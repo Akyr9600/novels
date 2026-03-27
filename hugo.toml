@@ -1,0 +1,4 @@
+baseURL = 'https://example.org/'
+languageCode = 'ja-jp'
+title = '僕の小説サイト（仮）'
+theme = 'ananke'
