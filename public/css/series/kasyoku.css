@@ -74,3 +74,13 @@ body.theme-kasyoku article hr {
 body.theme-kasyoku .is-draft {
     color: #4a6a8a;
 }
+
+/* 9. シリーズ文字色 */
+body.theme-kasyoku .series-toggle {
+    color: var(--text-dim);
+}
+
+/* 10. ハンバーガーボタン（テーマ色に合わせる） */
+body.theme-kasyoku .hamburger {
+    background: rgba(0, 212, 255, 0.3);
+}

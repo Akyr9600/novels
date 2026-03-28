@@ -82,6 +82,8 @@
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr13-hibi/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/troy/troy-main14/</loc>
+  </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr14-hibi/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/</loc>
@@ -94,9 +96,25 @@
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/troy/troy-red01/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/troy/troy-red02/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/troy/troy-red03/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/troy/troy-red04/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/troy/troy-red05/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/troy/troy-red06/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/troy/troy-red07/</loc>
+  </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main00/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/post/cheatsheet/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url><url>

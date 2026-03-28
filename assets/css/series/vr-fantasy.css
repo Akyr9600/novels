@@ -1,4 +1,4 @@
-﻿/* assets/css/series/vr-fantasy.css */
+/* assets/css/series/vr-fantasy.css */
 
 /* 【デザインパレット】変数は :root で定義 */
 :root {
@@ -98,50 +98,11 @@ body.theme-vr-fantasy article hr {
 }
 
 /* 10. シリーズ文字色 */
-body.theme-alamigo .series-toggle {
+body.theme-vr-fantasy .series-toggle {
     color: var(--text-dim);
 }
 
-/* 11. スマホ用 */
-@media screen and (max-width: 768px) {
-    /* 1. コンテナを縦並びにして余白を消す */
-    .container {
-        display: block !important;
-        padding: 0 !important;
-    }
-
-    /* 2. 【重要】サイドバーを通常時は非表示にする */
-    /* ※スマホでは「読む」ことに特化させるため一旦消します */
-    aside {
-        display: none !important;
-    }
-
-    /* 3. メインエリアを全画面に */
-    main {
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 5px !important;
-        display: block !important;
-    }
-
-    /* 4. 本文パネルの調整：スマホの画面幅を最大限に活かす */
-    article {
-        width: 96% !important;
-        max-width: none !important;
-        margin: 10px auto !important;
-        padding: 25px 15px !important; /* 左右の余白を削って文字を大きく */
-        box-shadow: none !important;   /* スマホではフラットな方が綺麗 */
-        border-radius: 0 !important;
-    }
-
-    /* 5. 文字サイズの調整（スマホで読みやすい大きさ） */
-    h1 {
-        font-size: 1.4rem !important;
-        margin-bottom: 20px !important;
-    }
-    
-    .novel-body {
-        font-size: 1.05rem !important;
-        line-height: 1.8 !important; /* 行間を広げて読みやすく */
-    }
+/* 11. ハンバーガーボタン（テーマ色に合わせる） */
+body.theme-vr-fantasy .hamburger {
+    background: rgba(74, 124, 89, 0.7);
 }
