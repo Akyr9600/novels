@@ -1,4 +1,3 @@
-baseURL = 'https://example.org/'
+baseURL = 'http://localhost:1313/'
 languageCode = 'ja-jp'
-title = '僕の小説サイト（仮）'
-theme = 'ananke'
+title = 'おはなしおきば'

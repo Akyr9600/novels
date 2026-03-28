@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  
+  <style>
+    /* ============================================================
+       1. 全体レイアウト (不変の基本ルール)
+       ============================================================ */
+    body { 
+      margin: 0; padding: 0; 
+      font-family: "sans-serif", "BlinkMacSystemFont", "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      background: #fff; color: #333; 
+    }
+    .container { 
+      display: flex; min-height: 100vh; max-width: 1200px; 
+      margin: 0 auto; background: #fafafa; 
+    }
+
+    aside { 
+      width: 220px; border-right: 1px solid #e0e0e0; 
+      padding: 0 15px 20px 15px;
+      background: #fafafa; position: sticky; top: 0; height: 100vh; overflow-y: auto; 
+    }
+    aside h1 { margin: 15px 0 10px 0; line-height: 1.2; }
+    aside h1 a { font-size: 1.1rem; color: #000; text-decoration: none; font-weight: bold; }
+
+    .side-nav-sticky {
+      position: sticky; top: 0; z-index: 10;
+      background: #fafafa; padding: 10px 0;
+      border-bottom: 1px solid #eee; margin-bottom: 15px;
+      display: flex; justify-content: space-between; gap: 5px;
+    }
+    .side-nav-sticky a {
+      flex: 1; text-align: center; font-size: 0.7rem; font-weight: bold;
+      color: #666; text-decoration: none; padding: 6px 0;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+
+    h2 { font-size: 1.1rem; border-left: 4px solid #333; padding-left: 10px; margin: 20px 0 8px 0; }
+.series-toggle { cursor: pointer; display: block; font-size: 0.95rem; color: #888; margin: 10px 0 4px 5px; position: relative; padding-right: 20px; }
+    .arrow {
+      display: inline-block; width: 0; height: 0; margin-left: 5px; vertical-align: middle;
+      border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #888;
+      transition: transform 0.3s;
+    }
+    .toggle-checkbox { display: none; }
+    .toggle-checkbox:checked + .series-toggle .arrow { transform: rotate(180deg); }
+    .series-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .toggle-checkbox:checked + .series-toggle + .series-content { max-height: 2000px; }
+
+    ul { list-style: none; padding-left: 15px; margin: 0; }
+    li { margin-bottom: 8px; font-size: 0.80rem; }
+    a { text-decoration: none; color: #444; }
+    .active { color: #d32f2f !important; font-weight: bold; }
+
+    /* メインエリア */
+    main { 
+      flex: 1; padding: 50px 0; background: #fff; 
+      display: flex; justify-content: center;
+    }
+    article { width: 90%; max-width: 720px; margin: 0 auto; }
+    .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
+.is-draft { color: #aaa; font-style: italic; }
+.lyric-card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px 30px;
+    margin: 1.5em auto;
+    max-width: 500px;
+    text-align: center;
+    font-style: italic;
+}
+  </style>
+
+  {{ $css_name := "" }}
+  {{ if .Params.custom_css }}
+    {{ $css_name = .Params.custom_css }}
+  {{ else if .Parent }}
+    {{ if .Parent.Params.custom_css }}
+      {{ $css_name = .Parent.Params.custom_css }}
+    {{ end }}
+  {{ end }}
+
+  {{ if $css_name }}
+    {{ $style := resources.Get (printf "css/series/%s.css" $css_name) }}
+    {{ if $style }}
+      <link rel="stylesheet" href="{{ $style.Permalink }}">
+    {{ end }}
+  {{ end }}
+</head>
+
+<body class="{{ if $css_name }}theme-{{ $css_name }}{{ end }}">
+  <div class="container">
+    <aside>
+      <h1><a href="/">{{ .Site.Title }}</a></h1>
+      <div class="side-nav-sticky">
+        {{ with .NextInSection }}<a href="{{ .Permalink }}">← BACK</a>{{ else }}<a href="#" style="visibility:hidden">← BACK</a>{{ end }}
+        {{ with .PrevInSection }}<a href="{{ .Permalink }}">NEXT →</a>{{ else }}<a href="#" style="visibility:hidden">NEXT →</a>{{ end }}
+      </div>
+
+      {{ range .Site.Sections }}
+        <div class="section-group">
+          <h2>{{ .Title }}</h2>
+          {{ range .Sections }}
+            <div class="accordion-item">
+              <input type="checkbox" id="series-{{ .File.UniqueID }}" class="toggle-checkbox" {{ if .IsAncestor $ }}checked{{ end }}>
+              <label for="series-{{ .File.UniqueID }}" class="series-toggle">【{{ .Title }}】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                {{ range .Pages.ByWeight }}
+                  <li>{{ if .Draft }}<a href="{{ .Permalink }}" class="is-draft">{{ .Title }}</a>{{ else }}<a href="{{ .Permalink }}" class="{{ if eq $.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>{{ end }}</li>
+                {{ end }}
+              </ul>
+            </div>
+          {{ end }}
+          <ul>
+            {{ range .RegularPages.ByWeight }}
+              <li>{{ if .Draft }}<a href="{{ .Permalink }}" class="is-draft">{{ .Title }}</a>{{ else }}<a href="{{ .Permalink }}" class="{{ if eq $.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>{{ end }}</li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+    </aside>
+
+    <main>
+      <article>
+        {{ block "main" . }}{{ end }}
+      </article>
+    </main>
+  </div>
+</body>
+</html>

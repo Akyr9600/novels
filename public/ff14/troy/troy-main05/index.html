@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <title>スカラ迷宮 5 - おはなしおきば</title>
+  
+  <style>
+     
+    body { 
+      margin: 0; padding: 0; 
+      font-family: "sans-serif", "BlinkMacSystemFont", "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      background: #fff; color: #333; 
+    }
+    .container { 
+      display: flex; min-height: 100vh; max-width: 1200px; 
+      margin: 0 auto; background: #fafafa; 
+    }
+
+    aside { 
+      width: 220px; border-right: 1px solid #e0e0e0; 
+      padding: 0 15px 20px 15px;
+      background: #fafafa; position: sticky; top: 0; height: 100vh; overflow-y: auto; 
+    }
+    aside h1 { margin: 15px 0 10px 0; line-height: 1.2; }
+    aside h1 a { font-size: 1.1rem; color: #000; text-decoration: none; font-weight: bold; }
+
+    .side-nav-sticky {
+      position: sticky; top: 0; z-index: 10;
+      background: #fafafa; padding: 10px 0;
+      border-bottom: 1px solid #eee; margin-bottom: 15px;
+      display: flex; justify-content: space-between; gap: 5px;
+    }
+    .side-nav-sticky a {
+      flex: 1; text-align: center; font-size: 0.7rem; font-weight: bold;
+      color: #666; text-decoration: none; padding: 6px 0;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+
+    h2 { font-size: 0.9rem; border-left: 4px solid #333; padding-left: 10px; margin: 20px 0 8px 0; }
+    .series-toggle { cursor: pointer; display: block; font-size: 0.8rem; color: #888; margin: 10px 0 4px 5px; position: relative; padding-right: 20px; }
+    .arrow {
+      display: inline-block; width: 0; height: 0; margin-left: 5px; vertical-align: middle;
+      border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #888;
+      transition: transform 0.3s;
+    }
+    .toggle-checkbox { display: none; }
+    .toggle-checkbox:checked + .series-toggle .arrow { transform: rotate(180deg); }
+    .series-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .toggle-checkbox:checked + .series-toggle + .series-content { max-height: 2000px; }
+
+    ul { list-style: none; padding-left: 15px; margin: 0; }
+    li { margin-bottom: 8px; font-size: 0.85rem; }
+    a { text-decoration: none; color: #444; }
+    .active { color: #d32f2f !important; font-weight: bold; }
+
+     
+    main { 
+      flex: 1; padding: 50px 0; background: #fff; 
+      display: flex; justify-content: center;
+    }
+    article { width: 90%; max-width: 720px; margin: 0 auto; }
+    .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
+.is-draft { color: #aaa; font-style: italic; }
+.lyric-card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px 30px;
+    margin: 1.5em auto;
+    max-width: 500px;
+    text-align: center;
+    font-style: italic;
+}
+  </style>
+
+  
+  
+    
+      
+    
+  
+
+  
+    
+    
+      <link rel="stylesheet" href="http://localhost:1313/css/series/alamigo.css">
+    
+  
+</head>
+
+<body class="theme-alamigo">
+  <div class="container">
+    <aside>
+      <h1><a href="/">おはなしおきば</a></h1>
+      <div class="side-nav-sticky">
+        <a href="http://localhost:1313/ff14/troy/troy-main04/">← BACK</a>
+        <a href="http://localhost:1313/ff14/troy/troy-main06/">NEXT →</a>
+      </div>
+
+      
+        <div class="section-group">
+          <h2>FF14</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-46ae835b836b509ad6872524212a5e12" class="toggle-checkbox" checked>
+              <label for="series-46ae835b836b509ad6872524212a5e12" class="series-toggle">【トロイの話】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main01/" class="">スカラ迷宮 1</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main02/" class="">スカラ迷宮 2</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main03/" class="">スカラ迷宮 3</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main04/" class="">スカラ迷宮 4</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main05/" class="active">スカラ迷宮 5</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main06/" class="">スカラ迷宮 6</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main07/" class="">スカラ迷宮 7</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main08/" class="">スカラ迷宮 8</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main09/" class="">スカラ迷宮 after01</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main10/" class="">スカラ迷宮 after02</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main11/" class="">スカラ迷宮 after03</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main12/" class="">スカラ迷宮 after04</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main13/" class="">スカラ迷宮 after05</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main14/" class="">スカラ迷宮 after06</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red01/" class="">ブラトロ はじまり</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red02/" class="">ブラトロ 俺の黄玉</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red03/" class="">ブラトロ ああ見えて</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red04/" class="">ブラトロ 赤鰐という男</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red05/" class="">ブラトロ 番外編GPT</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red06/" class="">ブラトロ 番外編Claude</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red07/" class="">ブラトロ RED DILE</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main00/" class="is-draft">base</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-fd1f546341f187a70bb5af75c4bb6af2" class="toggle-checkbox" >
+              <label for="series-fd1f546341f187a70bb5af75c4bb6af2" class="series-toggle">【ORIGIN】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-01/" class="">Prologue</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-02/" class="is-draft">第一話：フェロス</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-03/" class="">第二話：英雄</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-5de3c22336d28a71e6f69d789ed2b479" class="toggle-checkbox" >
+              <label for="series-5de3c22336d28a71e6f69d789ed2b479" class="series-toggle">【華飾の帳】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr01-kage/" class="">その影に 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr02-kage/" class="">その影に 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr03-kage/" class="">その影に 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr04-kage/" class="">その影に 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr05-inori/" class="">かそけき祈り 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr06-inori/" class="">かそけき祈り 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr07-inori/" class="">かそけき祈り 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr08-inori/" class="">かそけき祈り 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr09-inori/" class="">かそけき祈り 5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr10-inori/" class="">かそけき祈り 6</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr11-inori/" class="">かそけき祈り 7</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr12-hibi/" class="">日々彩々 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr13-hibi/" class="">日々彩々 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr14-hibi/" class="">日々彩々 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/" class="">日々彩々 3.5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr16-hibi/" class="">日々彩々 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr17-hibi/" class="">日々彩々 5・前</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/" class="">日々彩々 5・後</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/" class="is-draft">日々彩々 6</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-6542e7828ae546a46eed441bbde3312b" class="toggle-checkbox" >
+              <label for="series-6542e7828ae546a46eed441bbde3312b" class="series-toggle">【VRファンタジー】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr01/" class="">第一話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr02/" class="">第二話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr03/" class="">第三話</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>操作実験場</h2>
+          
+          <ul>
+            
+              <li><a href="http://localhost:1313/post/hello/" class="">自分用：サイト操作・要素まとめ</a></li>
+            
+              <li><a href="http://localhost:1313/post/cheatsheet/" class="">Markdown・Hugo記法</a></li>
+            
+          </ul>
+        </div>
+      
+    </aside>
+
+    <main>
+      <article>
+        
+  <article>
+    <header style="margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+      <h1 style="font-size: 1.8rem; color: #111; margin: 0;">スカラ迷宮 5</h1>
+    </header>
+    <div class="novel-body">
+      <p>　どうやら僕は自分が思っていたよりはるかに重傷だったらしい。
+　どうしようもないことを考えている内に、眠ったというより意識をなくして、気がついたら同盟軍兵舎の医務室に寝かされていた。事情を知っている不滅隊の人たちは、不思議なほど親身になって良くしてくれたが、
+「とんだ怪物に出くわしたものですね」
+　なんの悪気もなくそう言った。</p>
+<p>　僕が未知の&quot;怪物&quot;に襲われたことは話すしかなかったとして、それが僕の祖父であることまでは、フィルさんは話さなかった。だからこれは、無理もない。あれは腕の一振りで人間を殺せる凶暴で強力な怪物で、忌むべき存在だ。僕以外の人にとっては当然そうなのだ。
+　だが悪気もなくても、それが事実でも、&ldquo;あれ&quot;を怪物だとか化け物だとか言われると、やめてくれと言いたくなった。だが言えるわけがない。
+　あれは僕の祖父だと言えば、多くの人が言葉を選んでくれるだろう。だがそんなことをしても無駄で無益だ。知れば心優しい人は戦いたくないと思うだろう。それでも排除しなければならないとしたらつらい仕事になる。
+　それに、経緯を知っている不滅隊の人たちだけに知らせて、なんの意味があるのか。</p>
+<p>　僕たちがスカラに入ったことは秘密のままだ。僕のこの怪我は、王宮郊外を調べていたとき想定外に出くわした大型魔獣のせい、ということになっている。
+　不滅隊の人たちもフィルさんも、自分たちの行動とともに&quot;あれ&quot;の存在を隠すことについては、悩んだらしい。シャーレアンとの間にトラブルを起こすのも当然避けたいし、不滅隊の名誉にも関わる。それにラウバーンさんが許可を出しているのも、本人は一向に気にしないらしいが、政敵にとっては手札になりえた。許可自体は王宮に入るためだけのもので、そこから先は知らなかったと言えば言える。だが大して強くないカードでも、相手にとって有利なのは間違いない。
+　それで、僕たちが遭遇した大型魔獣はスカラから出てきたものだったのではないか、という可能性の話をして、調査団には警戒を促すにとどめたそうだ。</p>
+<p>　つまり僕たちはスカラに入ってはおらず、あんな&quot;怪物&quot;に出くわしてもおらず、あれが元は僕の祖父だったと知ることもなくここにいるはずで、だから当然、あれは僕の祖父なんだなどと言えるわけがない。事情を知らない多くの人が&quot;あれ&quot;を怪物呼ばわりするのなら、不滅隊の人たちだけに話しても意味はない。彼等に心痛を与えるだけ本当に無駄だ。
+　我が儘を言って迷惑をかけた僕のことまで心配してくれるような人に、余計な気苦労を背負わせたくない。そしてそんな優しい人たちですら、&ldquo;あれ&quot;を怪物や化け物と言って恐れ忌む。僕のことを気遣ってくれるがゆえに大怪我を負わせた&quot;怪物&quot;を憎み、嫌悪する。優しい人たちにあたたかい言葉で祖父を化け物呼ばわりされて、僕はどうにかなりそうだった。</p>
+<p>　熱が下がらないのもあって、ベッドの中で寝たり起きたり、鬱々として２日過ごした。
+　２日目に、とうとうラスティング・ドーンさんは地下監獄から通じる入り口を&quot;発見&quot;した。不滅隊の人たちは、僕たちが通行した痕跡を誤魔化すために、「たまたま見つけて、好奇心に負けて入ってしまった」ということにまでしてくれた。実際ウルダハには呪術師ギルドがあり、不滅隊にいる呪術師のレベルは相当高い。トップクラスの能力を持つ人であれば、魔法紋で隠された偽の壁を発見できても不思議はない。ラスティング・ドーンさんは相当うるさく抗議したに違いないが、
+「なに、どうかお気遣いなく。正直我々も、あのかたの横柄な態度にはこっちに来てからずっと、不愉快な思いをしてるんです。嫌いな相手に嫌われても、ね。どうってことはありませんよ」
+　平気な顔でそう言ってのけた。</p>
+<p>　そして３日目。宝物庫の手前に陣取るあの&quot;怪物&quot;もまた、発見された。
+　警告しておいた甲斐はあって、負傷者を出すことなくすみやかに引き上げたという。そしてすぐさま討伐隊が組まれた。
+　だが翌日早朝出発した討伐隊の第一陣は、深夜になっても一人も戻らず、全滅したと思われた。</p>
+<p>　調査団に雇われた冒険者は、あくまでも雑用と護衛が仕事で、報酬も決して高くない。フィルさんのような物好きを除けばほとんどがＣランク、Ｄランク相当の人たちばかりだ。それでもＤなら一人前、Ｃならベテランと言っていい冒険者や、それに準ずる力のある傭兵が一人も戻らないというのは慮外事だった。
+　全滅ではいったい何があったのかも分からない。そして僕たちは、どんな僅かな情報も言えなかった。</p>
+<p>　第二陣は、戦闘力より対応力の高さで選抜された。
+　彼等は一人を犠牲に撤退してきたが、一人は医務室に担ぎ込まれて間もなく亡くなった。
+　生き残った二人の話から、巨体に見合うパワーと、見た目よりはるかに高い、異様なタフさがあると知れた。
+「うまくいってたんだ」
+　パーティの盾役であるゼーヴォルフの男性は、そう言ったそうだ。自分たちの仕事は情報を持ち帰ること。そのため無理な攻めもしないが、即時の撤退もしない。かわし、いなし、耐え、観察することを重点にして、10分は戦ったか、それとももっと短かったか。集中を極めた過剰なストレスのもとでは、時間の感覚はあてにならない。特にタンクの彼は、あの拳の一撃をなんとか逸らし、耐えなければならないのだから尚更だ。
+　そうしてどうにか継戦しつつ、弱点はないか、隙はないか、有効な攻撃は何かを見極めようとしていた。
+「鎧だの身につけてるわけじゃねえし、避けるだのなんだのって小賢しい真似もしやしねえ。こっちの攻撃もガンガン当たるんだよ。当たってるから、もしかしたらイケんじゃねえかって思ったんだ」
+　だが最も間近で敵と向かい合っている彼はやがて気付いた。相手が少しも疲弊せず、つけたはずの傷がすぐ塞がってしまうことに。</p>
+<p>　これはまずいと思い、撤退を考えた。
+　その隙をうかがっているうちに槍術士が攻勢に出た。手応えでも感じたのか、そこまでは分からない。アタッカーにはよくあることだ。つい勢いに乗って攻撃に夢中になることは。
+　敵に近づきすぎていたせいもあり、相手が体をひねって尾をしならせたことに気付かなかった。丸太ほどもある尾を至近距離から叩きつけられ、おそらく即死だった。
+　彼等はその瞬間に撤退を決めた。幸い巨体のせいで動きはそれほど速くない。走れば振りきれると思えた。イシュガルドから来ていた機工士が離脱し、それを幻術士が追い、敵をぎりぎりまで引き止めておいてから、剣術士である彼も逃げ出した。
+　だがその背後から突然、大嵐のような衝撃が来た。
+「俺ぁ横っちょに飛ばされたせいで、あいつの視界から外れたんだろうな。俺を素通りして……」
+　転倒していた幻術士を、あれは、食おうとした、らしい。</p>
+<p>　機工士が手と顔を狙って狙撃し、さすがにそれは効いたのか、取り落とした幻術士を彼が担いで必死に逃げた。だが腹に噛みつかれていた幻術士は、食いちぎられてこそいなかったものの、ここに戻るまで治療してくれる者もなく……。
+　教えてくれと頼んで聞いた話だが、おぞましさに吐きそうだった。何万匹もの虫が背中から首筋に這い上がってきたような、最悪の悪寒がした。
+「大丈夫ですか？　だから言ったじゃないですか。で、でもほら。貴方は無事だったんですから。ね」
+　僕の様子を、「もしかしたら自分もそうなっていたのかも」とでも思ったからだと、解釈したのだろうか。それならそれでいい。素直に頷いて、横になることにした。</p>
+<p>　それでも吐き気も悪寒も眩暈も頭痛も止まらない。
+　どんな怪物になっていたとしても、それで誰かを殺めるとしても、まさか―――まさか、人を、食うだなんて……そこまで―――。
+　もしあのとき、フィルさんのサルベージが間に合わなければ、殺された後 僕は、食われていたんだろうか？　自分の祖父に？
+　そして、帰って来なかった第一陣の人たちは、まさか……？
+「せっ、先生を呼んできます。ね。大丈夫ですから。お薬もらって、休みましょう？」
+　これでも僕自身が医者なのだけど、とのんきなことが頭によぎったけれど、そんな軽口を叩けるわけもなく、破裂して溢れ出しそうなものを堪えるので精一杯だった。</p>
+<hr>
+<p>　かなり強い薬を飲まされて、寝ている間にどうやら嘔吐したようで、その始末は綺麗に済んでいたが、起きると喉が焼け、口の中は嫌な苦味と酸味に粘ついていた。
+　室内は暗く、少し離れたところにある壁の明かりがぼんやりと見える。
+　僕のそう長いわけではない人生史上、最悪だった。&ldquo;あれ&quot;が祖父だと視えてしまったときよりも最低だった。
+　こんなところに来なければ、いっそ何も知らなければ良かったのかと思った。そしてふと、教授の言葉が頭をよぎった。答えが得られるかもしれないが、見たくないものを見、知りたくないことを知るかもしれない。彼はそう言ったが、だとしても、それがまさかここまで酷いことだとは思いもしなかっただろう。
+　あのとき変に浮かれた気分に流されず、戻っていれば良かった。なにも知らないまま誰かの手でいつの間にか退治されているよりは、どんなに嫌な現実だろうと知れて良かったのかもしれないなんて、今は微塵も思わない。この調査団への参加を僕に勧めた教授のことさえ恨めしく思える。あれを断ってシャーレアンにとどまり、ほんの少しの悩みや迷いを抱えているだけのほうが、どんなに良かったか。
+　けれどふと、こんな地獄をアラミゴの人たちは経験してきたんだなと思った。</p>
+<p>　テオドリックの暴虐については何冊もの本に書かれている。視察と称して村や町を訪れ、なんの罪もない住民を引きずり出して処刑する。自分を見て笑っただろうとか、なんとなく顔つきが気に入らないとか、そんな理由で。時には自分の家族をその手で処刑するように強いたそうだ。そうしなければ他の家族を殺す、と。そして泣く泣く実行した者の目の前で、やはり残った家族を殺して笑う。そういう狂人だったそうだ。
+　僕もまた、自分の祖父を人を食うような化け物にされて、殺されかけ、テオドリックが生きていればさぞかし面白い見世物だっただろう。祖父に食われる孫。孫を食う祖父。口うるさい邪魔なジジイの始末としては、最高のアイディアだ。
+　アラミゴの人たちは、そんなイカれた王のもとで５年。その後の帝国支配もろくなものじゃなく、そこでまた20年。今の僕と変わらない思いをした人たちが、この土地には何人もいたし、今もいる。耐えに耐えて、生き抜いてきた。
+　そう思うと少しだけ、地獄の底からは浮かんだような心地がした。</p>
+<p>「落ち着いたか」
+　突然横から低い声がして驚いた。明かりのあるほうとは逆側にいたせいで、まるっきり気付いていなかったが、フィルさんの声だった。目を向ければ彼の形にぼんやりと、ほんのり淡いオレンジに、ほんの僅かに発光する気が視える。
+「いらしたんですか」
+　喉に絡んでひどいかすれ声になった。
+「少し前からな。……ママルモが心配していた。まだ快復してないのに、聞かせる話じゃなかったと。まあ、分からんよなあ。自分のした話が、他の人間にはともかく、おまえさんにとってどんなものだったかなんて」
+　他の人間には、ただの人食いの怪物の話。自分が遭遇した相手が、そんな危険な相手だったと、ただそれだけのこと。それですらぞっとする。けれど僕には……。
+「無理に頼んで、聞かせてもらったんです。ママルモさん、ですか。どうか彼には、気にしないでほしいと。見かけ倒しで、気が弱いんだとでも、言っておいていただければ」
+「言っておいたよ。後半はともかくな。怪我人はおとなしく養生に専念すればいいのに、余計なことを知りたがるほうが悪い。これに懲りておとなしくしてるだろうってな」
+　そう言われたとしても、優しい人は心配せずにいられないし、自分を責めずにいられないものだろうが。</p>
+<p>　フィルさんがここにいたのは、ただ僕の様子を見に来たというだけではなかった。
+「明日、第三陣が出る。俺も行く」
+　それを伝えるためだった。
+「これ以上、様子見や手探りで犠牲者は出せん」
+　できればもっと多人数での討伐か、あるいはＢランク以上に相当する冒険者・傭兵を呼び寄せたかったが、ラスティング・ドーンさんが強硬に明日の、少数での突入を主張したらしい。エーテライトを使えば、最速２日で増援が到着する。既にその手配はしてあるにも関わらず、明日中になんとかしろ、と。まがりなりにもＡランクとやらならそれくらいできるだろうと言ったらしい。初日にフィルさんが彼のチーム編成を蹴ったことを根に持っているのだろう。
+「そんな状態で……」
+「それはなんとでもする。と言いたいが、おそらく決め手不足だな」
+　決め手。つまり、&ldquo;あれ&quot;の尋常ではないタフさを突き破ってダメージを与えられるほどの、火力の持ち主がいないということだ。</p>
+<p>「おじいさんは、優れたモンクだったんだろ。ウルダハには格闘士ギルドがある。アラミゴから逃れてきたモンクも混じっていてな。俺も少しくらいは知ってる」
+　フィルさんは先日の遭遇と第二陣の話から、&ldquo;あれ&quot;は知性や理性を失っても、体に染み付いたモンクの技を自然と使っているのではないかと予想していた。
+　僕も、そう思っていた。
+「金剛と、内丹でしょうね」
+　モンクが使う身体強化術の一種だ。体内の気を一時的に滞留、充満させ、体の内側に気の防護層を作る金剛。そして肉体を構成するエーテルを活性化させ、治癒速度を高める内丹。鎧らしい鎧を身につけないモンクが、それでも十分な耐性を持つのはそのためだ。
+　未熟な間は瞬間的にしか使えないし、多くの気を消耗するため繰り返すこともできない。だが熟練のモンクはその状態を維持して戦う。
+　祖父がどの程度の段階に至っていたのかは分からないが、今の&quot;あれ&quot;が、意識などしなくても自然と実行するほど染み付いているとしたら、30年の修業で到達できる高みにいたのは間違いない。
+　それに加えてあの巨体だ。物理的な毛皮、皮膚、筋肉、脂肪という防御層まで備えているとなると、攻撃が通じないのは当たり前だった。</p>
+<p>　それを突き破るほどの破壊力を持つアタッカーは、今ここには一人もいなかった。
+　各地のギルドや傭兵組織を頼っていいなら、フィルさんは何人か容易に候補を上げられるようだ。問題は、その誰もが夜明けまでにここに来ることはできないということだった。
+　フィルさんにできるのは、有効打のない殴り合いだ。あの&quot;化け物&quot;と真っ向から殴り合い続けられるという時点でとんでもないが、
+「もって15分だな。そこから先は体力が続かん」
+　当然そこで撤退することになる。フィルさんが心配しているのは、その15分間、同行するＤランクの冒険者を守り切れるかどうかだった。
+「リムサ・ロミンサの、まあ、特攻タイプでな」
+　同行するもう一人は同盟軍、双蛇党の軍人だそうだ。今いる中では最も弓術に優れた人物で、人柄も問題ない。ただし火力不足は否めない。もう一人が問題の斧術士で、共に行動していた幼馴染みを二人、第一陣として失っているだけに、そちらの女性が過剰にやる気になっているらしい。つまり、フィルさんの指示を聞かない可能性が高かった。だが火力という点では目下、彼女より期待できる候補はいなかった。</p>
+<p>　チームを組んで戦う場合、最も危険なのは連携が取れないことだ。うまく力を合わせれば格上の相手にも勝てるが、一人が勝手なことをするだけで格下に惨敗することもある。血気に逸ったり、手柄を立てようとしゃかりきになったり、あるいは仲間の誰かを嫌ってわざと助けなかったり、指示を無視したり、あるいは勝手に逃げ出したり。そこからあっという間に崩れていく。他の仲間が組み立て積み上げていった成果を、その一人が一瞬で突き崩し台無しにする。そんなことは時折あるものだ。
+　それは当人だけじゃなくパーティ全体を危機にさらす。
+「……すみません」
+　なんとなく、僕がフィルさんをそんな苦境に追い込んだような気がした。僕があのときすぐ引き返していれば、いや、そもそもスカラに入りたがらなければ、何もかも今とは違う状況だっはずだ。
+「おまえさんが謝る理由はない。俺たちがスカラを探索しなくても、いつかこうなった。出くわして、討伐しようとし、失敗して、犠牲者が出る。違うのは、おまえさんがあの&quot;番人&quot;を、自分のおじいさんだと知ってるかどうか、それだけだ」
+「そうかも、しれませんが」
+「かもじゃない。&ldquo;そう&quot;だ」
+　フィルさんに力強く断言されると、その言葉に甘えてもいいような気がしてしまった。</p>
+<p>「ま、かなり厳しいのは事実だが、行く以上俺は、最悪でも全員無事の撤退、できれば討伐達成を考えている。ただそのときには、な。おじいさんを手にかけることになる。その覚悟だけ、しておいてほしくてな」
+　それでフィルさんはこんな遅い時間、薬が切れて僕が目覚める頃合いに、ここにいたのだった。
+　可能なら、爪の一欠片でも毛皮の一房でも、人間の一部ではないとしても何か、弔いのよすがにできるものを持ち帰るつもりでいる、とフィルさんは言ってくれた。
+「さて。俺もそろそろ寝るか。トロイ。できるだけでいい。ちゃんと休めよ」
+　巨体に相応しく、少しだけ溜めを作って立ち上がり、フィルさんが軽く手を掲げた。</p>
+<p>　出ていこうとする背中に、僕は唐突に一つ気がついたことを投げかけた。
+「待ってください。フィルさんが剣術士で、弓術士と、斧術士……ヒーラーは？　連れていかないんですか？」
+　僕みたいな三流もいいところの半人前賢者はともかく、軍にも冒険者や傭兵にもヒーラーはいるはずだ。
+「ん？　ああ。第二陣にいたのが、ここの中じゃ一番の腕利きでな。それより劣るとなると、いてもいなくても変わらん」
+「ですが、ヒーラーの援護なしじゃ、いくらフィルさんでも」
+　あんな巨大な拳の打撃、爪の脅威にさらされ続けて消耗しないわけがない。たとえ僕みたいなのですらいないよりマシなはずだ。僕がつい起き上がりかけると、大股に一歩戻ったフィルさんがグローブのような手を僕の上に広げ、わざとらしくいかめしい顔をした。
+「おとなしくしてろ、怪我人。俺のことは心配ない」
+　そして少しだけ笑って言ったのは、
+「俺は、剣術士じゃなくて、&ldquo;ナイト&quot;だからな」
+　だった。</p>
+
+    </div>
+  </article>
+
+      </article>
+    </main>
+  </div>
+</body>
+</html>

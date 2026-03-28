@@ -1,0 +1,76 @@
+/* assets/css/series/kasyoku.css */
+
+/* 【デザインパレット】変数は :root で定義 */
+:root {
+    --bg-dark: #050a0f;
+    --accent-cyan: #00d4ff;
+    --accent-red: #8b0000;
+    --text-main: #e0e6ed;
+    --text-dim: #6a7d8f;
+    --sidebar-bg: #0a1928;
+}
+
+/* 1. サイト全体 */
+body.theme-kasyoku,
+body.theme-kasyoku .container,
+body.theme-kasyoku main {
+    background-color: var(--bg-dark) !important;
+    color: var(--text-main) !important;
+}
+
+/* 2. サイドバー */
+body.theme-kasyoku aside {
+    background: var(--sidebar-bg) !important;
+    border-right: 1px solid #1a3a5a;
+}
+
+body.theme-kasyoku aside h1 a { color: var(--accent-cyan); }
+body.theme-kasyoku aside h2 { border-left-color: var(--accent-cyan); color: var(--text-main); }
+body.theme-kasyoku aside a { color: var(--text-dim); }
+body.theme-kasyoku .active { color: #ff4d4d !important; }
+
+/* 3. ナビボタン */
+body.theme-kasyoku .side-nav-sticky {
+    background: var(--sidebar-bg);
+    border-bottom: 1px solid var(--accent-cyan);
+}
+body.theme-kasyoku .side-nav-sticky a {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+}
+
+/* 4. 本文パネル */
+body.theme-kasyoku article {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-top: 5px solid var(--accent-red);
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* 5. タイトル */
+body.theme-kasyoku main h1 {
+    color: var(--accent-cyan) !important;
+}
+
+/* 6. 本文 */
+body.theme-kasyoku .novel-body {
+    color: var(--text-main) !important;
+    white-space: pre-wrap;
+}
+
+body.theme-kasyoku .novel-body p {
+    margin: 0 0 0.5em 0;
+}
+
+/* 7. 区切り線 */
+body.theme-kasyoku article hr {
+    margin: 3.0em 0;
+    border: none;
+    border-top: 1px solid var(--accent-cyan);
+}
+
+/* 8. ドラフト表示 */
+body.theme-kasyoku .is-draft {
+    color: #4a6a8a;
+}
