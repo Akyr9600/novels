@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
   
   <style>
@@ -71,6 +72,34 @@
     max-width: 500px;
     text-align: center;
     font-style: italic;
+}
+/* 画面幅が 768px 以下の時だけ適用される設定 */
+@media screen and (max-width: 768px) {
+    /* 1. 本文の横幅を画面いっぱいに（でも少し余白を） */
+    .container, .content-wrapper {
+        width: 95% !important;
+        margin: 0 auto;
+        padding: 10px;
+    }
+
+    /* 2. サイドバーを隠すか、下に回す */
+    .sidebar {
+        display: block; /* あるいは hidden にしてメニューボタンにする */
+        width: 100%;
+        float: none;
+    }
+
+    /* 3. 文字サイズを読みやすく調整 */
+    body {
+        font-size: 16px; /* スマホで標準的なサイズ */
+        line-height: 1.8;
+    }
+
+    /* 4. 画像がはみ出さないように */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 }
   </style>
 
