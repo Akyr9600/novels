@@ -96,3 +96,45 @@ body.theme-vr-fantasy article hr {
     border: none;
     border-top: 1px solid var(--accent-gold);
 }
+
+/* 10. シリーズ文字色 */
+body.theme-alamigo .series-toggle {
+    color: var(--text-dim);
+}
+
+/* 11. スマホ用 */
+@media screen and (max-width: 768px) {
+    /* 1. 全体の横並びを解除して縦並びにする */
+    .container {
+        display: block !important;
+    }
+
+    /* 2. サイドバーを一旦非表示にする、あるいは上に置く */
+    /* ※ハンバーガーメニューを作る前の応急処置として */
+    aside {
+        width: 100% !important;
+        position: relative !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--accent-gold);
+        padding: 20px !important;
+    }
+
+    /* 3. メインエリアを横幅いっぱいに広げる */
+    main {
+        width: 100% !important;
+        padding: 10px !important;
+    }
+
+    /* 4. 本文パネル（article）の余白を削って読みやすくする */
+    article {
+        width: 95% !important;
+        margin: 10px auto !important;
+        padding: 20px !important;
+        max-width: none !important;
+    }
+
+    /* 5. タイトルの文字サイズを少し小さくする */
+    h1 {
+        font-size: 1.5rem !important;
+    }
+}
