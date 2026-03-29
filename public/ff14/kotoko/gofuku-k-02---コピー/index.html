@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>呉服屋物語 - おはなしおきば</title>
+  
+  <style>
+     
+    body { 
+      margin: 0; padding: 0; 
+      font-family: "BlinkMacSystemFont", "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      background: #fff; color: #333; 
+    }
+    .container { 
+      display: flex; min-height: 100vh; max-width: 1200px; 
+      margin: 0 auto; background: #fafafa; 
+    }
+
+     
+    aside { 
+      width: 220px; border-right: 1px solid #e0e0e0; 
+      padding: 0 15px 20px 15px;
+      background: #fafafa; position: sticky; top: 0; height: 100vh; overflow-y: auto; 
+      flex-shrink: 0;
+    }
+    aside h1 { margin: 15px 0 10px 0; line-height: 1.2; }
+    aside h1 a { font-size: 1.1rem; color: #000; text-decoration: none; font-weight: bold; }
+
+    .side-nav-sticky {
+      position: sticky; top: 0; z-index: 10;
+      background: #fafafa; padding: 10px 0;
+      border-bottom: 1px solid #eee; margin-bottom: 15px;
+      display: flex; justify-content: space-between; gap: 5px;
+    }
+    .side-nav-sticky a {
+      flex: 1; text-align: center; font-size: 0.7rem; font-weight: bold;
+      color: #666; text-decoration: none; padding: 6px 0;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+
+    h2 { font-size: 1.1rem; border-left: 4px solid #333; padding-left: 10px; margin: 20px 0 8px 0; }
+    .series-toggle { cursor: pointer; display: block; font-size: 0.95rem; color: #888; margin: 10px 0 4px 5px; position: relative; padding-right: 20px; }
+    .arrow {
+      display: inline-block; width: 0; height: 0; margin-left: 5px; vertical-align: middle;
+      border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #888;
+      transition: transform 0.3s;
+    }
+    .toggle-checkbox { display: none; }
+    .toggle-checkbox:checked + .series-toggle .arrow { transform: rotate(180deg); }
+    .series-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .toggle-checkbox:checked + .series-toggle + .series-content { max-height: 2000px; }
+
+    ul { list-style: none; padding-left: 15px; margin: 0; }
+    li { margin-bottom: 8px; font-size: 0.80rem; }
+    a { text-decoration: none; color: #444; }
+    .active { color: #d32f2f !important; font-weight: bold; }
+
+     
+    main { 
+      flex: 1; padding: 50px 0; background: #fff; 
+      display: flex; justify-content: center;
+    }
+    article { width: 90%; max-width: 720px; margin: 0 auto; }
+    .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
+    .is-draft { color: #aaa; font-style: italic; }
+
+     
+    .lyric-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 20px 30px;
+      margin: 1.5em auto;
+      max-width: 500px;
+      text-align: center;
+      font-style: italic;
+    }
+
+     
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 12px; left: 12px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      width: 40px; height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+     
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 900;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+     
+    @media screen and (max-width: 768px) {
+
+       
+      .hamburger {
+        display: flex;
+      }
+
+       
+      aside {
+        position: fixed;
+        top: 0; left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 950;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+      }
+      aside.open {
+        transform: translateX(0);
+      }
+
+       
+      .container {
+        display: block;
+      }
+
+       
+      main {
+        width: 100%;
+        padding: 60px 0 20px 0;  
+        display: block;
+      }
+
+       
+      article {
+        width: 94%;
+        max-width: none;
+        margin: 0 auto;
+        padding: 20px 15px;
+      }
+
+       
+      h1 { font-size: 1.4rem !important; }
+      .novel-body { font-size: 1.05rem !important; line-height: 1.9 !important; }
+
+       
+      img { max-width: 100%; height: auto; }
+    }
+  </style>
+
+  
+  
+    
+      
+    
+  
+
+  
+    
+    
+      <link rel="stylesheet" href="http://localhost:1313/css/series/kotoko.css">
+    
+  
+</head>
+
+<body class="theme-kotoko">
+
+  
+  <button class="hamburger" id="hamburger" aria-label="メニューを開く">☰</button>
+
+  
+  <div class="overlay" id="overlay"></div>
+
+  <div class="container">
+    <aside id="sidebar">
+      <h1><a href="/">おはなしおきば</a></h1>
+      <div class="side-nav-sticky">
+        <a href="http://localhost:1313/ff14/kotoko/gofuku-k-02/">← BACK</a>
+        <a href="#" style="visibility:hidden">NEXT →</a>
+      </div>
+
+      
+        <div class="section-group">
+          <h2>FF14</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-46ae835b836b509ad6872524212a5e12" class="toggle-checkbox" >
+              <label for="series-46ae835b836b509ad6872524212a5e12" class="series-toggle">【トロイの話】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main01/" class="">スカラ迷宮 1</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main02/" class="">スカラ迷宮 2</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main03/" class="">スカラ迷宮 3</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main04/" class="">スカラ迷宮 4</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main05/" class="">スカラ迷宮 5</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main06/" class="">スカラ迷宮 6</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main07/" class="">スカラ迷宮 7</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main08/" class="">スカラ迷宮 8</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main09/" class="">スカラ迷宮 after01</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main10/" class="">スカラ迷宮 after02</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main11/" class="">スカラ迷宮 after03</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main12/" class="">スカラ迷宮 after04</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main13/" class="">スカラ迷宮 after05</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main14/" class="">スカラ迷宮 after06</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red01/" class="">ブラトロ はじまり</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red02/" class="">ブラトロ 俺の黄玉</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red03/" class="">ブラトロ ああ見えて</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red04/" class="">ブラトロ 赤鰐という男</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red05/" class="">ブラトロ 番外編GPT</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red06/" class="">ブラトロ 番外編Claude</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red07/" class="">ブラトロ RED DILE</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main00/" class="is-draft">base</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-aeeca8301969494c0adf2f2c423c2129" class="toggle-checkbox" checked>
+              <label for="series-aeeca8301969494c0adf2f2c423c2129" class="series-toggle">【琴子お嬢様】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-01/" class="">呉服屋物語</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-02---%E3%82%B3%E3%83%94%E3%83%BC-2/" class="">呉服屋物語</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-02---%E3%82%B3%E3%83%94%E3%83%BC-4/" class="">呉服屋物語</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-02---%E3%82%B3%E3%83%94%E3%83%BC-6/" class="">呉服屋物語</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-02/" class="">呉服屋物語</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-02---%E3%82%B3%E3%83%94%E3%83%BC/" class="active">呉服屋物語</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-fd1f546341f187a70bb5af75c4bb6af2" class="toggle-checkbox" >
+              <label for="series-fd1f546341f187a70bb5af75c4bb6af2" class="series-toggle">【ORIGIN】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-01/" class="">Prologue</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-02/" class="is-draft">第一話：フェロス</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-03/" class="">第二話：英雄</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-5de3c22336d28a71e6f69d789ed2b479" class="toggle-checkbox" >
+              <label for="series-5de3c22336d28a71e6f69d789ed2b479" class="series-toggle">【華飾の帳】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr01-kage/" class="">その影に 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr02-kage/" class="">その影に 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr03-kage/" class="">その影に 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr04-kage/" class="">その影に 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr05-inori/" class="">かそけき祈り 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr06-inori/" class="">かそけき祈り 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr07-inori/" class="">かそけき祈り 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr08-inori/" class="">かそけき祈り 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr09-inori/" class="">かそけき祈り 5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr10-inori/" class="">かそけき祈り 6</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr11-inori/" class="">かそけき祈り 7</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr12-hibi/" class="">日々彩々 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr13-hibi/" class="">日々彩々 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr14-hibi/" class="">日々彩々 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/" class="">日々彩々 3.5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr16-hibi/" class="">日々彩々 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr17-hibi/" class="">日々彩々 5・前</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/" class="">日々彩々 5・後</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/" class="is-draft">日々彩々 6</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-6542e7828ae546a46eed441bbde3312b" class="toggle-checkbox" >
+              <label for="series-6542e7828ae546a46eed441bbde3312b" class="series-toggle">【VRファンタジー】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr01/" class="">第一話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr02/" class="">第二話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr03/" class="">第三話</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>操作実験場</h2>
+          
+          <ul>
+            
+              <li><a href="http://localhost:1313/post/hello/" class="is-draft">自分用：サイト操作・要素まとめ</a></li>
+            
+              <li><a href="http://localhost:1313/post/cheatsheet/" class="is-draft">Markdown・Hugo記法</a></li>
+            
+          </ul>
+        </div>
+      
+    </aside>
+
+    <main>
+      <article>
+        
+  <article>
+    <header style="margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+      <h1 style="font-size: 1.8rem; color: #111; margin: 0;">呉服屋物語</h1>
+    </header>
+    <div class="novel-body">
+      <p>　　　　　【百言は一動にしかず】</p>
+<p>　お母さんはお祖母さんから譲られ、そしてお祖母さんはそのお母さんから譲られたという、最高級のアライワ友禅の振り袖。少しばかり古めかしいが、古紫の地に大きな白い牡丹を袂と裾にあしらって、それがなんともあでやかで琴子が小さい頃から憧れいてた逸品だ。
+「お嫁に行くときね、これを着て、ご挨拶するのですよ」
+　と言われ、いつかこれをと夢見たこともあったものに袖を通すのは、子供時分に憧れたときと違って、もっとずっと切ないものだった。
+　駕籠に乗ってイシヅ屋へ向かう。昔、もっと往来が広かったときには町中をよく行き来していたらしいが、建物が増えて狭くなってからは、殿様や家老、そうでなければ見合いに行く娘か婚礼の花嫁と、足弱な病人、怪我人くらいしか乗ることのなくなった乗り物だ。
+　許嫁同士の見合い、顔合わせにもいろいろの作法があるが、クガネの商家同士であれば、他家に入る者が相手の家に行き挨拶をするのがしきたりだった。供の者は、家の外までは駕籠の脇についてきても、そこで挨拶だけして引き返す。「娘・息子を引き渡す」儀式である。この見合いが終われば、たいていの場合は数ヶ月以内に結納、婚儀が執り行われた。
+　そうして十何年ぶりに顔を合わせたイシヅ屋ソウヤはなかなかの美男子だった。ヒューランらしい童顔だが、その中にしゅっとしたところもあり、きっと世間からは羨ましがられるのだろう。
+　だが琴子には、話せば話すだけ、なんとも言えない薄っぺらさに気が遠くなるほどだった。</p>
+<p>　どうしてこの人は自慢をするの？
+　どうしてこの人は奉公人や職人を馬鹿にするの？
+　どうしてこの人は自分がなんでもできるみたいに、なんでも知ってるみたいに言うの？
+　そしてどうしてこの人の親は、それを当たり前みたいな顔をして、得意げに見ているの？</p>
+<p>　自慢などしても、された側は琴子を立派だと思うより嫌な子だと思うだけだ、皆より上手にできることがあるなら、それはできない子を助けてあげるためや、誰かを喜ばせるために授かった才能なのだから、謙虚でいなさいと佐太郎に叱られたことがある。
+　我が家が世間さまから羨まれるような店であれるのは、真面目に一所懸命に働いてくれている皆のおかげ、良い物を作ろうと苦心してくれる職人たちのおかげだ、我が家の宝だよと父はいつも言っている。
+　あのレドレント・ローズでさえ、自分には知らないものがいっぱいある、キモノについてなにからなにまで分からないことだらけだと、彼に比べれば年若い篤司の説明を真剣に、熱心に聞いて学んでいた。
+　それなのに、それだというのに、いったいなんなのだろうかこの人は、この人たちは。
+　だがそれが、琴子のすぐ未来の夫、新しい家族なのだ。
+「こんな着物、流行遅れにも程がある。まるで年増の若作りだ。呉服屋の娘なんだから、こんなダサい着物はいまどき恥ずかしいと思う美意識くらい持っててもらわなきゃ」
+　そんなことを言う男でも―――。</p>
+<p>　帰りの夜道をとぼとぼと、琴子はソウヤとそのお付きの用心棒に送られて歩いていた。
+　本当は一刻も早く別れて帰りたかったが、娘が一人歩きのできる距離と時刻ではない。そのうえなにやら含みのある様子で、今夜は風もあたたかいしと送り出された。
+　アウラ・ゼラの用心棒がいつの間にか少し遅れて姿が見えないなと思ったら、突然肩を掴まれ抱き寄せられた。
+　反射的に突き飛ばしそうになったのを、堪えたわけではない。ただ、十近く年上の、男の腕力に抗えなかっただけだ。逆らえなかったその一瞬に、逆らってはいけないのだと自分に言い聞かせて体を固くする。
+「クガネ小町を妻にできるなんて、僕はツイてる」
+　ツイてる？　ただの運？　そして、小町だなんだ、またそれが自分の価値なのか。
+　この人はなにも見てない。あの日の猫子座で、レドレント・ローズが自分の恋心を見抜いてそっととりなしてくれたようには、この人は何一つ見ていないのだ。自分がどんな気持ちでいたか、今どんな気持ちでいるか、少しでも分かっていたら、せめてなんだその態度はと腹を立てるなりするだろうに。
+　そんな男の妻になるしかないことが、琴子は猛烈に悲しくなった。</p>
+<p>　と、そのときだった。
+　ざざっと足音がするや否や、三つの人影が自分たちを取り囲んだ。
+　覆面し、薄い羅紗で目元まで見えなくした装いの、その手元にぎらりと光るものがある。
+　夜更けにはまだだいぶあったが、川端には今、他に人っ子一人もいなかった。
+　これが噂の強盗なのかそれとは別なのか。
+　そんなことはともかく、琴子は竦み上がって袖口を握った。
+　ソウヤが連れていた用心棒はと思ったが、怖くて後を振り返ることもできない。
+　思っている内に、
+「貴様等！」
+　と駆けつけてきたが、電光石火のごとく動いた一人に、あっという間に川に投げ込まれてしまった。
+　途端にソウヤは震えだし、言われる前から懐を探ると財布を抜いてヘッピリ腰で前へと放った。
+　それでも相手が身じろぎもせずこちらを睨んでいると、銀鎖の掛け守り、手首につけていた瀟洒な珠の連なった腕輪、腰の煙草入れ、袂に入れていた小銭まで取り出した。
+「おいっ。なにグズグズしてるんだ。おまえも早く出せるものを出せ」
+　上ずった声で噛みつくように言った挙げ句、尻から先に後ずさって、コトコよりも下がるような有り様だった。</p>
+<p>　それをずっと見守って、とうとう琴子の中でなにかがぷつりと切れた。
+「こ……ンの根性なし!!　誰か……っ」
+　思い切り息を吸って叫ぶ。
+　だが素早く近寄ってきた前の一人に、固い手で口を塞がれるなり抱きすくめられた。
+「ん～～ぅ～っ、ン～ッ!!」
+　体をよじって抗う。だが、
+「静かにしろい」
+　顔の横に匕首を当てられて、さっと血の気が引いた。
+　チリリと鋭い痛みが左の頬に走る。
+　押し付けられたままの白刃は、傷の痛みを押しのけるほどに冷たく恐ろしかった。</p>
+<p>　だが声を上げた甲斐はあった。
+　市中見廻りの赤誠隊が駆けつけたのだ。
+　しかし琴子を抱きすくめ、その頬に刃を当てた賊を前に、抜刀はしたものの隊士二人はどちらも動けなかった。
+　それどころか、三人の賊のうち二人が、たかが匕首ではあるものの、それをぴたりと……腰を落として水平に、それはゴロツキの喧嘩殺法とはまるで異なる”構え”のようだった。悪漢の世界などろくに知らなくても、そのあたりで威勢を上げているヤクザ者とは違うのが、琴子にもなんとなく分かった。
+　それでも赤誠隊の者たちが持っているのは大刀だ。匕首よりははるかに長い。その彼等が動けずにいるのは、間違いなく自分が捕まっているせいだ。後ろから抱えられ、口を塞がれ匕首を頬に当てられ、大柄な男に抱きすくめられているため、腕を振り回せたりはしないが、身動きもできないほどではない。ただ、暴れたりしようなものなら、この冷たく熱い刃物がきっと……。</p>
+<p>「おとなしくしてな。自慢のお顔をざっくりやられたかぁねぇだろう」
+　薄く冷たく笑った声とともに、ひたひたと刃物の腹で頬を叩かれて、カッとなった。
+　こんなもの！　と。
+　自慢したことなんかない。したことなんかないのに、しかも馬鹿にするみたいに笑われて、こんなもののために悪い奴等の言いなりに、赤誠隊の人たちの邪魔になりたくない。
+　琴子は大きく息を吸うと、思いきり男の手に噛み付いた。
+　乱暴などしたことのない箱入り娘の反撃は、せいぜい男の指の肉を噛んだだけだったが、それでも思いもよらないことに反射的に腕が緩んだ。
+　琴子は今だと勢いよくしゃがんで腕の輪から抜け、駆け出す。髪を掴まれたが、強く掴み締められる前に振りきった。
+　前からは、右側の志士が刀を構えて突進し、左の一人が琴子へと手を差し出した。と―――その蘇芳色の隊服をまとった胸に、すっと吸い込まれるように白鞘の刃が突き立った。</p>
+<p>　琴子は口を押さえて立ち竦んだ。
+　軽く突き飛ばされたようによろめいた隊士が自分の胸を見下ろすその目の先で、白い着物に赤い染みが浮き上がってくる。胸を押さえて膝をつく隊士が、苦痛に歪んだ顔を上げて琴子を睨む。その目は「いいから早く逃げろ」と言っていた。
+　どうしようかと首だけ後ろへ回して振り返る。琴子を捕まえていた男は高みの見物、もう一人は隊士の相手、そしてもう一人がぬーっと、歩いているようにも見えないほとんど動きのない体でこちらへ近づいてきていた。
+「に、逃げなさい……っ」
+　苦しそうな声と、刀を支えに立ち上がろうとする姿に弾かれるように、琴子は後も見ず駆け出した。とにかく逃げて、そして誰か人を、助けを呼ばなければと、必死に走る。まとわりつく裾を片手にとって、今は恥ずかしいもはしたないもない。隊士さんたちが危ないのだ。
+　人通りのない川べりでなく、裏店の並ぶ路地のもう一本向こう、せめて横丁に出ればと走った。だがなんとなくすぐ後ろに、あのぬっとした妙な男がついてきているような気がして、振り返ろうと思ったが、その耳にひたひたと早足で歩いているような足音が聞こえた。人間が走ってくるのとはまるで違う、気味の悪い化物のようで全身に冷水を浴びせられたようにぞっとした。</p>
+<p>　そのとき前から、行灯のほのかな光に照らされた角を曲がって現れたのは、銀鼠色の羽織をまとった大きな人影だ。
+　ゆったりした足取りと、派手だが渋くもある銀鼠の羽織を見た瞬間、琴子は彼が大きな商家の旦那だとさとった。その人に向けて、息をつぐのもやっとの喉からどうにか声を振り絞り、
+「にっ、逃げて……！　逃げてくださ……ッ!!」
+　できるかぎり大きな声で叫んだ。</p>
+<p>　途端、その影は琴子が言ったのとは逆にこちらへ走りだした。
+　背後に残した明かりで影絵になって、その人が艶のある灰色の羽織をむしりとるように脱ぎ捨てるのを見る。
+　更にもどかしそうに草履を蹴り脱ぐと、猛然と走りはじめた。
+　なにやらおかしいと思ったが、薄暗がりにもその人の姿が見えるようになったとき、琴子は思わずあっと言って足を止めた。
+　重い突風のように巨漢が横を通り過ぎる。同時にすぐ背後でどすんともどかんとも表しようのない激突音が起こった。そして―――なにがどうなったのかはまったく分からない。ともかく琴子は、地面に叩きつけられてもうぴくりとも動かない賊の傍に茫然と立ち竦んでいた。
+「おい、大丈夫か!?」
+　よく響く声が強く張り詰めている。
+　その声にはっとして、琴子は相手の胸……腹に手をかけてすがり仰向く。
+「お、お願……お願いです！　たっ……助け……、赤誠隊の人が……！」
+「赤誠隊？」
+　琴子は何度も頷いて後ろの川のほうを指差した。
+「あっちで、怪我……っ、こういう、変な人たちが……!!」
+「レット！　嬢ちゃんを番屋に連れて行け」
+　どすどすと追い付いてきたもう一つの大きな影に向けて、琴子はとんと突き出された。
+「バ、バンヤ？　バンヤってなに……」
+「嬢ちゃんが知ってる。いいから連れて引き返せ！」
+「ちょっとフィルちゃん!!」
+　その声を置き去りに、路地を揺るがすような足音は遠ざかっていった。</p>
+<p>　番屋に辿り着き、安心するというより魂が抜けたようにぼうっとしていた琴子は、お茶をもらい、頬についた切り傷の手当をしてもらっているうちに、いったいどうなったろうかと心配が膨れ上がってきて、居ても立ってもいられなくなった。
+　思わず立ち上がろうとして、手当していた番太郎をぎょっとさせる。
+「駄目よコトコちゃん。じっとして。傷が残っちゃったらどうするの」
+　言われて強く頭を横に振る。こんなもの、どうでもいいのだ。そんなことより、
+「あそこにまだ二人、変な人がいたんです！　それに、隊士さんが怪我をしてて……！」
+「まあ！　でも、大丈夫よ。だから落ち着いて。フィルちゃん、とびっきり強いんだから。さっきの見たでしょ？　って、なにがなにやら私も分からなかったんだけど、とにかく、大丈夫だから」
+　ね？　と優しく両手を取って軽く揺すられ、琴子はそれでも心配でならなかったが、自分にできることはなにもないのだ。仕方なく、浮かせていた腰を落とした。</p>
+<p>　それから五分か、それとも十分ほどたっただろうか。がらりと番屋の戸が開いた。
+　暗い表から黒い塊がどすんどすん放り込まれ、
+「こいつら、忍び崩れだな」
+　戸口を占拠しそうなほどの巨漢が顔を出す。その顔、疲れた様子すらないフィルの様子を見て、そしてその脇に半分抱えられるような形で身を支えている隊士の無事な姿を見て、琴子は安心するあまりくたくたと腰が砕けそうにになってしまった。
+　後ろから、あちこち着物が裂けてはいるがもう一人の隊士も入ってくる。
+　良かった、みな無事だったんだと思ったところで、そういえばあの用心棒さんはどうしたろうと気になった。
+「あのっ」
+　隊士に尋ねると、
+「あやつが加勢してくれたおかげで、なんとかこちらのかたが来られるまで持ちこたえられたのだが、面目丸つぶれだと言ってな」
+　人に合わせる顔がないと、立ち去ってしまったらしい。たしかに琴子が見ていた範囲では、一瞬で投げ飛ばされていた。だがちゃんと戦えばちゃんと強い人だったらしい。ともかく無事なようで良かったとほっとする。
+　で―――最後に思い出したのがソウヤのことだった。甚だどうでもいい気がしたが、気にしないのも失礼だし不人情なので尋ねると、
+「そういえば、我等が駆け付けたたときにはもう一人いたような……？」
+「死体も転がってなかったし、逃げたんだろ」
+　あっけらかんと褐色のローエンガルデが言うのに、ただああそうかと、別段ほっともしなかった。</p>
+<p>　それよりも、人心地ついて緊張と混乱がおさまると、つい見てしまっているものに気付いて琴子は真っ赤になって顔を伏せた。
+　激しく動いてきたせいだろう。着物の前は臍まで見えかねないほど開いているし、たぶん洋装のつもりでいるからだろうが、着物という衣類の構造からすれば、足を開いて座ると必然的に裾が開き、はだけた腿に、西洋下履きまでちらりと……。
+「あらまっ！　ちょっとフィルちゃん。女の子がいるのよ。パレオじゃないんだから、ちゃんと隠しなさい！　ほら早くっ！」
+　ローズが膝を叩いて叱った。
+　フィルは今更そのことに思い至った様子で片方の眉を上げて琴子を見ると、大きな肩を竦め、雑に衣紋を繕い足を組んで裾を重ねた。</p>
+<p>　そして、こいこいと琴子を手招きする。西洋の、手のひらを上に向けた手招きだ。ふらふらと琴子は傍に行き、座れと手で示されてぺたんと正座した。
+　すると、自分の顔と変わりないほど大きな手が左の頬にかざされて、じんわりとあたたかくなった。そのせいでチリチリする痛みが強くなったようだが、しかしそれは次第に薄らいで、やがてきれいさっぱり消えてしまった。
+　恐る恐る触ってみても少しも痛くない。貼った膏薬と油紙をはがしても痛くない。そして、直接頬に触れても、そこにはもうつるつると、どんな違和感もなかった。
+「これでいい」
+　そして、今までかざされていた手がぽんと頭に乗せられた。
+「こっちの兄ちゃんから聞いた。賊の手に噛み付いて逃げたってな。怖かったろうに、よくやったもんだ。それに、”助けて”じゃなくて”逃げて”と来た。大した嬢ちゃんだよ、まったく」
+　ぽんぽん、そして、にっと笑われて、琴子の心臓は一瞬完全に止められた。</p>
+<p>　それから間もなく、知らせを受けて飛んできたトクサ屋の人々がてんやわんやの大騒ぎだったことは、記すまでもない。</p>
+
+    </div>
+  </article>
+
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      hamburger.textContent = '✕';
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+  </script>
+
+</body>
+</html>

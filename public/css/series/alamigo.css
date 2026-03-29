@@ -1,28 +1,21 @@
 /* assets/css/series/alamigo.css */
 
+/* ============================================================
+   デザインパレット（変数定義）
+   ============================================================ */
 :root {
-    --bg-base: #e2d8c3;
-    --accent-gold: #b08d57;
-    --text-main: #3e2723;
-    --sidebar-bg: #d7ccb5;
-    --outer-panel: #f4eee1;
-    --inner-panel: #ffffff;
-    --text-dim: #9e200a;
+    --bg-base:      #e2d8c3;
+    --accent-gold:  #b08d57;
+    --text-main:    #3e2723;
+    --text-dim:     #9e200a;
+    --sidebar-bg:   #d7ccb5;
+    --outer-panel:  #f4eee1;
+    --inner-panel:  #ffffff;
 }
 
-/* 1. サイト全体 */
-body.theme-alamigo,
-body.theme-alamigo .container {
-    background-color: var(--bg-base) !important;
-}
-
-/* 2. サイドバー */
-body.theme-alamigo aside {
-    background-color: var(--sidebar-bg) !important;
-    border-right: 1px solid var(--accent-gold);
-}
-
-/* 3. メインエリア */
+/* ============================================================
+   1. 本文エリア全体
+   ============================================================ */
 body.theme-alamigo main {
     background-color: var(--outer-panel) !important;
     padding: 0 !important;
@@ -32,7 +25,9 @@ body.theme-alamigo main {
     min-height: 100vh;
 }
 
-/* 4. 本文パネル */
+/* ============================================================
+   2. 本文パネル
+   ============================================================ */
 body.theme-alamigo article {
     background-color: var(--inner-panel) !important;
     margin: 20px auto !important;
@@ -40,17 +35,21 @@ body.theme-alamigo article {
     width: 95% !important;
     max-width: 760px !important;
     border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* 5. ヘッダー（タイトル部分） */
+/* ============================================================
+   3. ヘッダー（タイトル部分）
+   ============================================================ */
 body.theme-alamigo article header {
     border-bottom: none !important;
     margin-bottom: 25px !important;
     padding-bottom: 5px !important;
 }
 
-/* 6. タイトル */
+/* ============================================================
+   4. タイトル
+   ============================================================ */
 body.theme-alamigo h1 {
     color: var(--text-main) !important;
     border-bottom: 2px solid var(--accent-gold);
@@ -58,29 +57,36 @@ body.theme-alamigo h1 {
     padding-bottom: 10px !important;
 }
 
-/* 7. 本文 */
+/* ============================================================
+   5. 本文
+   ============================================================ */
 body.theme-alamigo .novel-body {
     color: var(--text-main) !important;
     white-space: pre-wrap;
 }
-
 body.theme-alamigo .novel-body p {
     margin: 0 0 0.3em 0;
 }
 
-/* 8. 区切り線 */
+/* ============================================================
+   6. 区切り線
+   ============================================================ */
 body.theme-alamigo article hr {
     margin: 3.0em 0;
     border: none;
     border-top: 1px solid var(--accent-gold);
 }
 
-/* 9. シリーズ文字色 */
+/* ============================================================
+   7. シリーズ文字色
+   ============================================================ */
 body.theme-alamigo .series-toggle {
     color: var(--text-dim);
 }
 
-/* 10. ハンバーガーボタン（テーマ色に合わせる） */
+/* ============================================================
+   8. ハンバーガーボタン
+   ============================================================ */
 body.theme-alamigo .hamburger {
     background: rgba(176, 141, 87, 0.7);
 }

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>真 - おはなしおきば</title>
+  
+  <style>
+     
+    body { 
+      margin: 0; padding: 0; 
+      font-family: "BlinkMacSystemFont", "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      background: #fff; color: #333; 
+    }
+    .container { 
+      display: flex; min-height: 100vh; max-width: 1200px; 
+      margin: 0 auto; background: #fafafa; 
+    }
+
+     
+    aside { 
+      width: 220px; border-right: 1px solid #e0e0e0; 
+      padding: 0 15px 20px 15px;
+      background: #fafafa; position: sticky; top: 0; height: 100vh; overflow-y: auto; 
+      flex-shrink: 0;
+    }
+    aside h1 { margin: 15px 0 10px 0; line-height: 1.2; }
+    aside h1 a { font-size: 1.1rem; color: #000; text-decoration: none; font-weight: bold; }
+
+    .side-nav-sticky {
+      position: sticky; top: 0; z-index: 10;
+      background: #fafafa; padding: 10px 0;
+      border-bottom: 1px solid #eee; margin-bottom: 15px;
+      display: flex; justify-content: space-between; gap: 5px;
+    }
+    .side-nav-sticky a {
+      flex: 1; text-align: center; font-size: 0.7rem; font-weight: bold;
+      color: #666; text-decoration: none; padding: 6px 0;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+
+    h2 { font-size: 1.1rem; border-left: 4px solid #333; padding-left: 10px; margin: 20px 0 8px 0; }
+    .series-toggle { cursor: pointer; display: block; font-size: 0.95rem; color: #888; margin: 10px 0 4px 5px; position: relative; padding-right: 20px; }
+    .arrow {
+      display: inline-block; width: 0; height: 0; margin-left: 5px; vertical-align: middle;
+      border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #888;
+      transition: transform 0.3s;
+    }
+    .toggle-checkbox { display: none; }
+    .toggle-checkbox:checked + .series-toggle .arrow { transform: rotate(180deg); }
+    .series-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .toggle-checkbox:checked + .series-toggle + .series-content { max-height: 2000px; }
+
+    ul { list-style: none; padding-left: 15px; margin: 0; }
+    li { margin-bottom: 8px; font-size: 0.80rem; }
+    a { text-decoration: none; color: #444; }
+    .active { color: #d32f2f !important; font-weight: bold; }
+
+     
+    main { 
+      flex: 1; padding: 50px 0; background: #fff; 
+      display: flex; justify-content: center;
+    }
+    article { width: 90%; max-width: 720px; margin: 0 auto; }
+    .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
+    .is-draft { color: #aaa; font-style: italic; }
+
+     
+    .lyric-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 20px 30px;
+      margin: 1.5em auto;
+      max-width: 500px;
+      text-align: center;
+      font-style: italic;
+    }
+
+     
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 12px; left: 12px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      width: 40px; height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+     
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 900;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+     
+    @media screen and (max-width: 768px) {
+
+       
+      .hamburger {
+        display: flex;
+      }
+
+       
+      aside {
+        position: fixed;
+        top: 0; left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 950;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+      }
+      aside.open {
+        transform: translateX(0);
+      }
+
+       
+      .container {
+        display: block;
+      }
+
+       
+      main {
+        width: 100%;
+        padding: 60px 0 20px 0;  
+        display: block;
+      }
+
+       
+      article {
+        width: 94%;
+        max-width: none;
+        margin: 0 auto;
+        padding: 20px 15px;
+      }
+
+       
+      h1 { font-size: 1.4rem !important; }
+      .novel-body { font-size: 1.05rem !important; line-height: 1.9 !important; }
+
+       
+      img { max-width: 100%; height: auto; }
+    }
+  </style>
+
+  
+  
+    
+      
+    
+  
+
+  
+    
+    
+      <link rel="stylesheet" href="http://localhost:1313/css/series/alamigo.css">
+    
+  
+</head>
+
+<body class="theme-alamigo">
+
+  
+  <button class="hamburger" id="hamburger" aria-label="メニューを開く">☰</button>
+
+  
+  <div class="overlay" id="overlay"></div>
+
+  <div class="container">
+    <aside id="sidebar">
+      <h1><a href="/">おはなしおきば</a></h1>
+      <div class="side-nav-sticky">
+        <a href="http://localhost:1313/ff14/chibiko/chibi06/">← BACK</a>
+        <a href="http://localhost:1313/ff14/chibiko/chibi07/">NEXT →</a>
+      </div>
+
+      
+        <div class="section-group">
+          <h2>FF14</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-46ae835b836b509ad6872524212a5e12" class="toggle-checkbox" >
+              <label for="series-46ae835b836b509ad6872524212a5e12" class="series-toggle">【トロイの話】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main01/" class="">スカラ迷宮 1</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main02/" class="">スカラ迷宮 2</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main03/" class="">スカラ迷宮 3</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main04/" class="">スカラ迷宮 4</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main05/" class="">スカラ迷宮 5</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main06/" class="">スカラ迷宮 6</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main07/" class="">スカラ迷宮 7</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main08/" class="">スカラ迷宮 8</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main09/" class="">スカラ迷宮 after01</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main10/" class="">スカラ迷宮 after02</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main11/" class="">スカラ迷宮 after03</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main12/" class="">スカラ迷宮 after04</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main13/" class="">スカラ迷宮 after05</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main14/" class="">スカラ迷宮 after06</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red01/" class="">ブラトロ はじまり</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red02/" class="">ブラトロ 俺の黄玉</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red03/" class="">ブラトロ ああ見えて</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red04/" class="">ブラトロ 赤鰐という男</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red05/" class="">ブラトロ 番外編GPT</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red06/" class="">ブラトロ 番外編Claude</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red07/" class="">ブラトロ RED DILE</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main00/" class="is-draft">base</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-aeeca8301969494c0adf2f2c423c2129" class="toggle-checkbox" >
+              <label for="series-aeeca8301969494c0adf2f2c423c2129" class="series-toggle">【琴子お嬢様】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-01/" class="">呉服屋物語 一</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-02/" class="">呉服屋物語 二</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-03/" class="">呉服屋物語 三</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-04/" class="">呉服屋物語 裏</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-05/" class="">呉服屋物語 四</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-06/" class="">傭兵物語 一</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-07/" class="">傭兵物語 二</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-08/" class="">傭兵物語 三</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-09/" class="">傭兵物語 四</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-4c452e7e8eb0756a2a0e983e2dad583d" class="toggle-checkbox" checked>
+              <label for="series-4c452e7e8eb0756a2a0e983e2dad583d" class="series-toggle">【ちびこ】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-6/" class="">かぞく(プロト版)</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01/" class="">かぞく(プロト版)</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-8/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi02/" class="">小さな拾いもの</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi03/" class="">家さがし</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi04/" class="">おうちゲットだぜ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi05/" class="">おやこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi06/" class="">異</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi07---%E3%82%B3%E3%83%94%E3%83%BC/" class="active">真</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi07/" class="">真</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi20/" class="">とある晩餐会の裏側で</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi21/" class="">小さなえいゆう</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi22/" class="">千伐の竜騎士</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi23/" class="">不伐の竜騎士</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi24/" class="">北稜の守護神</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi25/" class="">北稜の勇者たち</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-fd1f546341f187a70bb5af75c4bb6af2" class="toggle-checkbox" >
+              <label for="series-fd1f546341f187a70bb5af75c4bb6af2" class="series-toggle">【ORIGIN】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-01/" class="">Prologue</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-02/" class="is-draft">第一話：フェロス</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-03/" class="">第二話：英雄</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-5de3c22336d28a71e6f69d789ed2b479" class="toggle-checkbox" >
+              <label for="series-5de3c22336d28a71e6f69d789ed2b479" class="series-toggle">【華飾の帳】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr01-kage/" class="">その影に 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr02-kage/" class="">その影に 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr03-kage/" class="">その影に 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr04-kage/" class="">その影に 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr05-inori/" class="">かそけき祈り 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr06-inori/" class="">かそけき祈り 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr07-inori/" class="">かそけき祈り 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr08-inori/" class="">かそけき祈り 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr09-inori/" class="">かそけき祈り 5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr10-inori/" class="">かそけき祈り 6</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr11-inori/" class="">かそけき祈り 7</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr12-hibi/" class="">日々彩々 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr13-hibi/" class="">日々彩々 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr14-hibi/" class="">日々彩々 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/" class="">日々彩々 3.5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr16-hibi/" class="">日々彩々 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr17-hibi/" class="">日々彩々 5・前</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/" class="">日々彩々 5・後</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/" class="is-draft">日々彩々 6</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-6542e7828ae546a46eed441bbde3312b" class="toggle-checkbox" >
+              <label for="series-6542e7828ae546a46eed441bbde3312b" class="series-toggle">【VRファンタジー】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr01/" class="">第一話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr02/" class="">第二話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr03/" class="">第三話</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>操作実験場</h2>
+          
+          <ul>
+            
+              <li><a href="http://localhost:1313/post/hello/" class="is-draft">自分用：サイト操作・要素まとめ</a></li>
+            
+              <li><a href="http://localhost:1313/post/cheatsheet/" class="is-draft">Markdown・Hugo記法</a></li>
+            
+          </ul>
+        </div>
+      
+    </aside>
+
+    <main>
+      <article>
+        
+  <article>
+    <header style="margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+      <h1 style="font-size: 1.8rem; color: #111; margin: 0;">真</h1>
+    </header>
+    <div class="novel-body">
+      <p>　　　　　【禁術】</p>
+<p>　初手は子拐いであった。
+　世にいくらでもある人のならい。わしらには聞く価値も意味もない。
+　だがそれに源流の技が使われているとなれば、話は別となる。</p>
+<p>　総じては&quot;縛&quot;と名付けられておる。
+　人の心を掴み捻じ曲げる技だ。似た技は他にもあろうが、わしらのそれが禁術であるのにはわけがあった。
+　心のありようが根から変わる。千年来の友好国に攻め入らせることも、生まれたばかりの我が子を床に叩きつけさせることも、生きる希望に満ちた若者に首をくくらせることも、&ldquo;縛&quot;を用いれば容易であった。
+　要するものも僅か。言葉や音、光、あるいは気配、匂い、仕草、表情、人に伝わるものであれば何でもよい。それらをもって人の心に沁むだけだ。</p>
+<p>　わしらの受け継ぐ術技はみな、そのようなものだ。人の世にあるには危うすぎる力や技ばかり。それゆえわしらには里を抜けるなぞという選択肢はない。里に属して生きるか、さもなくば死か。
+　そうしてすべては里の内でのみ醸造され、受け継がれてきた。</p>
+<p>　だが聞くだにその異様な子拐いは、&ldquo;縛&quot;をもってしているとしか思えなんだ。
+　いわく、子供を連れ去る怪しい者が一度として目撃されておらぬ。
+　いわく、連れ去られた子らは一人として逃げようとも帰ろうともせなんだ。
+　いわく、運良く発見された子らは例外なく、己の連れ去られた先をこそ居場所と見做しておる。
+　いわく、関わった者の思考や感覚も中途でがらりと変わることがある。
+　いわく、洗脳であろうと見てエーテル放射による書き換えや緩和を試みたが、まるで通用せぬ。
+　どれもこれも、巧みかつ強力な催眠術や洗脳術であれば、不可能ではない。が、そのすべてを僅かな時間で容易く行うとすれば、やはりこれは&quot;縛&quot;であろうと長らが懸念するのは当然であった。</p>
+<p>　&ldquo;縛&quot;がかように強力なわけは簡単だ。外から押し付けるのではなく、内に元よりあったものを興すからだ。
+　いかなる人間も、一切の疑念や不信、不安、敵意や反意、嫌悪、倦怠なく生きているわけもなく、逆もしかり。好意や依存、執着、愛着、思慕、様々な念を抱えておる。
+　&ldquo;縛&quot;はその中の特定の感情や思念を強く励起し、拡大し、固着させる。本来ならば長い時間や繰り返される経験によってそうなっていくものを、短時間で強制的に起こす。
+　術により増幅されてはおれどそれは、真実その者の中にあったもの、抱いていたもの。ゆえに拒めず、強く頑なで、分かつこと、すなわち解除することが極めて困難になる。</p>
+<p>　励起するまでであれば、ただの詐術、人心掌握術であろう。禁術とまではされておらぬ。
+　わしらがどこぞに何者かとして入り込むとき、信用のできる者だと印象付ける、それをいささか強くした程度のものだ。愛しい恋しいと思わせ籠絡する手管も、世に珍しいものではあるまい。
+　だとしても通常、己のために後宮の他の女子男子を皆殺しにしてくれと言うても、聞く者はおらぬ。だが思いを強め肥大させ、他のすべてを圧するまで頑なにすれば、&ldquo;縛&quot;を用いれば、それが叶う。
+　人をかように操りうる、それが&quot;縛&quot;である。</p>
+<p>　里に今いる&quot;縛&quot;の使い手は、わしとノロシのみ。ノロシは里を出たこともなく、わしは―――子拐いなぞと益体もないことに手間暇をかけるほど酔狂ではない。となれば、あとは死んだ者だけだ。死んだはずの。
+　可能性のあるのは二人おった。マクヅか、ワブキだ。そして考えるまでもなくマクヅであろうと察せられた。
+　そも、抜けたマクヅを追うたのがワブキであった。あの当時、&ldquo;縛&quot;の使い手としてはワブキのほうが上と見られておったがゆえに、ワブキが持ち帰ったマクヅの首が偽であるとは誰も疑わなんだ。だが実際の腕前は逆だったのであろう。マクヅは己の才を隠しておったに違いない。ゆえに追ったワブキが術中に落ちた。あるいは、己の意思でマクヅについたか。
+　後にワブキもまた里を抜け、それを追うたのはわしだ。ワブキの術ごときではわしを絡めることはできぬ。よって持ち帰った首は間違いなくワブキのものであり、かち割られた頭から髄を出されてなお生きる道理もない</p>
+<p>　&ldquo;縛&quot;を弄する相手に他の者は役に立たぬ。操られ手先となるのが落ちだ。ノロシが使えぬ以上、行くのはわしであった。
+　マクヅは優秀な忍びであったが、何をやらせても卒なくこなすも、隙がないには至らぬといった具合だ。わしが遅れを取ることはない。と言いたいが、マクヅが真の才を隠して立ちまわっていたならば、それに気付かなんだわしに奴を侮ることはできぬ。
+　さりとて、世に出て奇妙な子拐いについて知る程に、悠長に追うておる暇はないと思えた。
+　子を連れ去るときに警戒させぬのも、買い手にとって都合のいい偽りを刷り込むのも&quot;縛&quot;を使えば容易であろう。それにしてもかける術が悪辣極まりない。「この家を出たら死ぬ」と縛れば、事実その子供はその家から一歩出た途端に死ぬ。だがその必要があるか。ない。買い手を親と思い込み、従い慕うだけで十分だ。
+　すべての子供がそうではないようだが、奴は気まぐれに、そういった要らぬ&quot;縛&quot;をかけておった。</p>
+<p>　時にその手は官憲や協力者にも及び、捜査を取りやめさせるのみならず、より積極的に混乱させている。
+　シャーレアンより招聘されたエーテル学者は、子を治療するはずが逆に、より深く&quot;縛&quot;を浸透させておった。どこぞでマクヅに会うて術中に落ちたのであろう。
+　既に興った思いを深めるには、エーテル放射など必要ではない。僅かな言葉で良い。施術の間、親を思い出し偽りを振り払うよう諭す中に、不安や不信、嫌悪、あるいは拒絶を煽るような言葉を混ぜる。他の者に気付かれぬように、あるいは聞かれていたとしても気付かれぬほど他愛もない言葉で。
+　より強く、意のままに御するには頻繁に会うて&quot;縛&quot;の一部を伝えねばならぬとすれば、まだその学者の近辺にマクヅの形跡がないとも言えなんだ。</p>
+<p>　同業の老人に身を変えてその学者のもとに赴くと、出迎えた娘が既に何者かに自我を歪められておった。&ldquo;縛&quot;によるとは思えぬ杜撰な焼き込みだ。しばし観察してみれば、この女学者が己の従者を都合の良いように作り変えておると知れた。
+　過剰な自己卑下、過剰な崇拝。時には暴力を振るわれることもあるようだが、それを娘は悪と思うてはおらぬ。だが完全ではないがゆえに、言葉の端々に、ふとした思考の行き詰まりに、「己でない意思」に従わされている齟齬が垣間見える。
+　浅いものであれば、偽りの感情と意識を剥ぎ取れば元に戻ったろう。だがそれは、稚拙とはいえ幾度となく塗り重ねられたものであった。これを破壊すれば娘は己を取り戻すであろうが、同時に正気も失われよう。
+　そして女。船中でマクヅの虜となり、これは―――マクヅめ。どれほどの爪を隠していたのか、それとも里を離れ気儘に&quot;縛&quot;を使ううちに力をつけたか。わしでは解けぬと確信した。</p>
+<p>　となればすべきことは一つであった。これ以上この女を捜査に関わらせては、解決しうるものさえせぬようになる。
+　幸い、わしが手を下す必要はない。
+　夜分の訪問でこちらも食事をしておらぬと告げれば、菓子があると言うて勧められる。食う物がそこにあれば、箸、ナイフ、フォーク、何かが目の前に共に出る。少し離れた卓の上のペンではならぬ。&ldquo;そのとき&quot;自然と視界の中にあらねばならぬ。
+　あとは、娘の洗脳を解き、学者の意識を飛ばすだけで良かった。</p>
+<p>　痕跡を残さぬよう立ち去る。
+　朝まで目覚めぬ学者より先に娘の意識が戻る。同時に、己が真実抱えていたもの、これまで押さえこまれていたものがいちどきに放たれる。その強烈な思念が自我を侵食し、支配し、その色に染まってもはや戻るまい。だがもしあの娘の中に、いくらかでも学者を慕う思いがあれば、ともすると……。
+　そうも思うたが、受けた報せは、わしがこうであろうと思うたままであった。</p>
+<hr>
+<p>　　　　　【桃花】</p>
+<p>　モモカがいなくなり、戻ってくるまでもきてからも、何人もの人に会った。探しまわってくれた軍人たち、ボランティア、それから医者や学者。彼等がモモカを、私たち家族を助けてくれようとしているのは分かる。分かるが……軍人には時折面倒臭さが見え、ボランティアは自分のしている善行が楽しいからやってるだけ。医者は自分のプライドを気にし、学者はまるでサンプルみたいにモモカを見る。いつもいつもじゃないし、私の気のせいかもしれないが、ふとそう見えるそれに、私は次第に耐えられなくなっていった。
+　ましてや物珍しさや興味本位の見物人。ちらちらとうちの塀を見上げて意味もなく往復したり、時には不躾に門内を覗きこんだり。
+　もうほっといてくれ。私もダミニも外に出なくなってどれくらいたつだろう。最初は本気で心配してくれていた弟も、最近では無関心になってきた気がする。家族として義務だから仕方なしに世話を焼くだけで、本当はうんざりしているような……。気がするだけで、気のせいなのかもしれないが。</p>
+<p>　疲れきっていた私たちのもとに、その女性が来たのは昼過ぎだった。
+　追い返しに出たはずの家政婦がその人を連れて戻ってきたときには、私は思わず罵倒しそうになったが、
+「ご心痛極まりないところ、お邪魔をして大変申し訳ございません」
+　そう言って丁寧に頭を下げる訪問客を見た途端、今まで張り詰めて砕けそうだった気持ちが、急にふっと緩んだのを感じた。
+　つややかな黒髪に、スミレ色の瞳。その目に湛えられているのは、私たちのことを本当に、心から気の毒だと思い、痛みも悲しみも感じてくれている優しい心だった。</p>
+<p>　その人は、被害に遭った家庭を回り、事情を聞いているのだと言った。犯人逮捕のため、そして、私たちのようにめちゃくちゃに壊され引っ掻き回され、どうにもならなくなった家族のために。
+　何度も尋ねられ何度も話し、それでもなんの甲斐もなく、思い返すのもつらいことだろうけれど、それでもどうか聞かせてほしいとその人は言った。どんな些細なことでもいいし、無関係に思えることでもいいと。
+　だから私は、その人に言われるとおり、拐われる前の、モモカと過ごした日のことから話し始めた。
+　昼前のことだ。公園に大道芸人が来て色とりどりの風船を配っているのを、買い物帰りの家内が見かけた。天気もいいし、昼飯が終わったら見に行こう、風船をもらおうと、モモカと三人で出掛けた。</p>
+<p>　モモカは名前と同じ桃色の風船をもらってご機嫌だった。私と家内でそれぞれの手をつないで、せっかくみんなで出てきたのだから、昼飯とは別になにか食べていこうじゃないか。
+「なあモモカって……そう言って見下ろしたら、……なんで……なんでそんな」
+　あの出来事を思い出すと今でも混乱する。私たちが手をつないでいたのは、桃色の風船を持った別の子供だった。
+　いい店がなかったかと、私が辺りを見回したのはほんの５、６秒くらいのはずだ。家内もそうだった。モモカの手を離したつもりもない。なのに私たちの間にいるのは、ぼんやりした様子のまるで知らない男の子だった。
+　とっさにどうしていいか分からなかった。何が起こったのか分からなかったし、モモカを探さないとというのと、この子をどうすればというのとで、私たちはまずその子に、君はどこの子だと尋ねたが返事はなく、何があったと聞いてくれた人にわけを話しても、理解できないという顔をされるだけだった。</p>
+<p>　わけは分からなくても、その子を人に預けて私はモモカを呼んで回った。通りの端から端まで、迷惑がられようと通行人に声をかけて、家内だって同じだ。だがモモカはどこにも……。
+　迷子にしても誘拐にしても、私にできることは何もなくて、星戦士団の人たちに任せるしかなかった……。
+　……モモカは誘拐されて、３日、いや、４日だったかな。幸い、よそに連れて行かれる前に、他の拐われた子たちと合わせて見つかって、うちに帰ってきた。でも……っ……。
+　……やっと、お父さん、お母さんて、呼んでくれるようになったのに……っ。</p>
+<p>　―――すみません。みっともない。……そう言ってもらえるとほっとします。
+　モモカはね、養女なんですよ。あ、さっき言いましたっけ。ええ。私たちには子供がなくて……私に種がないんです。それは結婚する前から分かっていて、家内も承知で一緒になってくれました。そのときにね、もし子供がほしくなったら養子でも取ればいいじゃないって、簡単に考えてたんですよ。
+　でも実際にそうしようとすると、そりゃもういろいろ考えて。可愛がる子供がほしいから養子がほしいなんて、それじゃペットと同じだ。そんな愛玩物みたいに子供をもらっていいのかとか。じゃあどんな理由ならいいんだとか、そりゃもういろいろね。</p>
+<p>　そのうち弟が、ぐだぐだ考えてないでまずそういう子らに会ってみて、養子の斡旋とかしてる人に話をして、聞いてみろってね。それもそうだなって家内と二人で、養子の紹介もしてくれるっていう孤児院や役所なんかを回ったんです。
+　それでもなかなか、自分たちがなんのために子供がほしいのかとか、それは子供にとってどうなんだろうとか……。だって勝手ですよねぇ。子供たちを見てね、思うんですよ。おとなしそうな子だな、あの子は育てやすそうだなって。でもそれ、酷いじゃないですか。やんちゃだったら駄目なんですよ。だったらそんな理由でどの子にするかなんて選べるわけがない。じゃあ他の人に見捨てられたような、扱いづらい子にするのか。そういう子の親に、なってやる、なんてのも酷い話だし、それに本当に手に負えなかったら、どうするんです？　また捨てる？　世間体が悪いからって、我慢して育てる？　実の子なら、そんなふうに育ったのも自分たちの育て方のせいだとか、我慢する理由もあるでしょうが……。</p>
+<p>　悩んで悩んで、それである日、モモカに会ったんです。
+　そのときね、私だけじゃなく家内もね、この子とを手を繋いで、当たり前みたいに家族してる姿ってのが、ふっと浮かんで……。そうするのが当たり前みたいな気がして、何度会ってもやっぱり、この子はうちの子だって気がして……。
+　モモカもうちの子になっていいって言ってくれて、親子になりました。
+　でも、全然本物じゃない、形だけの親子です。
+　嫌われないように、怒らせないようにって、ほんの４つかそこらでいっつも気にしてるんですよ。近東語もね、無理してすぐ覚えなくても、私も家内も言語学者だし、東国語くらいできるし、だからこそモモカを支えてやれるって思ったんだし……。それでも一所懸命覚えてて、いじらしいっていうより、なんだか可哀想で、悔しくて……。
+　でもいつかきっとって、いつか絶対って、家内と二人でね。</p>
+<p>　だからね、ものすごく嬉しかったんですよ。モモカが初めてね、家内の手伝い、嫌がったの。
+　絵を描くのに夢中でね、洗濯物一緒に畳もうって言ったのを、つい、なんでしょうね。つい「えーっ」って。すぐはっとして、怯えた顔になって、でも私も家内も嬉しかった。いいんだよって。言っていいんだよって。他の子はみんなそうだ。我が儘言ったり甘えたり。それで叱られたりもするけど、いちゃいけなくなるんじゃないかなんて、怖くなったりしない。
+　やっとそうやって……やっとモモカの家族になれたのに……っ。</p>
+<p>　……―――ええ。戻ってきたモモカは、どうせ私なんかいらないんでしょって……。
+　でもね！　でも諦めませんよ。洗脳だかなんだか知りませんが、２年かけてやっと家族になれたんです。だったら10年かかってでも20年かかってでも取り戻しますよ。モモカが信じてくれなくても、それでもモモカはうちの子なんだ。モモカはもう私の、私と家内の大事な娘なんだ……っ。</p>
+<p>　……いや、すみません。でも、はは、ちょっとすっきりしました。思ってること全部言えて。
+　ええ。私は諦めません。おまえだって、な。それに、一番つらいのはモモカなんです。本当は嫌われてるんだって思って、仕方なしなんだって、そんなふうに思ってたらつらいに決まってる。だったらもうね、嫌になるくらい、鬱陶しい、しつこいって言われるくらい大事にしてね、モモカに諦めてもらいますよ。疑っても無駄だって。ええ。何年かかったって。</p>
+<p>　え？　……あ、モ、モモカ……。
+「モモカちゃん」
+　優しい声がして、暴走していた私の感情が、急にすんなり心のなかに収まった感じがした。
+　呼ばれて、ドアの陰にいたモモカがもう少しだけ顔を覗かせる。ずっと聞いていたんだろうか。それで私たちの思いが伝われば、と思ったが、無駄なのだ。こんな思いはもう何度もモモカに聞かせてきた。それでもモモカに焼き付けられた不安や不信は払えなかった。
+　だが今何故かモモカは、虚ろな、冷たい目からぼろぼろ涙を落としていた。そこだけまるで別物のようだった。
+「モモカちゃん。お姉さん、知ってるわ。お父さんが大好きだって。お母さんが大好きだって。どうせ他人なんだって、本当はいらないんだって思えても、大好きなのはそのままだもんね。大好きな人とは、ずっと一緒にいたいよね。だからモモカちゃん。大好きなお父さんとお母さんのこと、信じようって、もう一度思ってみて？」
+　その瞬間、モモカの周囲で何かが割れたような、破裂したような気がした。</p>
+<p>「お&rdquo;……どう、ざん……っ」
+　破裂したのはモモカの涙もで、詰まって声にならない言葉を吐き出しながら、モモカが私に飛びついてくる。
+「おどうざん、おどうじゃん、おどうじゃ……っ」
+　泣きじゃくりながら、モモカは「お父さん」と「お母さん」と、そして「好き」、「大好き」、「ここにいたい」、「お父さんといたい」、「お母さんといたい」を叫んでいた。
+　親子三人で思わずかき集めるみたいに抱き合っている目の端に、また丁寧に頭を下げて出て行く人の姿が見える。
+　何故か私には、貴方のおかげだという気がした。今まで何度も語ったこの気持ちを、だがモモカに届けてくれたのはきっと貴方だ。
+　礼も言わないうちに帰ってしまったが、だからその分も私はモモカをこれからも大事にする。幸せにする。もし洗脳が残っていたとしても、大丈夫だ。モモカは強い。それを跳ね除けてきっといつかは完全に自分を取り戻してくれる。私はただ、それを信じ、支えるだけだ。
+　だが今はただ、取り戻した幸せと喜びをこうして抱きしめていたかった。</p>
+<hr>
+<p>　木偶どもが色のない目でわしを見る。一斉に向けられるそれはわしの掟破りを見ておるが、知ったことではない。
+　確かにわしの役目はマクヅを追い、殺すこと。源流の技を外の世から消去することだが、不必要に強力な技など編み出し、それを里内にとどめおくことにしくじった挙げ句、平穏な暮らしを壊した責任は、いささかなりとも取らねばなるまい。
+　救いがまだあるならば、壊れたものを本来の形に戻すのもその一つだ。</p>
+<p>　己が実の子を、そもそも虐待し、自ら売った親がいた。
+　手を焼く養子にうんざりし、誘拐されたとなれば被害者面しておれば簡単に&quot;良き親&quot;であれたものを、戻ってきたのは厄介と迷惑顔をするのもいた。
+　救い出された子を、案じておったのは間違いなかろうに、まず「人様に迷惑をかけて」と叱ったがゆえにその子に殺された親もいた。
+　実子であれ養子であれ、元に戻そうと必死になり、叶わぬと諦めて無関心になった親もいた。諦められて命を断った子もいた。
+　マクヅの撒いた種であれ、元来その親子が抱えていたものであれ、わしが見てきた大概は、崩壊し元には戻らず、周囲を巻き込んで更に壊れていく残骸であった。</p>
+<p>　ゆえにこそ、まだ救える者は救わねばならぬ。
+　あのモモカなる娘は幸いであった。
+　もとより不安を抱きやすい性状で、幼な子であるに関わらず親の顔色を窺うて過ごした。それゆえ心に、不安と戦い、信じたいと思い「信じよう」とする小さな力が育っていた。そしてまた、親と心から思うことはできずとも、二人の大人を慕う思いが確かにあった。
+　そこへ思いの丈をまとめて聞かされて、あの娘は今一度抗うたのだ。マクヅの&quot;縛&rdquo;、莫大に膨れ上がった不信と不安に、ほんの僅かな力ではあれど抗うた。
+　内から育つ&quot;縛&quot;に抗せる、あるいは破れるとすれば、それはやはり内よりだ。それがなくてはわしにもなすすべはない。あの娘は懸命に抗うたがゆえ、そこにわしの&quot;縛&quot;を入れることができた。</p>
+<p>　娘のうちに本来あり、今もまだ消えてはおらぬもの。マクヅの&quot;縛&quot;によって肥大した悪感情により押し潰され、どれほど小さくなっていようとも、無ではないもの。二人の大人を恋い慕う思いと、信じたい気持ち。そしてそれが叶い、たとえ僅かでも信じ始めていた、信じていた事実。
+　だからわしは今一度「信じよう」という意志を興した。
+　「信じたい」は願望に過ぎぬ。「信じている」や「信じる」はあまりにも僅かで頼りない。だからこそ「信じよう」と決意させた。そして、それを呼び水に、マクヅの&quot;縛&quot;を抜けだしたのは、あの娘自身だ。名残は残ろうし、それとは長く戦い続けねばなるまいが、あの親子であれば無理ではあるまい。</p>
+<p>　さて、これも&quot;縛&quot;であればわしの勝手で使うべきではないが、使わねば救えなんだ。
+　長らにすればわしのしたことも、許しもなく外界にて禁術を使うた掟破りに過ぎぬのであろう。
+　だが知らぬ。
+　わしに人らしい心はそれほどあるまいが、皆無ではない。あの小さな一家を救うたとて、そのために僅かな&quot;縛&quot;を用いたとて、それで世が乱れるわけもなし。里の理念に反してはおらぬ。
+　と、木偶に言うたとて通じまいし、長どももわしの反駁に付き合う気もあるまい。</p>
+<p>「マホロ様」
+　木偶の一人が口をきき、今しがた受けたらしい報せを呟いた。
+　マクヅめは、ラザハンを南から北へと移動しながら子拐いを続けている、か。わしが追っておることには気付いておろうに、それでもまだこの地を去らぬとは、とどまる合理的なわけがあるのか、あるいは挑発か。
+　何であれ、追って仕留めるのがわしの役目だ。
+　できうれば&quot;縛&quot;にかけられる前に居所を掴み、親御のもとへ戻してやりたいが……。
+　そう簡単ではあるまいと、わしはいくらか、悪い予感を覚えた。</p>
+
+    </div>
+  </article>
+
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      hamburger.textContent = '✕';
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+  </script>
+
+</body>
+</html>

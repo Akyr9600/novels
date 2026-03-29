@@ -1,0 +1,89 @@
+/* assets/css/series/chibiko-bright.css */
+
+/* ============================================================
+   デザインパレット（変数定義）
+   ============================================================ */
+:root {
+    --outer-panel: #3d2e1e;
+    --inner-panel: #fdf6e8;
+    --border-color: #c8a46e;
+    --accent: #b36d56;
+    --text-main: #2a1f0e;
+    --text-dim: #7a5a38;
+    --title-color: #fdf6e8;
+}
+
+/* ============================================================
+   1. 本文エリア全体
+   ============================================================ */
+body.theme-chibiko-bright main {
+    background-color: var(--outer-panel) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* ============================================================
+   2. 本文パネル
+   ============================================================ */
+body.theme-chibiko-bright article {
+    background-color: var(--inner-panel) !important;
+    margin: 20px auto !important;
+    padding: 20px 40px 30px 40px !important;
+    width: 95% !important;
+    max-width: 760px !important;
+    border-top: 4px solid var(--accent);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    border-left: 8px solid var(--accent);
+    border-radius: 8px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+   3. ヘッダー（タイトル部分）
+   ============================================================ */
+body.theme-chibiko-bright article header {
+    border-bottom: none !important;
+    margin-bottom: 25px !important;
+    padding-bottom: 5px !important;
+}
+
+/* ============================================================
+   4. タイトル
+   ============================================================ */
+body.theme-chibiko-bright h1 {
+    color: var(--text-main) !important;
+    border-bottom: 2px solid var(--accent);
+    margin: 0 0 20px 0 !important;
+    padding-bottom: 10px !important;
+}
+
+/* ============================================================
+   5. 本文
+   ============================================================ */
+body.theme-chibiko-bright .novel-body {
+    color: var(--text-main) !important;
+    white-space: pre-wrap;
+}
+body.theme-chibiko-bright .novel-body p {
+    margin: 0 0 0.3em 0;
+}
+
+/* ============================================================
+   6. 区切り線
+   ============================================================ */
+body.theme-chibiko-bright article hr {
+    margin: 3.0em 0;
+    border: none;
+    border-top: 2px dashed var(--border-color);
+}
+
+/* ============================================================
+   7. ハンバーガーボタン
+   ============================================================ */
+body.theme-chibiko-bright .hamburger {
+    background: rgba(192, 106, 42, 0.75);
+}

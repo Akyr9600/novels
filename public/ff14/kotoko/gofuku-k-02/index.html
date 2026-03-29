@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>呉服屋物語 二 - おはなしおきば</title>
+  
+  <style>
+     
+    body { 
+      margin: 0; padding: 0; 
+      font-family: "BlinkMacSystemFont", "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      background: #fff; color: #333; 
+    }
+    .container { 
+      display: flex; min-height: 100vh; max-width: 1200px; 
+      margin: 0 auto; background: #fafafa; 
+    }
+
+     
+    aside { 
+      width: 220px; border-right: 1px solid #e0e0e0; 
+      padding: 0 15px 20px 15px;
+      background: #fafafa; position: sticky; top: 0; height: 100vh; overflow-y: auto; 
+      flex-shrink: 0;
+    }
+    aside h1 { margin: 15px 0 10px 0; line-height: 1.2; }
+    aside h1 a { font-size: 1.1rem; color: #000; text-decoration: none; font-weight: bold; }
+
+    .side-nav-sticky {
+      position: sticky; top: 0; z-index: 10;
+      background: #fafafa; padding: 10px 0;
+      border-bottom: 1px solid #eee; margin-bottom: 15px;
+      display: flex; justify-content: space-between; gap: 5px;
+    }
+    .side-nav-sticky a {
+      flex: 1; text-align: center; font-size: 0.7rem; font-weight: bold;
+      color: #666; text-decoration: none; padding: 6px 0;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+
+    h2 { font-size: 1.1rem; border-left: 4px solid #333; padding-left: 10px; margin: 20px 0 8px 0; }
+    .series-toggle { cursor: pointer; display: block; font-size: 0.95rem; color: #888; margin: 10px 0 4px 5px; position: relative; padding-right: 20px; }
+    .arrow {
+      display: inline-block; width: 0; height: 0; margin-left: 5px; vertical-align: middle;
+      border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #888;
+      transition: transform 0.3s;
+    }
+    .toggle-checkbox { display: none; }
+    .toggle-checkbox:checked + .series-toggle .arrow { transform: rotate(180deg); }
+    .series-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .toggle-checkbox:checked + .series-toggle + .series-content { max-height: 2000px; }
+
+    ul { list-style: none; padding-left: 15px; margin: 0; }
+    li { margin-bottom: 8px; font-size: 0.80rem; }
+    a { text-decoration: none; color: #444; }
+    .active { color: #d32f2f !important; font-weight: bold; }
+
+     
+    main { 
+      flex: 1; padding: 50px 0; background: #fff; 
+      display: flex; justify-content: center;
+    }
+    article { width: 90%; max-width: 720px; margin: 0 auto; }
+    .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
+    .is-draft { color: #aaa; font-style: italic; }
+
+     
+    .lyric-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 20px 30px;
+      margin: 1.5em auto;
+      max-width: 500px;
+      text-align: center;
+      font-style: italic;
+    }
+
+     
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 12px; left: 12px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      width: 40px; height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+     
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 900;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+     
+    @media screen and (max-width: 768px) {
+
+       
+      .hamburger {
+        display: flex;
+      }
+
+       
+      aside {
+        position: fixed;
+        top: 0; left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 950;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+      }
+      aside.open {
+        transform: translateX(0);
+      }
+
+       
+      .container {
+        display: block;
+      }
+
+       
+      main {
+        width: 100%;
+        padding: 60px 0 20px 0;  
+        display: block;
+      }
+
+       
+      article {
+        width: 94%;
+        max-width: none;
+        margin: 0 auto;
+        padding: 20px 15px;
+      }
+
+       
+      h1 { font-size: 1.4rem !important; }
+      .novel-body { font-size: 1.05rem !important; line-height: 1.9 !important; }
+
+       
+      img { max-width: 100%; height: auto; }
+    }
+  </style>
+
+  
+  
+    
+      
+    
+  
+
+  
+    
+    
+      <link rel="stylesheet" href="http://localhost:1313/css/series/kotoko.css">
+    
+  
+</head>
+
+<body class="theme-kotoko">
+
+  
+  <button class="hamburger" id="hamburger" aria-label="メニューを開く">☰</button>
+
+  
+  <div class="overlay" id="overlay"></div>
+
+  <div class="container">
+    <aside id="sidebar">
+      <h1><a href="/">おはなしおきば</a></h1>
+      <div class="side-nav-sticky">
+        <a href="http://localhost:1313/ff14/kotoko/gofuku-k-01/">← BACK</a>
+        <a href="http://localhost:1313/ff14/kotoko/gofuku-k-03/">NEXT →</a>
+      </div>
+
+      
+        <div class="section-group">
+          <h2>FF14</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-46ae835b836b509ad6872524212a5e12" class="toggle-checkbox" >
+              <label for="series-46ae835b836b509ad6872524212a5e12" class="series-toggle">【トロイの話】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main01/" class="">スカラ迷宮 1</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main02/" class="">スカラ迷宮 2</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main03/" class="">スカラ迷宮 3</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main04/" class="">スカラ迷宮 4</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main05/" class="">スカラ迷宮 5</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main06/" class="">スカラ迷宮 6</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main07/" class="">スカラ迷宮 7</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main08/" class="">スカラ迷宮 8</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main09/" class="">スカラ迷宮 after01</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main10/" class="">スカラ迷宮 after02</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main11/" class="">スカラ迷宮 after03</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main12/" class="">スカラ迷宮 after04</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main13/" class="">スカラ迷宮 after05</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main14/" class="">スカラ迷宮 after06</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red01/" class="">ブラトロ はじまり</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red02/" class="">ブラトロ 俺の黄玉</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red03/" class="">ブラトロ ああ見えて</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red04/" class="">ブラトロ 赤鰐という男</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red05/" class="">ブラトロ 番外編GPT</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red06/" class="">ブラトロ 番外編Claude</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red07/" class="">ブラトロ RED DILE</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main00/" class="is-draft">base</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-aeeca8301969494c0adf2f2c423c2129" class="toggle-checkbox" checked>
+              <label for="series-aeeca8301969494c0adf2f2c423c2129" class="series-toggle">【琴子お嬢様】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-01/" class="">呉服屋物語 一</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-02/" class="active">呉服屋物語 二</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-03/" class="">呉服屋物語 三</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-04/" class="">呉服屋物語 裏</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-05/" class="">呉服屋物語 四</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-06/" class="">傭兵物語 一</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-07/" class="">傭兵物語 二</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-08/" class="">傭兵物語 三</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-09/" class="">傭兵物語 四</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-4c452e7e8eb0756a2a0e983e2dad583d" class="toggle-checkbox" >
+              <label for="series-4c452e7e8eb0756a2a0e983e2dad583d" class="series-toggle">【ちびこ】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01/" class="">かぞく(プロト版)</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi02/" class="">小さな拾いもの</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi03/" class="">家さがし</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi04/" class="">おうちゲットだぜ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi05/" class="">おやこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi06/" class="">異</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi07/" class="">真</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi08/" class="">裏側の黒トロ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi20/" class="">とある晩餐会の裏側で</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi21/" class="">小さなえいゆう</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi22/" class="">千伐の竜騎士</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi23/" class="">不伐の竜騎士</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi24/" class="">北稜の守護神</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi25/" class="">北稜の勇者たち</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi30/" class="">まんまるいしの物語</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi60/" class="">調理師ちびこっこ 01</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi61/" class="">調理師ちびこっこ 02</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-fd1f546341f187a70bb5af75c4bb6af2" class="toggle-checkbox" >
+              <label for="series-fd1f546341f187a70bb5af75c4bb6af2" class="series-toggle">【ORIGIN】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-01/" class="">Prologue</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-02/" class="is-draft">第一話：フェロス</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-03/" class="">第二話：英雄</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-5de3c22336d28a71e6f69d789ed2b479" class="toggle-checkbox" >
+              <label for="series-5de3c22336d28a71e6f69d789ed2b479" class="series-toggle">【華飾の帳】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr01-kage/" class="">その影に 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr02-kage/" class="">その影に 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr03-kage/" class="">その影に 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr04-kage/" class="">その影に 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr05-inori/" class="">かそけき祈り 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr06-inori/" class="">かそけき祈り 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr07-inori/" class="">かそけき祈り 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr08-inori/" class="">かそけき祈り 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr09-inori/" class="">かそけき祈り 5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr10-inori/" class="">かそけき祈り 6</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr11-inori/" class="">かそけき祈り 7</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr12-hibi/" class="">日々彩々 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr13-hibi/" class="">日々彩々 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr14-hibi/" class="">日々彩々 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/" class="">日々彩々 3.5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr16-hibi/" class="">日々彩々 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr17-hibi/" class="">日々彩々 5・前</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/" class="">日々彩々 5・後</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/" class="is-draft">日々彩々 6</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-6542e7828ae546a46eed441bbde3312b" class="toggle-checkbox" >
+              <label for="series-6542e7828ae546a46eed441bbde3312b" class="series-toggle">【VRファンタジー】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr01/" class="">第一話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr02/" class="">第二話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr03/" class="">第三話</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>操作実験場</h2>
+          
+          <ul>
+            
+              <li><a href="http://localhost:1313/post/hello/" class="is-draft">自分用：サイト操作・要素まとめ</a></li>
+            
+              <li><a href="http://localhost:1313/post/cheatsheet/" class="is-draft">Markdown・Hugo記法</a></li>
+            
+          </ul>
+        </div>
+      
+    </aside>
+
+    <main>
+      <article>
+        
+  <article>
+    <header style="margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+      <h1 style="font-size: 1.8rem; color: #111; margin: 0;">呉服屋物語 二</h1>
+    </header>
+    <div class="novel-body">
+      <p>　　　　　【寝ても覚めても】</p>
+<p>　レドレント・ローズという人は、琴子が思ったよりもはるかに大層な人物だった。
+　ブランド「サン・シルク」のメインデザイナーだと聞くと、少しはそのすごさが分かる。戦争だのなんだので流通に制限があり、輸入がしづらかったのも価格高騰していた一因で、この東国でサン・シルクの商品を買えるのはトクサ屋のような豪商だけだったのだ。
+　トクサ屋はそんな金があるならば商売に使う、店の者に使うといった考え方だから、よほどのことがなければ度を越えた贅沢はしない。だが何年か前、ミノリ屋のカナデちゃんが自慢していた真っ白なレースの手布、あれがサン・シルクだったはずだ。
+　間違いなく大層なおかたなのだが、琴子にとっては、素敵なお洋服を作るすごい裁縫師さんなのに、面白くて楽しい人だったなというのがなによりで、「なにより」と言うならなによりも、その日から頭を離れないことができてしまった。
+　それは、ローズの連れだったあの大柄なローエンガルデだ。
+　どうしたことか、ほんの五分ほどの間だけ見た姿が瞼に焼き付いて離れない。麻の半袖シャツから突き出した太い腕、襟ぐりから覗く鍛えられた胸元、褐色の肌と朱色の隈取、短く刈り込まれた金色の髪、それからくっきりとした緑の目、精悍な顔つき。
+　ローズさんがまた店に来てくれれば、あの人も一緒に来るかもしれない。そうすればまた垣間見ることもできるだろう。もしかするとまた、挨拶くらいは交わせるかもしれない。そう思ってほぅっと溜め息をつく琴子である。</p>
+<p>　だが、夕餉の膳につく父の話を聞くと、それが叶う望みは薄そうだった。
+　エオルゼア屈指のデザイナーの訪東は瞬く間に同業者の間へ知れ渡り、あちこちの店が接待の申し入れをしているらしい。ローズがそれに応じるかどうかはさておき、そんなふうに四方からぜひうちの商品も見てくれと請われているとしたら、一度来たこの店に、短い滞在期間中もう一度足を運んでくれる可能性は乏しい。
+　まとまった買い物をしていってくれただけでも、トクサ屋にとっては大きな僥倖である。良い品を誠実な価格で取り扱っているのだから、ほしい品があれば自然と良い話も来るだろう。父はそう割りきっている。
+　だが琴子にとっては、これきり来てくれないとしたらそれは特大のがっかり案件だった。
+　父と佐太郎兄がいてはまず無理だが、もう一度ローズさんのお話を聞きたい。西洋服飾の話―――というより、それを話すローズの、なんとも言えない華やかさ、艶やかさにもう一度触れたい。好きで好きでたまらない、やり甲斐の塊のような仕事について話すときのキラキラだ。
+　それでもし叶うなら、今度はあの人ともお話ししてみたい。どんな話ができるのかも分からないけれど、よく響くあの声を耳にしていられるだけでもいい。岩から直接削りだしたような、いかつくも鋭い顔立ちなのに、頼もしそうなだけでなくどこか悪戯げで……。
+「はふぅ……」
+　また一つ大きな溜め息が、琴子の部屋に吹き零れた。</p>
+<p>　いくら箱入り娘でも二十歳である。
+　自分の恋心を、そうと分からないほど子供ではない。
+　お父さんよりは若いとしてもそう変わらない年の、しかも異種族なのにと思うが、その程度では少しも胸の火照りは冷めなかった。
+　初恋は下駄屋のトクちゃんだったし、五年ほど前には出入りの小間物屋シュウゲツさんが格好いいとときめいていたのだから、決して年上好きだとかファザコンとやらではない。
+（格好いいなら、シュウゲツさんのほうが格好いいよね）
+　と、出入りの店の娘っ子からことごとくきゃあきゃあ騒がれた、眉目秀麗なエレゼン族を思い出す。ひんがしにエレゼン族は少ないのもあって、それはもう読本の登場人物のように綺麗で格好いいと皆が皆して憧れたものだ。
+　だが今は、（今にして思えば）照れ笑いの効果まで考え含めたに違いない気取った流し目なんかより千倍も、あのおじさんの気取りのない笑顔のほうがいいのである。
+　しかしそんな琴子を待ち受けているのは、週末のお見合いだった。</p>
+<p>　琴子のなんとない気鬱は、店の者にも家の者にもすぐ分かったが、婚礼前の娘の気が塞ぐのはよくあることである。生まれ育った家を出て他人の家に行くことになるのだし、娘時分のような気楽さではいられなくなる。慎み深く真っ当な育った娘であれば、否応なくやってくる閨事にだって不安はあるだろう。
+「琴子。猫子（ねこね）座が新しい劇を掛けるそうだ。見に行ってくるといい」
+　珍しく佐太郎兄がそんなことを言い出したのも、残り僅かな娘暮らしを思いやってのことだろう。</p>
+<p>　クガネには居付きの芝居小屋が三つあるし、定期的にやってくる興行にも大きな芝居座はいくらもあるが、琴子のお気に入りはそれよりぐっと小規模な猫子座だった。大きな座にはない様々な工夫や新規な趣向が面白く、なにより、役者たち自身が芝居を楽しんでやっているのが分かるのがいい。
+　そんな猫子座の新しい出し物は、ほんの半年ばかり前にドマで巻き起こった、ドマ城奪還をモチーフにした劇だった。
+　こういったタイムリーかつ政治的なものを含む題材は、大劇団ではまずできない。お上に睨まれて鑑札没収ともなれば一大事だ。だが流浪の小さな一座であれば、いざとなったら役者も裏方も散り散りに逃げ出して、どこかよその土地でまた落ち合えばいい。それくらいの覚悟で彼等は、大きな劇団ではできない芝居をやっている。
+　おそらくこの演目も、猶予があって十日、早ければ三日もしないうちにお偉方の耳に入って、すぐに立ち退きとなるだろう。そうと分かっていても、二十年続いた帝国支配を覆す、若き国主とそれを助ける異国の英雄の物語なのだ。猫子座がやるにはうってつけ、やらずにはおれない物語だった。</p>
+<p>　もちろん、出来事そのままでは言い逃れする時間ももらえないので、主人公はコウメというお姫様にされている。このコウメ様が僅かな家臣とともに落ち延びて、男装の若武者となって再起のときをうかがっていると、遠い異国からやってきた凛々しい英雄が……と、どうやら色恋沙汰の味付けもあるようだ。
+　しかもそのコウメ様を演じるのは、一座の花形、居付きの三座にもなかなかこれだけの女形はいないと言われるトキノジョウだという。実際には男なのに女の子の役、それがまた男装して男の子として振る舞うというのだから、相当に難しい役どころだろう。いつもの琴子なら、前の晩から眠れないほど興奮したに違いない。
+　しかし今はそれすらも、胸を塞いだなんとない重しをどけてはくれなかった。</p>
+<p>　が―――。
+　青天の霹靂、瓢箪から駒、二階から目薬がたまたま目にぴったり入ることもあるに違いない。
+　茶屋の者に案内されて向かった桟敷で、琴子は目を見開いて固まった。
+　そこにはなんと、
+「あらコトコちゃん、素敵なフリソデねえ」
+　店に来ていたときよりぐっと砕けた気さくな態度で目を細めるローズと、その連れがいたのだ―――。</p>
+<p>「もしかして、お兄さまから聞いてないのかしら？」
+　珍しくも珍しいがうえに珍しいことに、あの佐太郎がローズをこの芝居に招いたという。
+　佐太郎は、篤司がローズとの会談に琴子を同席させたことをなんらかの形で知って、それをいつものように叱るのではなく、娘でいられる間の僅かな楽しみとして最後に後押しする気になったのだ。
+　イシヅ屋に嫁せば、家にいるときのような気儘はできない。若い嫁の間は芝居一つ見に行くのにも家の許可が要ろうし、異国人の珍しい話を面白おかしく聞くようなこともないだろう。
+「古いおうちも大変ねえ」
+　ともあれそんなわけで、服飾の話であれば呉服屋の娘として聞いておいて損はあるまいと、芝居を見たついでにローズと話す機会を作ってくれたのである。
+　連れの男がいるのは、ローズ様だけをお招きしてお連れ様を粗略にしたのではとんだ失礼になる、申し訳ない、せっかくなのだからぜひそのかたにも楽しんでいってもらおうという配慮なのだろう。
+　琴子にとってはもっけの幸いだった。</p>
+<p>　お供に連れてきた女中と丁稚は、重箱を突付くのときらきらしい役者を見るのに一所懸命である。
+　そして琴子は、ローズの話を熱心に聞かなければ聞きたいと思っているのにどうしても、黙々と酒を飲んでいるだけの人とどうにか話せないものかと頭の片隅でぐるぐるしていた。
+　頭もいっぱい、胸もいっぱい、こうなると何故かおなかもいっぱいで、ろくろくお重に箸もつけられない。いっぱいなものだから、せっかくのローズの話も耳に入っているのかどうか分からないほどだ。
+　そのうちくらくら目眩がしてきてしまった。
+「なんだか少し具合が悪そうね。人いきれのせいかしら」
+　人の熱気にのぼせてしまった、というのも事実あるかもしれない。
+「お嬢様、それならお庭で少し……」
+　連れてきた女中のアヤメが慌てるのを、
+「ちょっと待って。貴方たちだって、このお芝居楽しみにして来たのでしょ？　ねえフィルちゃん、貴方がコトコちゃんを涼みに連れて行ってあげなさいよ」
+「ん？　そうだな」
+「いいえ、一人で行けますから」
+　とっさに考えたのは、自分のことでせっかくの楽しみを途中にさせるのは申し訳ない、ということだ。それでつい断った。だが、
+「いいのよ。この人、荒事なら人の何倍も経験してきたから、こういうお芝居は現実味がなくって今ひとつノれないの。だから気にしないで連れてらっしゃいな」
+「それに、金持ちの嬢ちゃんが一人でいるなんて物騒極まりない。さ、一緒に行こう」
+　そうして琴子は、少しばかりふらつく足で立ち上がり、急造の仮設劇場の隣、庭園へと向かった。</p>
+<p>　涼しい風にあたって人心地つき、
+「大丈夫か？」
+　そう言われるまで気付かなかった。はからずも、二人きりだということに。
+　気付いた瞬間頭が沸騰しそうになったが、同時に、これはもうたった一度の、最後のチャンスなのだということに、急に目が覚めた。
+　よく分からないけれど、とにかく今しかないし今日しかない。芝居の間中こにいるわけにもいかないなら、今からほんのしばらくしかないのだ。
+　琴子は付き添ってくれた礼を言い、そして、とにかくなにか話のとばぐちをと考えて、
+「フィルさんは、エオルゼアではなにをしていらっしゃるのですか？　裁縫師ではないのでしょう？　どうしてローズさんと一緒にクガネに来られたのですか？」
+　桟敷を出る前にローズが言っていた言葉や、鍛え上げられた体からして、裁縫師などという手仕事についているのでないことは一目瞭然だ。「荒事ならば人の何倍も経験してきた」というからには武人なのだろうが、ならず者には到底思えないし、侍、西洋ならば軍人だろうか。そういった人のようでもない。
+　尋ねると、
+「俺は、なんでも屋だな。冒険者、傭兵。もう少し若いころは剣闘士もやってたが……分かるか、剣闘士」
+「いいえ」
+「見世物の試合だ。そうだな、芝居の大立ち回りを、筋書きなしに、相手を負かすつもりでやるみたいなもん、と言えばいいか……。で、ローズには雇われてついてきた。東国の案内人、兼、護衛だな」
+「案内人……。では、以前にも来たことがあるのですか？」
+「ああ。10年ほど前かな。ドマの反乱が不首尾に終わって、火種はとりあえず消えたはずだったのが、南のほうで……ってこんな話、いいとこのお嬢さんにするもんでもないか。ま、傭兵として雇われて、半年ほどドマにいた。クガネにはそのとき出入りしててな。10年もすりゃだいぶ変わってるとは言ったんだが、レットの奴、あれで案外 繊細なんだよ。土地に詳しい見知らぬ他人より、気を使わなくていい顔見知りのほうがいいってな」</p>
+<p>　傭兵というのは、実際に見たのは初めてだったが、知識としては知っているし、なんとなくだが分かる。
+　だが冒険者というのはなんなのだろうか。言葉どおりであれば「冒険をする人」なのだが、ではその「冒険」とは？
+　尋ねると、便宜上そう呼び習わしているだけで、実際には「なんでも屋」だとフィルは言った。
+「戦うことがメインになりがちだが、傭兵と違うのは、戦うだけが仕事じゃないってことだな」
+　ビラ配りや畑の世話まで、人から依頼されたことを引き受ける。その中には危 ”険” を ”冒” す必要のある内容もあって、雑用みたいな仕事が嫌ならば、戦う力を身につける他ない。だからほとんどが戦う力を持ってはいるが、軍隊や、赤誠隊のような自警団とは違う。ギルドに所属し、必要に応じてパーティを組むことはあっても、基本的には完全に個人主義である。
+「それに、軍人や傭兵はできるだけ危険は冒さない」
+　だが冒険者は―――便宜上そう呼ばれているだけの「冒険者ギルド登録者」でなく、本物の冒険者は &ldquo;冒&rdquo; &ldquo;険&rdquo; がしたいのだ。だから、情報の少ない未知の敵や場所に向かっていく。軍人あるいは傭兵が、情報が少ないからと踏み込むのをためらうような場所へこそ、なにがあるかこの目で見てやりたいと進みたくなる。
+「ま、真面目に堅実な人生送ってる人からしたら、”馬鹿”の代名詞だな」
+　だがそう言いながらフィルは、面白がっているような中にほんのりと、不敵な気配を漂わせた。</p>
+<p>　どんな冒険をしたことがあるのか聞いてみたかったが、
+「さて、どうやら顔色も戻ったし、中に戻るか。さっきまでまるでリンゴだったからな」
+　そう言われた途端、またリンゴに逆戻りした。からからと笑われ、すまんと謝られる。だがさっきまでのとりのぼせたような目眩はもうなかった。
+　もっとここにいて話をしたいとも言えず、琴子は大きな背中の後について、元の桟敷席に戻った。
+　そこで琴子は気がついた。
+「あら、もう戻ってきちゃったの？」
+　とローズが言ったのだ。
+　見飽きた演目でなく今日見るのが初めての芝居。贔屓の一座。大立ち回りあり恋模様ありの活劇。幕の途中で抜けだしたなら、一刻も早く戻って見たい、見逃した場面が惜しい悔しいと思うのが普通だろう。
+　だがローズのその言葉は、琴子がもっと長い時間戻ってこないことを期待したものだった。つまり、「もっとゆっくりしてくればいいのに」だ。
+　何故そんなふうに言うのか。ローズにとって琴子が邪魔者なのでないとしたら―――同情するような眼差しは、決して琴子を邪険にするものでなく、むしろ、よく分かってくれているものだった。</p>
+<p>　芝居がはねた後の茶屋で遅い夕食をとりながら、ローズはごく自然に、なんてこともないように、話題を今見た芝居のことだけでなくフィルの経験した冒険のことへと振ってくれた。
+「フィルちゃんだって、間一髪の救出劇したことあるでしょ。聞かせなさいよ」
+　そんなふうに。
+　ローズの話に興味がないわけではなくても、それ以上に気になることがあって気もそぞろ。そんな自分に、彼はすっかり気付いていたのだろう。そしてそれが何故かまで見抜いてしまった。それで、少しでも話せる時間を作ろうとしてくれたし、今は少しでも話ができるようにと気遣ってくれている。
+　いつの間にか琴子の中では、週末でなにもかもが変わってしまうその前の、今は最後に見ていられる甘くて楽しい夢なのだと、踏ん切りがついていた。だから、煩わしいと思われないようにとだけ気をつけながら、ローズの好意に甘えて精一杯話しかけることにした。
+　夢の終わりは、刻一刻と更けていく。
+　最後は、若い娘や小僧だけでは不安心だろうと店まで送ってもらい、そこでおしまい、幕が下りた。</p>
+
+    </div>
+  </article>
+
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      hamburger.textContent = '✕';
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+  </script>
+
+</body>
+</html>

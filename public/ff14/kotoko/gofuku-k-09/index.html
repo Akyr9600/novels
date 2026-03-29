@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>傭兵物語 四 - おはなしおきば</title>
+  
+  <style>
+     
+    body { 
+      margin: 0; padding: 0; 
+      font-family: "BlinkMacSystemFont", "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      background: #fff; color: #333; 
+    }
+    .container { 
+      display: flex; min-height: 100vh; max-width: 1200px; 
+      margin: 0 auto; background: #fafafa; 
+    }
+
+     
+    aside { 
+      width: 220px; border-right: 1px solid #e0e0e0; 
+      padding: 0 15px 20px 15px;
+      background: #fafafa; position: sticky; top: 0; height: 100vh; overflow-y: auto; 
+      flex-shrink: 0;
+    }
+    aside h1 { margin: 15px 0 10px 0; line-height: 1.2; }
+    aside h1 a { font-size: 1.1rem; color: #000; text-decoration: none; font-weight: bold; }
+
+    .side-nav-sticky {
+      position: sticky; top: 0; z-index: 10;
+      background: #fafafa; padding: 10px 0;
+      border-bottom: 1px solid #eee; margin-bottom: 15px;
+      display: flex; justify-content: space-between; gap: 5px;
+    }
+    .side-nav-sticky a {
+      flex: 1; text-align: center; font-size: 0.7rem; font-weight: bold;
+      color: #666; text-decoration: none; padding: 6px 0;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+
+    h2 { font-size: 1.1rem; border-left: 4px solid #333; padding-left: 10px; margin: 20px 0 8px 0; }
+    .series-toggle { cursor: pointer; display: block; font-size: 0.95rem; color: #888; margin: 10px 0 4px 5px; position: relative; padding-right: 20px; }
+    .arrow {
+      display: inline-block; width: 0; height: 0; margin-left: 5px; vertical-align: middle;
+      border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #888;
+      transition: transform 0.3s;
+    }
+    .toggle-checkbox { display: none; }
+    .toggle-checkbox:checked + .series-toggle .arrow { transform: rotate(180deg); }
+    .series-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .toggle-checkbox:checked + .series-toggle + .series-content { max-height: 2000px; }
+
+    ul { list-style: none; padding-left: 15px; margin: 0; }
+    li { margin-bottom: 8px; font-size: 0.80rem; }
+    a { text-decoration: none; color: #444; }
+    .active { color: #d32f2f !important; font-weight: bold; }
+
+     
+    main { 
+      flex: 1; padding: 50px 0; background: #fff; 
+      display: flex; justify-content: center;
+    }
+    article { width: 90%; max-width: 720px; margin: 0 auto; }
+    .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
+    .is-draft { color: #aaa; font-style: italic; }
+
+     
+    .lyric-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 20px 30px;
+      margin: 1.5em auto;
+      max-width: 500px;
+      text-align: center;
+      font-style: italic;
+    }
+
+     
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 12px; left: 12px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      width: 40px; height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+     
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 900;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+     
+    @media screen and (max-width: 768px) {
+
+       
+      .hamburger {
+        display: flex;
+      }
+
+       
+      aside {
+        position: fixed;
+        top: 0; left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 950;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+      }
+      aside.open {
+        transform: translateX(0);
+      }
+
+       
+      .container {
+        display: block;
+      }
+
+       
+      main {
+        width: 100%;
+        padding: 60px 0 20px 0;  
+        display: block;
+      }
+
+       
+      article {
+        width: 94%;
+        max-width: none;
+        margin: 0 auto;
+        padding: 20px 15px;
+      }
+
+       
+      h1 { font-size: 1.4rem !important; }
+      .novel-body { font-size: 1.05rem !important; line-height: 1.9 !important; }
+
+       
+      img { max-width: 100%; height: auto; }
+    }
+  </style>
+
+  
+  
+    
+      
+    
+  
+
+  
+    
+    
+      <link rel="stylesheet" href="http://localhost:1313/css/series/kotoko.css">
+    
+  
+</head>
+
+<body class="theme-kotoko">
+
+  
+  <button class="hamburger" id="hamburger" aria-label="メニューを開く">☰</button>
+
+  
+  <div class="overlay" id="overlay"></div>
+
+  <div class="container">
+    <aside id="sidebar">
+      <h1><a href="/">おはなしおきば</a></h1>
+      <div class="side-nav-sticky">
+        <a href="http://localhost:1313/ff14/kotoko/gofuku-k-08/">← BACK</a>
+        <a href="#" style="visibility:hidden">NEXT →</a>
+      </div>
+
+      
+        <div class="section-group">
+          <h2>FF14</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-46ae835b836b509ad6872524212a5e12" class="toggle-checkbox" >
+              <label for="series-46ae835b836b509ad6872524212a5e12" class="series-toggle">【トロイの話】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main01/" class="">スカラ迷宮 1</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main02/" class="">スカラ迷宮 2</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main03/" class="">スカラ迷宮 3</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main04/" class="">スカラ迷宮 4</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main05/" class="">スカラ迷宮 5</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main06/" class="">スカラ迷宮 6</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main07/" class="">スカラ迷宮 7</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main08/" class="">スカラ迷宮 8</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main09/" class="">スカラ迷宮 after01</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main10/" class="">スカラ迷宮 after02</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main11/" class="">スカラ迷宮 after03</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main12/" class="">スカラ迷宮 after04</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main13/" class="">スカラ迷宮 after05</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main14/" class="">スカラ迷宮 after06</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red01/" class="">ブラトロ はじまり</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red02/" class="">ブラトロ 俺の黄玉</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red03/" class="">ブラトロ ああ見えて</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red04/" class="">ブラトロ 赤鰐という男</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red05/" class="">ブラトロ 番外編GPT</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red06/" class="">ブラトロ 番外編Claude</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red07/" class="">ブラトロ RED DILE</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main00/" class="is-draft">base</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-aeeca8301969494c0adf2f2c423c2129" class="toggle-checkbox" checked>
+              <label for="series-aeeca8301969494c0adf2f2c423c2129" class="series-toggle">【琴子お嬢様】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-01/" class="">呉服屋物語 一</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-02/" class="">呉服屋物語 二</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-03/" class="">呉服屋物語 三</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-04/" class="">呉服屋物語 裏</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-05/" class="">呉服屋物語 四</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-06/" class="">傭兵物語 一</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-07/" class="">傭兵物語 二</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-08/" class="">傭兵物語 三</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-09/" class="active">傭兵物語 四</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-4c452e7e8eb0756a2a0e983e2dad583d" class="toggle-checkbox" >
+              <label for="series-4c452e7e8eb0756a2a0e983e2dad583d" class="series-toggle">【ちびこ】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01/" class="">かぞく(プロト版)</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-5/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-6/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-7/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-8/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi02/" class="">小さな拾いもの</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi03/" class="">家さがし</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi04/" class="">ダチ</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-fd1f546341f187a70bb5af75c4bb6af2" class="toggle-checkbox" >
+              <label for="series-fd1f546341f187a70bb5af75c4bb6af2" class="series-toggle">【ORIGIN】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-01/" class="">Prologue</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-02/" class="is-draft">第一話：フェロス</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-03/" class="">第二話：英雄</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-5de3c22336d28a71e6f69d789ed2b479" class="toggle-checkbox" >
+              <label for="series-5de3c22336d28a71e6f69d789ed2b479" class="series-toggle">【華飾の帳】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr01-kage/" class="">その影に 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr02-kage/" class="">その影に 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr03-kage/" class="">その影に 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr04-kage/" class="">その影に 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr05-inori/" class="">かそけき祈り 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr06-inori/" class="">かそけき祈り 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr07-inori/" class="">かそけき祈り 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr08-inori/" class="">かそけき祈り 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr09-inori/" class="">かそけき祈り 5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr10-inori/" class="">かそけき祈り 6</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr11-inori/" class="">かそけき祈り 7</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr12-hibi/" class="">日々彩々 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr13-hibi/" class="">日々彩々 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr14-hibi/" class="">日々彩々 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/" class="">日々彩々 3.5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr16-hibi/" class="">日々彩々 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr17-hibi/" class="">日々彩々 5・前</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/" class="">日々彩々 5・後</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/" class="is-draft">日々彩々 6</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-6542e7828ae546a46eed441bbde3312b" class="toggle-checkbox" >
+              <label for="series-6542e7828ae546a46eed441bbde3312b" class="series-toggle">【VRファンタジー】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr01/" class="">第一話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr02/" class="">第二話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr03/" class="">第三話</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>操作実験場</h2>
+          
+          <ul>
+            
+              <li><a href="http://localhost:1313/post/hello/" class="is-draft">自分用：サイト操作・要素まとめ</a></li>
+            
+              <li><a href="http://localhost:1313/post/cheatsheet/" class="is-draft">Markdown・Hugo記法</a></li>
+            
+          </ul>
+        </div>
+      
+    </aside>
+
+    <main>
+      <article>
+        
+  <article>
+    <header style="margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+      <h1 style="font-size: 1.8rem; color: #111; margin: 0;">傭兵物語 四</h1>
+    </header>
+    <div class="novel-body">
+      <p>　　　　　【第六日目】</p>
+<p>　朝の芝居町は閑散として、色とりどりの幟がばたばたと風に翻る音がやけに喧しい。人でごった返すようだった先日とは大違いだった。
+　ウルダハやリムサ・ロミンサの石畳でなくグリダニアの湿度の高い黒土でもなく、埃っぽい砂色の道をかさかさと、丸められたチラシらしきものが転がっていく。それを箒の先で受け止めて、くず入れに掃き込んだのは腰の曲がった老爺である。
+　フィルは老人の背後にある小屋を見上げ、ここが猫子座の劇場に間違いないことを確かめた。だが周囲と異なり幟はすべて取り払われ、吊るされていた役者の名前を書いた看板も下げられている。
+　演目が演目だけに早いと数日、遅くとも十日もすれば上演中止、退去の命令が出るだろうと言われていたが、本当にそうなるらしい。常設の劇場を持たない旅回りの一座の小屋は、あくまで仮設だ。取り壊されて元の広場に戻る。
+　だが幸い、まだ旅立ってはいないようだった。</p>
+<p>　ローズの思いつきで囮捜査をすることになったのはいいが、襲ってもらうためには強そうに見えてはいけないということで、フィルは&quot;商家の旦那&quot;のふりをすることになった。だが生まれてこのかた大金には一度も縁がなかったし、大勢の部下の上でのんびり胡座をかいたこともない。歩き方一つとっても大家の旦那には程遠いのは間違いなく、しかし、
+「劇団のかたに教えてもらったらいいのよ！」
+　そんな簡単にいくか？　と思いながらも、不気味なくらいに乗り乗りのローズに水を差すのもなんだかなと引き受けた。
+　そのローズは夜明け前から起きだして、瞬きすら忘れたような目つきでガリガリとデザイン画だかなんだか分からないが、着物の形らしいものを何枚も書き散らしていた。昨夜強盗の話をしたのもあるし、一人で出歩くことはまずないだろう。</p>
+<p>　それにしても、いきなり押しかけて「旦那らしい振る舞いを教えてくれ」というのも素っ頓狂な話である。向こうも商売なのだから、そういったコツを安々と他人へ伝授したくもないだろう。
+　だが間に入って話をつけてもらう誰かというのも思いつかない。だいたい、仲立ちを入れようとすればどうしても待ち時間が増えるし、話が漏れる可能性も出てくる。待つのも数日ならいいが、それより長くなれば帰国が迫り、なにより、囮捜査なんてものは秘密にやらなければ意味は無い。世間に漏れ聞こえて犯人の耳に入ったらパアだ。
+　そう考えると知る人間は少ないほどいいわけで、
+（とりあえず聞いてみるか）
+　相手の出方次第だと、フィルは下足番かなにかだと思われる老人に声をかけた。</p>
+<p>　少し頼みたいことがあるので責任者に会わせてほしいと言えば、もちろん即却下。胡乱な目で見られる。
+　ファンが押しかけてきて同じようなことを言うこともあるだろう。断るのも無理はないというより当然だ。だからと言って、とは思ったが、話を通すにはこれもありかとフィルは率直に、
+「俺は別に芝居のファン……贔屓ってわけじゃない」
+　とぶつけた。
+　役者に会いたいとかいった理由で来たのではなく、無茶だとは思うが、わけあって素人の俺が似合いもしない役を演じることになった、どうしていいかも分からないから助けてほしくてやって来た。
+　そう話すにつれ老爺は鳩が豆鉄砲を食ったような顔になり、皺だらけの顔を傾げてまじまじとフィルを見上げた。
+「……駄目かな」
+　最後に問うと、丸くなった目をそのまま何度か瞬いて、
+「座頭に聞いちゃらぁ」
+　そう言って、箒を引きずりながら筵掛けの出入り口に消えていった。</p>
+<p>　やがて老爺は壮年のアウラ・ゼラを連れて出てきた。
+　彼はアウラ族ならではの鋭い顔立ち、しかし表情に富んだ皺のある目尻に好奇心を輝かせ、丁寧に会釈すると座頭のアケガネだと名乗った。
+「イサク爺から聞きましたが、急に芝居をせねばならぬことになって困っておられるとか。お見受けしたところ、素人芝居の手解きを求めて当座にいらっしゃるような不躾なかたとも思えませぬ。詳しいわけをお聞かせいただけませぬか」
+　ふわりとした仕草で道を開け、中へと促された。</p>
+<p>　クガネを騒がせる切取強盗を捕まえるため、一種の囮作戦をすることにした。出くわすとは限らないものの、見回りにはなるから夜歩きするだけでも無駄ではない。ただ、もし俺を襲ってくれれば確保する自信がある。問題は、
+「例の強盗ってのは弱い相手ばかり狙うような奴らしいからな」
+「たしかに、お客人のようなお人を襲うとは到底思えませぬなァ」
+「で、連れが、俺が強くなさそうに見えればいいとか言い出してな。着物で体格を隠すことはできるから、あとは歩き方とか雰囲気とか、そういうのだな」
+「なるほど。大旦那に見えるような所作を身に着けたいというわけでございますね。それで当座を頼っていらっしゃいましたか」
+　座頭アケガネは、話を聞くと面白そうにからからと笑った。そして、
+「ようございます。粋な趣向じゃァございませぬか。幸いと言うのもなんでございますが、芝居には案の定おかみの横槍が入り、昨日で打ち切りとなっております。今も荷物をまとめていたところで、ええ、クガネを発つ前にもう一芝居、ご贔屓の皆様の御為にも、一枚噛ませていただきましょう」
+「それじゃあ」
+　アケガネはいくらか人の悪そうなものも混ぜて、にぃっと笑った。</p>
+<p>　猫子座は、元はミコッテとララフェルの二人が組んだ盗賊だった。
+　だがある夜しくじって捕手に追われ、怪我をして逃げ遅れていたミコッテのほうが、とっさに捕手のふりをしてやり過ごし、更には相棒を追いかけ始めた。そうしながら、自分たちにしか分からない符号でやりとりして捕手を撹乱、ララフェルは逃げ切り、ミコッテのほうは最後まで捕手の一人だと疑われず、怪我を押して追いかけたのを労られ、「今後も励んでくれよ」などと声までかけられて、堂々と立ち去ることができたという珍事があった。
+　その夜の騒動が面白すぎて、二人は盗人なんかやめて芝居をやろうと決めた。
+　追いかける猫と逃げるネズミで&quot;猫子&quot;座。人を集めて稽古して、最初の出し物は、あの夜の騒動を元にしたものだった。しかも、「角を曲がった瞬間に、裏表に着ていた着物を表返し捕手のふりをした」という事実を、「角を曲がった途端に町娘に化けて捕手に突き当たり、転んで泣いて慌てさせる」という虚偽にした。その後も、少し人の目から隠れるたびに屋台の蕎麦屋、道端の乞食、帰り道を急ぐ商家の旦那と次々に早変わりして観客を驚かせ、捕手を引っ掻き回して笑わせた。</p>
+<p>　しょせんまだまだ素人集団で、
+「劇評家からはさんざんに叩かれたそうですが、お客さんの大笑いに比べたら蚊の鳴く声だったと、爺様はよう言うておりました」
+　初芝居からずっと、彼等が最も大事にするのは自分たちが心から面白いこと、楽しいこと。そして、観客を違う世界に連れて行き、笑い、泣き、怒り、心ゆくまで楽しませることだ。
+　何百年という伝統の上にある大座にしかできない本物の芝居がある。だが身が軽く小さい自分たちにしかできないものもあると、盗賊だった先々代から続いてアケガネで三代目。
+　切取強盗のせいでクガネの人たちは安心して夜歩きもできない。その憂い顔を晴らす手伝いができるなら、それもまた猫子座が&quot;本&quot;とするところ―――。
+「さ、そろそろ稽古に戻りましょうか」
+　アケガネは笑ったが、フィルはなかなかハードな特訓につい溜め息が漏れた。</p>
+<p>　特訓の甲斐あって、朝からぶっ通して日暮れ前には、
+「まあそれなら、遠目に見ればなんとか誤魔化せましょうなァ」
+　というくらいにはなった。
+「あ&quot;～……なんか、ここ数年で一番疲れた……」
+　ぐったりしたフィルに、アケガネ始め付き合ってくれた座の者が笑う。くすくすと小悪魔めいた笑い方をしている少女は、しかし少年だ。トキノジョウ、本名はトキヤという一座の花形で、例のドマ城水没では主役のコウメを演った。芝居中は彼の名を呼ぶ黄色い声がひっきりなしだった。ああいった娘たちに「トキノジョウに会ったし、話もした」と言ったら、どれだけ羨ましがられるのだろう。しかも妙に懐かれて、昼飯のときにはぴったり横にくっついてあれこれ質問攻めだった。
+　もちろん、コウメに仕えて命をかけた忠義一徹の侍役、ふらりと現れた異国の英雄役、国の仇の首領役やその腹心、それぞれの役者に贔屓がいるわけで……。
+「一応聞いておくが、あんたたちに稽古してもらったことは、言わないほうがお互いのためだよな？」
+「さようでございますなァ。それなら己もと、押しかけて来られては困りますゆえ」
+　フィルとしても、トキ様に手を取られたなんて悔しいｷｲｨｨユリ様と並んで歩いたなんてﾓｵｫｫｫｫアヤ様と抱き合ったなんでｷﾞｬｱｧｧｧｧｧァとなられても盛大に困る。（ほんに大きい手やわぁというだけのことだし、手本になってくれただけだし、解体中の柱が倒れてきたからとっさに庇っただけである）</p>
+<p>「で、謝礼なんだが、どうしたらいい？　一応俺の連れはそれなりに金もある。あんたたちなら、旅費……路銀も役に立つだろうし、そいつはデザイナーだから、西洋風のもので良ければ衣装の案をいくつか書くってのも、喜んで引き受けてくれると思うぞ」
+「そりゃまたどっちもありがたいねぇ。どうしますよ、座頭」
+　前の芝居では敵役―――妖艶と言っていいような侍大将―――をやったエレゼンが、素顔はずいぶん人懐っこく笑う。
+「もちろんなにか他にあれば言ってくれ」
+「ふむ……」
+　アケガネは顎先の鱗に指を当ててしばし考えていたが、やがて、
+「いえ、今はなにも。結構でございます」
+　と答えた。</p>
+<p>「今はと言われてもな。俺たちもあと五日かそこらで国に帰る。そうなれば次いつ来るか、来るか来んかも分からんぞ」
+「いいえ。今いただかずとも……いずれ私どもがこれぞと思えるものを勝手にいただけると……そんな気がいたしますゆえ」
+　フィルはなんだそりゃと思ったが、
+「あ。出たな。座頭の”おつげ”。お客人。うちのお頭は、時々妙なこと言い出すんだ。今日はどうしても冬瓜を買って来いとか、暮れの鐘が鳴ったら裏の野良犬に餌をやれとか。なんでかなんてお頭にも分からんのだが、やってみるとたまにいいことがあることもあってな」
+「結局なんやったんか分からんことのほうが多いけどな」
+「はあ……」
+「どうか気になさらんでくださいませ。そんなわけでございますゆえ、今あえてなにかいただこうとは思いませぬ。皆も、それでよしか？」
+「俺っちは全然。だいたい、今日一日面白かったからそれでいいって」
+「ええ男はん一日眺めて、目の保養させてもらいましたさかいな」
+「私は勝手に、益荒男の所作を盗ませていただきました。十分です」
+　理由はそれぞれだったが、満場一致で、特になにもいらないと決まった。</p>
+<hr>
+<p>　　　　　【第七日目】</p>
+<p>　今日もローズは囮作戦用の着物作りに忙しいらしい。
+　昨夜は仮で仕立てた着物を着せられて、立ってくれ座ってくれ歩いてくれ腕を上げてくれ体をひねってくれ、動かしにくくないか突っ張らないかまとわりつかないか、あれこれやらされ聞かれて大変だった。慣れないというよりおそらく一生に一度に違いない芝居の稽古（もどき）で変な疲れ方をした後だったので尚更だ。
+　いよいよ今日は本番用を作るらしく、やはり明け方に起きて作業を始めていた。フィルが寝床に入った後も起きる前も、始終ごそごそと物音はしていた。聞きつつ無視して寝るくらいのことはできるからいいが、大したやる気だと呆れ半分、感心半分。そして、広げられた型紙と布地を見る限り、このまま部屋でごろごろしていると邪魔にされそうだ。
+　昨日疲れたのもあって今日はせめて昼くらいまでは転がっていたかったが、仕方ない。
+「出かけてくる。暮れには戻るが、それまでは宿にいろよ」
+　言うと生返事だけ返ってきた。</p>
+<p>　ところで一昨日、センタに金を渡すとき紙幣を全部出してしまったため、手持ちの金がほとんどない。40年&quot;自分&quot;をやっていれば、こういううっかりはよくあることなので今更しまったとも思わず、ポケットに残っていた小銭で魚の干物と酒の入った徳利を買い、それを提げてぶらぶらと街を歩いてみた。
+　ローズの手の早さからすると、作ったものにまったく納得がいかないというのでないかぎり、今夜には仕上がっているだろう。となると見回るルートくらい考えておきたかった。
+　歩いた範囲と宿から見ている景色で、クガネ繁華街とその周辺くらいはだいたい頭に入っている。郊外のほうが暗い場所は多いだろうが、そこまで手を広げると見回るべき場所が増えすぎる。それより、繁華街の一回り外、町屋のあたりのほうが通行人の油断を誘いそうだった。
+（あのセンタってやつに、どこでどう襲われたか詳しく聞いてみるか）
+　そう思い立って、フィルは昨日の記憶を頼りに横丁を抜けた。</p>
+<p>　漁師のシナト、大工のセンタが暮らすカササギ長屋は町屋のはずれにある。
+　昨日来たときにも思ったが、まばらな民家の奥に長屋が固まっているカササギ町は、のどかさと寂しさが同居している。家屋がどれも煤けたように古く、彩りが乏しいせいもあるだろう。
+　歩いていくと、抜け裏になっているとおぼしき細い路地があり、草地や雑木林が民家の合間に挟まってる場所もある。古い民家が連なっているあたりも、夜中に明かりを灯しておくような家はなさそうである。
+　ここを暗くなってから一人帰るのは、よほど豪胆でないかぎり、普通でもなんとなく不安になるだろう。
+　悪意のある者にとってはいくらでも身を潜め、逃げ込める場所があり、都合がいいに違いなかった。</p>
+<p>　センタはおとなしく家にいた。フィルが顔を出すと、妹だけでなく母親まで奥から手探りに現れ、揃って土下座された。
+「おい、よしてくれ。あれは連れの金だ。そいつは金持ちだから、あんたたちが遠慮することなんてこれっぽっちもねえよ」
+「お金のことだけじゃありません。怪我ァ治してくれて、おかげで俺……っ」
+「できるからしただけだ。それより、もうすっかりいいなら、少し話を聞きたいと思ってな。思い出すのも嫌な気分だろうが、そこを我慢してできるだけ詳しく教えてほしいんだよ。おまえさんが賊に襲われたときのことをな」
+　言うと、襲われた瞬間の驚きや恐怖を思い出したのか、センタは大きく身震いした。</p>
+<p>「俺が今通ってる普請先は、ミヤツ屋さんの別宅です」
+　切られた腕をさするようにして、センタがゆっくりと話し始める。場所の名前を言われても分からないが、あそこをこう行ってどう折れた先だ、と言われればだいたいの位置は分かった。
+　話に付き合わされた仲間二人と共にそこを出たのが夜七時過ぎ。初夏のことで、あたりにはほんのりと明るみも残っていたが、二手に分かれるあたりまで来たときにはすっかり日は落ち暗くなっていた。
+「最初、一緒にいた二人は俺を家まで送ろうかって言ってくれたんです。でもそうすると二人の帰りがもっと遅くなるし、あとはもう町内うちだから走って帰るって、そこで別れました」
+　あたりを気にすればかえって怖さが増しそうで、センタは大股に家を目指した。走りこそしなかったものの、早歩きで行けば背の高いハイランダーのこと、小柄な者の小走り程度にはなる。それで突っ切ってしまえば、襲おうと思ってひそんでいる相手がいても、置き去りにできるような気がしたのだ。
+　だがそれは間違いだった。</p>
+<p>　横手になにかが見えたと思ったときには突き当られて右肘のあたりを刺されていた。そしてよろめいたところをそのまま切りつけられ、上腕をざっくり切られた。
+　眉尻を下げた情けない顔で、しかし正直にセンタは、
+「俺ァもう怖くって……」
+　背中がなにかにぶつかっているのをいいことに、なりふり構わずそこをドンドン叩いて助けを呼んだ。
+　そこは空き家だったが、草地を挟んで隣にある家がその声を聞きつけた。だが彼等も戦闘力のない一市民で、飛び出してくるといった勢いのいいことはなかった。だが犯人は、センタが声を上げた時点で踵を返し、少し引き返したところの藪、そこに隠れてもいたに違いない場所へと飛び込んで、あとはもう分からない。</p>
+<p>「切りつけられただけか？」
+　フィルが問うと、センタは頷く。
+「それじゃ切取強盗じゃなくて、ただの通り魔じゃねえか」
+　「切」と「強」しかなく、「取」「盗」が欠けている。
+「ち、違う奴なのかもしれません。でも、酒屋の番頭さん、糸屋のツバキさんもなんにも盗られてねえって話です」
+「ふむ……」
+　いくら閑散とした町家のはずれでも、近くに民家のある場所で襲えば、声を上げられて誰かが来ることは当然考えられる。そうなれば金品をせしめる暇もなく逃げるしかないが、だったらそもそも、そんな場所で襲わなければいいのではないだろうか。
+「金を奪られてる奴もいるんだよな？」
+「はい。土手茶屋のおカネさんはその日の売上全部奪られたって。あとは……」
+「コイト屋のお嬢さんが、着物を引きちぎられたって聞きましたよ。それから、ミマス屋の小僧さんも。旦那さんのお遣いで出かけたところだったから、たまたま大きなお金を持っていて、いろいろ大変だったそうです」
+　センタの母が横から言い添えた。</p>
+<p>　酒屋の番頭。番頭というのは店のマネージャー格だから、金持ちでこそなくともいい給金をもらっている。身なりも整っているし、襲えば、大金は無理でもそれなりの期待はできる。だが彼は切りつけられただけでなにも奪られていない。
+　糸屋のツバキという人は一家の主婦で、庭の裏手、枝折り戸に戸締まりをかっておこうと出てきたところで顔を切られたらしい。昨日シナトたちが飲み屋で「ひでぇ話だ」とさんざん憤っていた。
+　土手茶屋の婆さんは、店じまいしての帰り道に襲われて金を奪られた。ケチで有名でかなり貯めこんでいるらしいが、一日の売上では大した額でもあるまい。
+　コイト屋のお嬢さんというのはまだたった八つで、これはかなり金持ちの家の娘らしく、着物を半分引き剥がされたような姿で泣いているのを発見された。金持ちの女児の着物は派手で高価な布を使っていることが多いから、これは端切れとして売れば金になるし、抵抗される恐れの少ない相手でもある。
+　ミマス屋の小僧というのは、たまたまお遣いで大金を持っていたが、普通なら財布も持っていない相手だ。大金を持って使いに行くと知っていて襲ったのか、それともたまたま襲ったら大金を持っていたのかで大きな違いになる。
+　そしてセンタ―――。
+「うん、分からん」
+　考えた挙げ句、フィルはつい声に出してそう言った。</p>
+<p>　いくつか質問をしたきり黙って考え込んでいたのが、急に口を開いたかと思えば「分からん」。センタたちは呆気に取られたような顔になっている。
+「まあ犯人探しなんてのはおえらいさんも赤誠隊の連中もしてるんだしな。今更俺が考えてなにか分かるわけもないんだが、ほんとによく分からん犯人だな」
+　ただ、一つだけなんとなく分かったような気がすることもある。それを当人に言うべきかどうか迷ったが、言わずにおくとまた襲われる可能性もないとは言えない。
+「あくまでこれは俺の考えだし、見当違いかもしれんが、一応言っておく」
+　そう前置きして、センタを襲ったのは顔見知りの可能性が高い、と告げた。</p>
+<p>　仰天したセンタは、今にも泣きそうな顔になる。
+「そんな……。でもそんなことしそうな奴なんて……」
+「だがよく考えてみろ。おまえのことをろくに知らない奴がおまえを見たら、襲いやすい相手だなんて思うか？」
+　ハイランダーの若者で、体格もいい。先を急いで歩いて行く様子から、「どこからでもかかってこい」といったタイプでないのは分かるとしても、万一を思えば避けたい相手だ。人並みに怖がりではあるが、いざとなったら遮二無二反撃してきて……といったリスクを考えずにはいられない。
+「しかも、言っちゃあ悪いが、このへんに住んでる連中がまとまった金を持ち歩いていることなんてない。そんなのを襲っても金にはならんぞ」
+　にも関わらず襲ったのは、金が目当てでなく怪我をさせることが目的で、かつ、センタのことを反撃してくるような相手でないと知っていればこそではないだろうか。</p>
+<p>「そんな……！　うちのセンタが、どうしてそんな」
+　母親が狼狽するのも無理はなかった。センタはこうして話していても、おとなしく素直で、やや臆病だからこそ人に危害を加えるような人間ではない。それに、金を出し合って少しでも助けてやろうとするような友人がいる。間違いなく好青年の見本だ。
+「分からん。目をかけられているのが気に食わん、そういう奴も世の中にはいるし、逆恨みってヤツもある」
+　善良なら人の恨みを買わないかといえば、それは違う。善良さが気に障るという連中がいる。100人いれば99人は正しいと思うようなことを、理不尽だ、間違っていると信じて疑わない人間もいるのである。
+「だとしたら……も、もしかしてまた……」
+「ないとは言えんな」
+　よく分かっていないらしい妹を除き、母子は見て分かるほど青い顔になった。それを見て不安になったのか、妹が兄の手を握った。</p>
+<p>「いいか」
+　フィルはゆっくりと言い聞かせる。
+「一番怖いのは、危ないと思っていないことだ。また襲われるかもしれんと思えば、用心もできる。対策もできる。もちろん俺の考えすぎで、なにもかもたまたまかもしれんが、気をつけるに越したことはない」
+「でも……どうすれば。明後日くらいまで休むつもりでいますけど、仕事行かねえわけにゃいかねえですよ」
+「朝出かけるときは、町の連中も起きて外にいるよな？」
+「う、うん。みんな飯の支度したりとか、掃除したりとか」
+「だったら朝はいい。だが夜は、遅くなりそうなら必ず誰かに家まで送ってもらえ。そう言えばあいつら、ほとんど毎日あそこ……なんて言ったか忘れたが、&ldquo;いつもの飲み屋&quot;みたいなところにいるんだろ？　おまえは飲まなくてもいいから立ち寄って、そうだな、シナトっていったか、あいつと帰れ。わけを言って頼めば嫌とは言わんだろ」
+「そうおしよ。シィちゃんには迷惑かけるけど、あの子と一緒なら安心だよ」
+「でも、それでシィちゃんまで襲われたら嫌だよ」
+「それはない。たぶんだがな。おまえを襲った奴が例の強盗と同じなのかどうかは分からんが、逃げていくところを少しは見たんだろ？　中肉中背で、腕っ節が強いわけでもないとしたら、ルガディンの漁師でそこそこ胆力のある奴を襲おうなんて思わんはずだ」
+「だといいけど……。シィちゃ……シナトは昔っからいっつも俺を庇ってくれて、すぐ無理するから」
+　自分が狙われているかもしれなくても、友達を巻き込みたくはない。そんな、臆病だが友達思いの優しい弟分を、無理をしてでも守ろうとしてきた兄貴分。
+　俺も守ってやれればいいがと、フィルは少し緩む口元を隠すように手で覆った。</p>
+<p>　干物は邪魔をした詫びだとセンタにやってしまったので、徳利酒だけ煽りながら、土手に腰掛け、やがて草の上に寝転んで考えをまとめる。
+　センタを襲ったのが強盗なのかそれとは別なのかはともかく、どちらにしても犯人を捕まえるのが最良の解決だ。
+　だが考えてみても犯人像というのがはっきりしない。
+　外から見て金を、あるいは高価なものを持っていそうだったのは、酒屋の番頭、幼い娘の着物。だが番頭のほうは切りつけられただけ。
+　大した金にはならなくても一定の金は取れそうだったのが茶屋の婆様。これは売上金を全部取られている。
+　ろくな金など持ってないはずなのは家の庭に出ただけの女房、お使いの小僧、そしてセンタだ。お使いの小僧はたまたま大金を持っていて奪われたが、「金を持ってお使いに行く」かどうかを知っていなければ、ただの偶然にすぎない。
+　被害者は他にもいるようだが、それを全部洗い出しても、こんな具合に統一感がないに違いない。
+　こうもちぐはぐなのは、
+（一人のしてることじゃないって可能性もあるな）
+　たまたまか、それとも便乗かはともかく、複数の人間がそれぞれにしていること、という可能性はある。
+　たとえば、センタを襲ったのはあくまでもセンタへの恨みかなにかで、他とはまったく別の話、という具合だ。</p>
+<p>　もし同一犯の仕業だとしても、
+（金が目当てじゃないとか……）
+　だからこそ、大した金を持っていそうもない相手も襲っている。その相手がたまたま金を持っていて、それを奪えそうなら奪うが、無理だと思えば切りつけた時点で目的は果たしているから、さっさと逃げる。
+（そのほうがありそうだ）
+　だとしたら、被害者をよく調べれば、全員が犯人となんらかの顔見知りになる。
+　だがそれにしても、酒屋の番頭に見習い大工、めったに表に出ない商家の女房、筵掛けの露天茶屋の婆さんと幅が広い。
+　だいたいその程度のこと―――犯人を割り出すために被害者の共通点を調べる―――は、捜査している連中がとっくにやっているはずである。</p>
+<p>（馬鹿の考え休むに似たり、か）
+　いい加減頭が痛くなってきて、フィルは諦めて頭を振った。
+　犯人が一人なのか複数なのかまで考えて割り出そうとしても無理だ。
+　ただ、センタから詳しく聞いて、彼を襲った犯人については少しばかりはっきりしている。
+　おそらくはハイランダー、ミッドランダー、エレゼン、この三種族の男だと思われる。</p>
+<p>　ルガディンの男やララフェルは一目でそうと分かるから真っ先に除外される。アウラ族には耳角があり、もし折れていれば音が聞こえない。それに彼等の尾は固く、腰に巻き付けたり下履きに入れたりして隠すのも難しい。
+　ミコッテは耳も尾も隠しやすいし、男であれば中肉中背というのにも当てはまりやすいが、
+「はっきりは言えませんけど、ルガディンとかララフェルでないのは間違いないし、ミコッテでもないと思うんです。足音がばたばたうるさかったから」
+　センタはそう言った。ミコッテは種族として、意識せずとも足のバネが足音を小さくしてしまう。足音を&quot;立てる&quot;ように訓練しないと、自分がミコッテであると隠せないのだ。
+　ロスガルやヴィエラをクガネに来てから見たことはない。
+　となると、大柄である、小柄である、成長期前であるという条件つきで、ハイランダー男女、ミッドランダー男女、エレゼン男女と、ルガディン女が残る。
+　そして、
+「でも、ぶつかられた感じ、女の人だとはちょっと」
+　センタは相手を男だと感じた。そしてそれはそうそう間違っていないと思えた。</p>
+<p>　特殊な鍛え方をしないかぎり、やはり女の体には柔らかみがある。それに生物として、生殖できる相手を感じ分ける直感も働く気がした。
+　昨日の稽古中、フィルがとっさに助けた役者は見た目はおっとり優し気な女だったが、触れたときにこいつ男かと驚いたのだ。細い首も柔らかそうな手も、なみの女よりしなやかに見えても、体の芯にどこかがっしりとした硬さがある。女形として徹底的に鍛え、普段から女のように生活していてもそうなのだから、並の人間では触れても分からないほど性別を隠すのは、体そのものを内側から作り変えでもしないかぎり無理だろう。
+　そこをいくらか譲っても、候補には、筋肉質な種族であるハイランダーの女が入るくらいだ。</p>
+<p>　センタの知り合いで、彼になんらかの恨みがある、ハイランダーの男女、ミッドランダーの男、エレゼンの男。
+　クガネにエレゼンはかなり少なく、ひょろひょろしているので案外見分けがついてしまいそうなことも考えると、ヒューランの男というのが有力だ。
+　だがセンタに思い当たる相手は一人もいない。悪いことをしたかも、というのも、「そんなこと気にしていたら息もできんぞ」みたいな些細なことしかないのである。となればやはり逆恨みの類だろう。これでは本人に心当たりなど聞いても無駄だ。
+　そもそもセンタの知り合いだろうというのも、確証があるわけでもない。
+（……よし、無理だ）
+　推理小説なんてものはでたらめだ。名探偵はいかにも「これこれこうだから犯人は彼だ！」とか言うが、そこには無視される無数の要因がある。
+　もちろん、犯人を絞り込むためにフィルも、すべての被害者に聞き込みをして……とやればもっと情報は集まるが、それをすべて集めたところで、「実は被害者全員、別の犯人でした」なんてオチがないとも言えない。それが現実である。
+　結局のところセンタは、言ったとおりシナトに送ってもらうようにして、少しでもまた襲われる心配をなくすしかない。
+　徳利に残っていた酒を全部喉に流し込んで、腹も減ったしと、フィルは宿に戻ることにした。</p>
+<p>　着物が仕上がっていれば、夜には囮作戦決行であるが、歩き方や所作は正直もう既に半分くらいぼんやりしている。
+　だが、囮捜査などしたところで、広いクガネに打ったたった一つの点である。そこにたまたま犯人が飛び込んでくるなど、夢物語に近い。
+　それでもその夢物語は、決して起こらない空想ではない。何千分の一の確率で現実になる可能性があるし、その可能性を引き上げるのが事前準備だ。今寝転がっていた土手のあたりは、対岸には屋台が出るらしい形跡もあるが、こちら側は柳の木がまばらに並ぶだけの寂しい通りだ。昼でも民家の前にはあまり人通りがなく、住民が必要に応じて出入りするだけである。堤防の下、柳の陰、建物の角、隠れやすい場所はかなりある。
+（このへんにしておくか）
+　と決めている。
+　もし犯人に出くわさなくても、見回りになれば無意味ではない。なにせ自分はルガディンなので、「犯人は中肉中背」とくらいは知れている以上、出会った者が「まさか」と思う必要はない。
+（……俺ならその『まさか』を利用して道連れになってから襲うがな。殺しちまえば死人に口なしだ。首でも掻き切って、当たりどころが悪かったことにしておけば強盗になすりつけられる）
+　そんな物騒な人間は、いないと信じておくことにしよう。</p>
+<p>　そんなふうにぼちぼち宿へと引き返す道で、フィルはまたあのミッドランダーの小僧、弟子入り志願の厄介者を見つけた。
+　油屋の柱に隠れるようにして望海楼を見上げている。
+「おい。なにしてる」
+　特に脅すつもりもなく声をかけると、飛び上がらんばかりに驚いて、
+「なっ、なんでもねぇよ!!」
+　そう言って逃げていった。
+　まだ凝りていないのだろうか。態度と考えを改めない限り、ローズが彼を受け入れることはない。家族を頼るなどしてもいいが、とにかく自分の金と力で海を渡ってエオルゼアに来る。不自由しなくてもいいように共通語を覚える。教えを請う相手に「そっちが俺の言葉を覚えてくれ」は勘違いも甚だしい。
+　だが―――。
+（逆恨み……）
+　たまたま入った飲み屋でたまたま聞いた、ローズと自分への罵詈雑言。そんなふうに悪態をつく相手に、今更また弟子入りしたいと思って様子をうかがう、とは考えにくい。それよりは―――。
+　ともかく厄介なダニに噛まれたらしい。
+　フィルは酒臭い息を一つついて、望海楼への階段を登っていった。</p>
+
+    </div>
+  </article>
+
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      hamburger.textContent = '✕';
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+  </script>
+
+</body>
+</html>

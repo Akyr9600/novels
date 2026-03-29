@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>かぞく(プロト版) - おはなしおきば</title>
+  
+  <style>
+     
+    body { 
+      margin: 0; padding: 0; 
+      font-family: "BlinkMacSystemFont", "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      background: #fff; color: #333; 
+    }
+    .container { 
+      display: flex; min-height: 100vh; max-width: 1200px; 
+      margin: 0 auto; background: #fafafa; 
+    }
+
+     
+    aside { 
+      width: 220px; border-right: 1px solid #e0e0e0; 
+      padding: 0 15px 20px 15px;
+      background: #fafafa; position: sticky; top: 0; height: 100vh; overflow-y: auto; 
+      flex-shrink: 0;
+    }
+    aside h1 { margin: 15px 0 10px 0; line-height: 1.2; }
+    aside h1 a { font-size: 1.1rem; color: #000; text-decoration: none; font-weight: bold; }
+
+    .side-nav-sticky {
+      position: sticky; top: 0; z-index: 10;
+      background: #fafafa; padding: 10px 0;
+      border-bottom: 1px solid #eee; margin-bottom: 15px;
+      display: flex; justify-content: space-between; gap: 5px;
+    }
+    .side-nav-sticky a {
+      flex: 1; text-align: center; font-size: 0.7rem; font-weight: bold;
+      color: #666; text-decoration: none; padding: 6px 0;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+
+    h2 { font-size: 1.1rem; border-left: 4px solid #333; padding-left: 10px; margin: 20px 0 8px 0; }
+    .series-toggle { cursor: pointer; display: block; font-size: 0.95rem; color: #888; margin: 10px 0 4px 5px; position: relative; padding-right: 20px; }
+    .arrow {
+      display: inline-block; width: 0; height: 0; margin-left: 5px; vertical-align: middle;
+      border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #888;
+      transition: transform 0.3s;
+    }
+    .toggle-checkbox { display: none; }
+    .toggle-checkbox:checked + .series-toggle .arrow { transform: rotate(180deg); }
+    .series-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .toggle-checkbox:checked + .series-toggle + .series-content { max-height: 2000px; }
+
+    ul { list-style: none; padding-left: 15px; margin: 0; }
+    li { margin-bottom: 8px; font-size: 0.80rem; }
+    a { text-decoration: none; color: #444; }
+    .active { color: #d32f2f !important; font-weight: bold; }
+
+     
+    .is-draft { color: #aaa; font-style: italic; }
+
+     
+    .is-coming-soon {
+      color: #bbb;
+      font-style: italic;
+      cursor: default;
+    }
+    .is-coming-soon::after {
+      content: "　［準備中］";
+      font-size: 0.85em;
+      color: #ccc;
+    }
+
+     
+    main { 
+      flex: 1; padding: 50px 0; background: #fff; 
+      display: flex; justify-content: center;
+    }
+    article { width: 90%; max-width: 720px; margin: 0 auto; }
+    .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
+
+     
+    .lyric-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 20px 30px;
+      margin: 1.5em auto;
+      max-width: 500px;
+      text-align: center;
+      font-style: italic;
+    }
+
+     
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 12px; left: 12px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      width: 40px; height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+     
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 900;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+     
+    @media screen and (max-width: 768px) {
+
+       
+      .hamburger {
+        display: flex;
+      }
+
+       
+      aside {
+        position: fixed;
+        top: 0; left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 950;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+      }
+      aside.open {
+        transform: translateX(0);
+      }
+
+       
+      .container {
+        display: block;
+      }
+
+       
+      main {
+        width: 100%;
+        padding: 60px 0 20px 0;
+        display: block;
+      }
+
+       
+      article {
+        width: 94%;
+        max-width: none;
+        margin: 0 auto;
+        padding: 20px 15px;
+      }
+
+       
+      h1 { font-size: 1.4rem !important; }
+      .novel-body { font-size: 1.05rem !important; line-height: 1.9 !important; }
+
+       
+      img { max-width: 100%; height: auto; }
+    }
+  </style>
+
+  
+  
+    
+      
+    
+  
+
+  
+    
+    
+      <link rel="stylesheet" href="http://localhost:1313/css/series/chibiko-bright.css">
+    
+  
+</head>
+
+<body class="theme-chibiko-bright">
+
+  
+  <button class="hamburger" id="hamburger" aria-label="メニューを開く">☰</button>
+
+  
+  <div class="overlay" id="overlay"></div>
+
+  <div class="container">
+    <aside id="sidebar">
+      <h1><a href="/">おはなしおきば</a></h1>
+      <div class="side-nav-sticky">
+        <a href="#" style="visibility:hidden">← BACK</a>
+        <a href="http://localhost:1313/ff14/chibiko/chibi02/">NEXT →</a>
+      </div>
+
+      
+        <div class="section-group">
+          <h2>FF14</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-46ae835b836b509ad6872524212a5e12" class="toggle-checkbox" >
+              <label for="series-46ae835b836b509ad6872524212a5e12" class="series-toggle">【トロイの話】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main01/" class="">スカラ迷宮 1</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main02/" class="">スカラ迷宮 2</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main03/" class="">スカラ迷宮 3</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main04/" class="">スカラ迷宮 4</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main05/" class="">スカラ迷宮 5</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main06/" class="">スカラ迷宮 6</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main07/" class="">スカラ迷宮 7</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main08/" class="">スカラ迷宮 8</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main09/" class="">スカラ迷宮 after01</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main10/" class="">スカラ迷宮 after02</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main11/" class="">スカラ迷宮 after03</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main12/" class="">スカラ迷宮 after04</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main13/" class="">スカラ迷宮 after05</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main14/" class="">スカラ迷宮 after06</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red01/" class="">ブラトロ はじまり</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red02/" class="">ブラトロ 俺の黄玉</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red03/" class="">ブラトロ ああ見えて</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red04/" class="">ブラトロ 赤鰐という男</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red05/" class="">ブラトロ 番外編GPT</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red06/" class="">ブラトロ 番外編Claude</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red07/" class="">ブラトロ RED DILE</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main00/" class="is-draft">base</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-aeeca8301969494c0adf2f2c423c2129" class="toggle-checkbox" >
+              <label for="series-aeeca8301969494c0adf2f2c423c2129" class="series-toggle">【琴子お嬢様】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-01/" class="">呉服屋物語 一</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-02/" class="">呉服屋物語 二</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-03/" class="">呉服屋物語 三</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-04/" class="">呉服屋物語 裏</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-05/" class="">呉服屋物語 四</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-06/" class="">傭兵物語 一</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-07/" class="">傭兵物語 二</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-08/" class="">傭兵物語 三</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-09/" class="">傭兵物語 四</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-4c452e7e8eb0756a2a0e983e2dad583d" class="toggle-checkbox" checked>
+              <label for="series-4c452e7e8eb0756a2a0e983e2dad583d" class="series-toggle">【ちびこ】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi01/" class="active">かぞく(プロト版)</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi02/" class="">小さな拾いもの</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi03/" class="">家さがし</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi04/" class="">おうちゲットだぜ</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi05/" class="">おやこ</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi06/" class="">異</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi07/" class="">真</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi08/" class="">裏側の黒トロ</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi20/" class="">とある晩餐会の裏側で</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi21/" class="">小さなえいゆう</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi22/" class="">千伐の竜騎士</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi23/" class="">不伐の竜騎士</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi24/" class="">北稜の守護神</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi25/" class="">北稜の勇者たち</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi30/" class="">まんまるいしの物語</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi60/" class="">調理師ちびこっこ 01</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi61/" class="">調理師ちびこっこ 02</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-fd1f546341f187a70bb5af75c4bb6af2" class="toggle-checkbox" >
+              <label for="series-fd1f546341f187a70bb5af75c4bb6af2" class="series-toggle">【ORIGIN】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/sp-main/00-sp-01/" class="">Prologue</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <span class="is-coming-soon">第一話：フェロス</span>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/sp-main/00-sp-03/" class="">第二話：英雄</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-5de3c22336d28a71e6f69d789ed2b479" class="toggle-checkbox" >
+              <label for="series-5de3c22336d28a71e6f69d789ed2b479" class="series-toggle">【華飾の帳】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr01-kage/" class="">その影に 1</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr02-kage/" class="">その影に 2</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr03-kage/" class="">その影に 3</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr04-kage/" class="">その影に 4</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr05-inori/" class="">かそけき祈り 1</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr06-inori/" class="">かそけき祈り 2</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr07-inori/" class="">かそけき祈り 3</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr08-inori/" class="">かそけき祈り 4</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr09-inori/" class="">かそけき祈り 5</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr10-inori/" class="">かそけき祈り 6</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr11-inori/" class="">かそけき祈り 7</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr12-hibi/" class="">日々彩々 1</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr13-hibi/" class="">日々彩々 2</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr14-hibi/" class="">日々彩々 3</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/" class="">日々彩々 3.5</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr16-hibi/" class="">日々彩々 4</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr17-hibi/" class="">日々彩々 5・前</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/" class="">日々彩々 5・後</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/" class="is-draft">日々彩々 6</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-6542e7828ae546a46eed441bbde3312b" class="toggle-checkbox" >
+              <label for="series-6542e7828ae546a46eed441bbde3312b" class="series-toggle">【VRファンタジー】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr01/" class="">第一話</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr02/" class="">第二話</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr03/" class="">第三話</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>操作実験場</h2>
+          
+          <ul>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/post/hello/" class="is-draft">自分用：サイト操作・要素まとめ</a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/post/cheatsheet/" class="is-draft">Markdown・Hugo記法</a>
+                
+              </li>
+            
+          </ul>
+        </div>
+      
+    </aside>
+
+    <main>
+      <article>
+        
+  <article>
+    <header style="margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+      <h1 style="font-size: 1.8rem; color: #111; margin: 0;">かぞく(プロト版)</h1>
+    </header>
+    <div class="novel-body">
+      <p>　　　　　【家とパンツと三歳児】</p>
+<p>（パンツ２枚ってわけには&hellip;..いかねえんだろうなぁ）
+　女子がたまに髪につけている、シュシュとやら。ほとんどあれにしか見えない女児用の下着を見ながら、フィルは考えていた。パンツは何枚あったほうがいいんだろうか、と。
+　よりにもよって下着売り場で悩まなくていいようなものだが、下着だから悩むのだ。自分のことなら、拠点に戻れない、野営が続く、そんなときには着替えられないとなったら十日もそのままなこともあったので、&ldquo;日常&quot;の着替えも雑なものだ。むしろ、特になにかあって汚れたというのでないなら毎日着替えるなんてのは不要、非効率すぎないかとさえ思っている。しかしそれが世間一般には不潔だと言われることくらいは知っていた。だから&quot;人並みの日常&quot;を日常にしていくこれからは、もう少し着替えや身の回りの道具についても考えないとならないのだろう。だが、フィルには家財道具を入れる箱、すなわち家がなかった。</p>
+<p>　傭兵として暮らしていたときは、二か月働いて装備の修理をし渡航費を貯めたらまた戦場に行く、そんな生活だったので、住まいは月極の共同住宅だった。家賃は割高だが最低限の家具は揃っていて、場所によっては鍋釜のたぐいも一通りついている。三カ月四カ月、時には半年留守にする暮らしには、そのほうが都合が良かった。
+　だが、小さな子供と暮らすとなったらそうはいかない。定住するには月極住宅は高すぎる。一般のアパートになると、いい場所は家賃も高いし、保証人や身元引受人くらいいないと借りられない。スラムと呼ばれるような地区ならそんなこともないが、今度は環境が悪かった。自分が出掛けている間、小さな子供を一人留守番させておけるような場所はなかったのである。
+　今は、
+「ほんとは単身者以外ダメなんだけど、そんな小さい子道端に放り出しておけないし……。半月だけだからね」
+　たびたび利用していた月極の物件に子連れで転がり込ませてもらっている。（特例を認めるため一カ月分の家賃を、と言いたいらしい旦那をどうにか説得してくれた。ありがたいことだ）　半月の間に何とか住処を見つけなければならないのだが、期日はもう三日後に迫り、そしてアテはなかった。</p>
+<p>　たぶん多くの人は、安易に子供なんか引き取るからだと言うだろう。たしかにそのとおりだ。だが敗戦でボロボロになったドマに身寄りのない幼児が一人、どうやって生きていけと言うのか。誰も彼もが自分とその縁者の今日明日のことで手いっぱいで、手間も世話もかかる幼児の面倒など見ている余裕はない。孤児たちが寄り集まって親を待つ待機所には、人買いらしき奴もちらほしていた。
+　だから、すべての子供を助けることはできないが、何故だか自分になついてしまったちびっこ一人くらい、腹をくくって育ててやろうと決めたのだ。
+　考えが浅かった……考えなしに近いほどなにも分かってなかったことは認める。だが、まだ育ててないのだから、失敗かどうかは分からない。</p>
+<p>　ともあれ、家が見つからないというのが問題なのだ。
+　家がないということは、雨風をしのぐ決まった場所がないということでもあり、荷物を置いておく場所がないということでもある。だから、―――パンツの枚数の話に戻る。たかがパンツでも、金だけの話でなく、持ち歩く荷物になる。何枚も買うわけにはいかなかった。
+　俺だけなら、とフィルは思っている。持ち物は、武具一式に剃刀などのちょっとした小道具、コップ一つに皿一枚、鍋一つ、それから着替えが上着１枚、中着は２枚、下着も２枚で洗っては着回しというのでいいと思っている。すべて大きめのザックに押し込んで吊るして、あとはテントと寝袋を巻いて挟めばOKだ。
+　だがそれと同じことをたった三歳の幼児、女の子に強いるのはどうだろう。せめてパンツは３枚ほしいんじゃないか、いや、毎日履き替えたいと思ったら念のため４枚？　と悩んでいるのである。
+　本当は必要ではない物を増やしていくと、いくら小さな子供のこととは言っても荷物は膨らむ。いざとなったらぱっと片手に荷物を持って移動する、それが当たり前だったフィルにとっては、持て余すほどの大荷物というのは想定外だった。</p>
+<p>　一番いいのは住む場所が決まることだ。難民のようなキャンプでもいい。ただし、荷物を置いておいても盗まれる心配のないような場所がいいし、できれば幼児を留守番させておければいいのだが……。
+（無理だよなぁ）
+　ミッドランダーの子供だが、なにせ３歳、ララフェルと変わらない大きさで片腕に軽く抱えておける。乗せておけると言ってもいい。そんな子供を連れているので、女の子用の下着売り場にじっとしていてもかろうじて不審者ではない……と信じたい。ともかく、いくらフィルが世間並みの常識に疎くても、そんな子供を四半日も放置できるわけがないことくらいはさすがに分かった。
+　結局パンツは３枚。足りなければ買い足せばいいと決めた。</p>
+<p>　あと３日で出て行かなければならない住処に帰る道、こいつは俺と来て良かったんだろうかと思う。
+　ひとりぼっちで置き去りにされるよりはマシだったとしても、世間一般の基準からしたら、暮らしは下の下になるだろう。フィル自身にとってはいっこうに平気でも、家もない、母親もいない、パンツは３枚。そんな生活は苦痛かもしれない。
+（ま、仕方ねえか）
+　&ldquo;最悪&quot;と&quot;けっこう悪い&rdquo;。その選択肢しかなかったのだ。いつかもっといい選択肢ができたら、そっちに移ればいい。フィルはそう割り切って、自分なりにこの小さな子供と一緒に暮らすことを決意するのだった。</p>
+<hr>
+<p>　　　　　【手に入れたのは、金では決して買えないなにか】</p>
+<p>　―――昔、「この子は俺なんかといていいんだろうか。もう少し大きくなったら嫌だと思うんじゃないだろうか」と心配したことがある。
+　選択肢が&quot;より悪い&quot;ものしかなかったから、仕方なく選ぶしかなかった。コトコ自身が選んだわけではないが、ともかくもっと悪い道しかなかったのだから仕方ない。
+　幸いコトコはすくすくと育ち、フィルが心配したほどにはなにも嫌がらなかった。パンツは５枚になったが、大きさから言えばフィルのそれの五分の一もないのだから大したことはなかったのだ。</p>
+<p>　コトコが世界の終わりみたいに泣いたのは、５歳のときだ。誰かに「おまえの父ちゃんは本物の父ちゃんじゃない」と言われたからだった。
+　大人だったら見れば分かる。ルガディン族はルガディン族との間にしか子供ができない。だから、ミッドランダーの子供とルガディンの親というのはありえない。実の親子でないことは、大人にとっては当たり前のことだ。だが子供は、コトコは、父親を知らずに母親に育てられ、その母親と死に別れたのさえたったの３歳で、この無闇やたらと大きい「おとうさん」を本当の父親だと自然に思い込んでいたらしい。
+　あるとき、大人の常識を仕入れて得意になったどこかの子供に、「そんなことも知らないのかよ」という形でいきなり突き付けられた。「おまえの父ちゃんは偽物だ」と。</p>
+<p>　あまり我が儘も言わず、いつもきゃっきゃと楽しそうにしているコトコが、そのときだけは声を上げて泣いた。
+　血のつながりがないのは事実だ。だから、血のつながりが「本当の」という意味なら、コトコがフィルの子でないのは本当で、偽物の父親というのも本当だ。泣かれても、フィルにはどうしようもなかった。
+　だが、ふと思った。
+　だったら、「本当の」父親あるいは母親から虐待されている子供は、どうしたらいいのだろう。どんなに嫌でも怖くても逃げたくても、血のつながりがあるだけで「本当の」親はそっちだ。他にどんなに心配して大切にしてくれる大人がいても。だったらその「本当の」は、少しも嬉しくもありがたくもないことになる。それでも「本当の」親であることが大事なんだろうか。</p>
+<p>　そんなことはない。
+　だしたら―――。
+「&ldquo;本当の&quot;ならいいってことじゃねえんだよ」
+　と、小さいコトコに分かるかどうか分からなかったが、フィルはゆっくりと話して聞かせた。
+　本当の親でも、子供になんの愛情も覚えない親もいる。逆に、血のつながりなどなくても、育てた子供を心から大切に、可愛く思う親だっている。
+「もし、だぞ。ちびこを可愛がってくれず嫌いだと思ってる本当の父ちゃんと、ちびこが可愛くて仕方ない偽物の父ちゃんだったら、ちびこはどっちがいい?」
+　本物の父親は事故で死んでしまっただけで、生きていたらコトコを命より大切にしたかもしれない。だから本当の父親が悪い父親ではない。だからあくまで「もし」の話だ。もし本当の父親という人が、子供の面倒なんか見たくないと家を出て行ってしまうような勝手な男だったりしたら、それでも「本当の」父親がいいのか。
+　案の定コトコにはよく分からなかったようだ。行きつくのは
+「おとうさんは、ほんとうのおとうさんだもん……ことこのおとうさんだも……っ」
+　だった。
+　ただ―――その言葉、コトコが使う「本当の」は、血のつながりのあるという意味ではないように聞こえた。</p>
+<p>　そんなコトコも、７歳になった。膝くらいまでしかなかった背丈も腰くらいにはなって、自分の荷物くらいは自分で背負って歩けるようになった。
+　フィルはいい仕事があればどこにでも行く。危険だとかなんだとかで普通の鉱山会社が人を出したがらない、けれど違法というわけではない採掘場は、その危険の分だけ実入りがいい。
+　フィルが聞いたのは、付近に中型のモンスターが出没し、採掘人が襲われることがあるとかいうグリダニアの森の奥、洞窟の底だった。
+　毒ガスだなんだは困るが、灼熱だとかモンスターだとかいうならどうということもない。それで通常の倍近い手間賃を貰えるならありがたいくらいだ。しかもこの仕事は、万一モンスターに襲われたりした場合、討伐できればその分のボーナスが出るという。移動費を考えても割のいい仕事で、フィルはさっそくコトコを連れて、深夜の定期キャリッジに乗り込んだ。</p>
+<p>　乗客が手持無沙汰に無駄話をし、中にはうとうと寝入り始めているその座席でのことだ。
+　こんな小さな子供を連れて夜中にどうしたのか。そんな話から、おばさん特有の詮索好きに捕まって、あれこれ尋ねられた。その果てで、
+「可哀想にねぇ」
+　という言葉がフィルに突き刺さった。</p>
+<p>　小さい子供が、家もなく、ろくでもない親父のせいでその日暮らし。体に比べては大きなリュックを背負って、その中には自分の着替えの他に、重量のない食器なんかも入っている。
+　きれいなお人形なんかない。あるのはリュックの横にぶらさげたよく分からない茶色くて丸い生き物の形をしたマスコット。風呂も毎日は無理で、洗って濡らしたタオルで体を拭くだけなんてこともある。洗濯はコトコの仕事だ。自分のだけじゃなく、フィルの衣類も洗ってくれる。
+　嫌な顔一つせず、相変わらずきゃっきゃと楽しそうにしているが……。
+　たった七歳の子供なら、家の中で人形遊びをしたり外でかけっこをしたりして遊び、もっと可愛い服を着てもっと美味しいものを食べて、大人の仕事の肩代わりなんかせず、もっとのんきに自分のしたいことだけして生きていていい。
+　ぼさぼさの髪を不器用に結んで、重い荷物を背負って、野宿も当たり前なんて暮らしは、
+（分かってんだよそんなこと）
+　間違いなく可哀想だった。</p>
+<p>　だがそのとき横からコトコが言ったのだ。
+「コトコ、かわいそうじゃないよ」
+　と。
+「だってお父さんいるもん」
+　可哀想に、と言ったヒューランの女に向けて、にっと満面の笑顔を向ける。それは１ミリの作為もなく、自慢げにすら見える笑顔で、その威力は「可哀想に」などと言った女を一瞬で恥じ入らせるほどだった。</p>
+<p>（こいつ……）
+　そう言えば、とフィルは思い出す。世間並みに可愛い服の一枚くらいと思って、仕事を増やしたときのことだ。帰って来るのが遅いフィルにふくれっ面をしていた。
+「町の子が着てるみたいな、可愛い服ほしいだろ。そのためにがんばってんだ。だからいい子で待ってろ」
+　そう言うと、少し考えて、むっとした顔でこう言った。
+「おようふくいらない。おとうさんがいい」</p>
+<p>　そして今。
+　生まれたときにすら泣いていなかったんじゃないかと言われたことのあるフィルだ。だがコトコの「おとうさんがいるもん」には、思わず目が潤んだ。
+　可愛い服も。
+　きれいな人形も。
+　柔らかいベッドも。
+　重いものなんか持たなくてよくて。
+　全部大人にしてもらえる暮らしも。
+　別にいらない。
+　そんなものがなくても可哀想なんかじゃない。
+　そんな、普通の暮らしに比べて足りないもの、余計なもの、全部飲み込んでどうでもよくしてしまうほど、</p>
+<p>　お父さん大好き。</p>
+<p>　与えてやったものの数千倍を、たった一つの思いで返された気がした。</p>
+<p>　そして分かった。
+　世間がどういう基準でどう言おうと知ったことじゃない。コトコが俺を好きだと言って笑っているかぎり、俺は最高の親父でコトコは世界一幸せな子供なんだ、と。
+　ともするといつかそうでなくなる日が来るのかもしれなくても、それまで俺は最高の親父として、自信を持って胸を張っていよう。コトコが大好きなな、世界一の親父だと自慢できるように―――。</p>
+
+    </div>
+  </article>
+
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      hamburger.textContent = '✕';
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+  </script>
+
+</body>
+</html>

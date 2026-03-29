@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/post/hello/</loc>
+  </url><url>
     <loc>http://localhost:1313/ff14/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/sp-main/</loc>
@@ -21,6 +23,8 @@
     <loc>http://localhost:1313/ff14/troy/troy-main02/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr02-kage/</loc>
+  </url><url>
+    <loc>http://localhost:1313/mass-effect/sp-main/00-sp-02/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-fantasy/02-vr02/</loc>
   </url><url>
@@ -90,6 +94,8 @@
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/</loc>
   </url><url>
+    <loc>http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/</loc>
+  </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red01/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red02/</loc>
@@ -104,7 +110,14 @@
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red07/</loc>
   </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2026-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/ff14/troy/troy-main00/</loc>
+  </url><url>
     <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/post/cheatsheet/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url>

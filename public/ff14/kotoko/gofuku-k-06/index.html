@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>傭兵物語 一 - おはなしおきば</title>
+  
+  <style>
+     
+    body { 
+      margin: 0; padding: 0; 
+      font-family: "BlinkMacSystemFont", "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      background: #fff; color: #333; 
+    }
+    .container { 
+      display: flex; min-height: 100vh; max-width: 1200px; 
+      margin: 0 auto; background: #fafafa; 
+    }
+
+     
+    aside { 
+      width: 220px; border-right: 1px solid #e0e0e0; 
+      padding: 0 15px 20px 15px;
+      background: #fafafa; position: sticky; top: 0; height: 100vh; overflow-y: auto; 
+      flex-shrink: 0;
+    }
+    aside h1 { margin: 15px 0 10px 0; line-height: 1.2; }
+    aside h1 a { font-size: 1.1rem; color: #000; text-decoration: none; font-weight: bold; }
+
+    .side-nav-sticky {
+      position: sticky; top: 0; z-index: 10;
+      background: #fafafa; padding: 10px 0;
+      border-bottom: 1px solid #eee; margin-bottom: 15px;
+      display: flex; justify-content: space-between; gap: 5px;
+    }
+    .side-nav-sticky a {
+      flex: 1; text-align: center; font-size: 0.7rem; font-weight: bold;
+      color: #666; text-decoration: none; padding: 6px 0;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+
+    h2 { font-size: 1.1rem; border-left: 4px solid #333; padding-left: 10px; margin: 20px 0 8px 0; }
+    .series-toggle { cursor: pointer; display: block; font-size: 0.95rem; color: #888; margin: 10px 0 4px 5px; position: relative; padding-right: 20px; }
+    .arrow {
+      display: inline-block; width: 0; height: 0; margin-left: 5px; vertical-align: middle;
+      border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #888;
+      transition: transform 0.3s;
+    }
+    .toggle-checkbox { display: none; }
+    .toggle-checkbox:checked + .series-toggle .arrow { transform: rotate(180deg); }
+    .series-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .toggle-checkbox:checked + .series-toggle + .series-content { max-height: 2000px; }
+
+    ul { list-style: none; padding-left: 15px; margin: 0; }
+    li { margin-bottom: 8px; font-size: 0.80rem; }
+    a { text-decoration: none; color: #444; }
+    .active { color: #d32f2f !important; font-weight: bold; }
+
+     
+    main { 
+      flex: 1; padding: 50px 0; background: #fff; 
+      display: flex; justify-content: center;
+    }
+    article { width: 90%; max-width: 720px; margin: 0 auto; }
+    .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
+    .is-draft { color: #aaa; font-style: italic; }
+
+     
+    .lyric-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 20px 30px;
+      margin: 1.5em auto;
+      max-width: 500px;
+      text-align: center;
+      font-style: italic;
+    }
+
+     
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 12px; left: 12px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      width: 40px; height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+     
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 900;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+     
+    @media screen and (max-width: 768px) {
+
+       
+      .hamburger {
+        display: flex;
+      }
+
+       
+      aside {
+        position: fixed;
+        top: 0; left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 950;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+      }
+      aside.open {
+        transform: translateX(0);
+      }
+
+       
+      .container {
+        display: block;
+      }
+
+       
+      main {
+        width: 100%;
+        padding: 60px 0 20px 0;  
+        display: block;
+      }
+
+       
+      article {
+        width: 94%;
+        max-width: none;
+        margin: 0 auto;
+        padding: 20px 15px;
+      }
+
+       
+      h1 { font-size: 1.4rem !important; }
+      .novel-body { font-size: 1.05rem !important; line-height: 1.9 !important; }
+
+       
+      img { max-width: 100%; height: auto; }
+    }
+  </style>
+
+  
+  
+    
+      
+    
+  
+
+  
+    
+    
+      <link rel="stylesheet" href="http://localhost:1313/css/series/kotoko.css">
+    
+  
+</head>
+
+<body class="theme-kotoko">
+
+  
+  <button class="hamburger" id="hamburger" aria-label="メニューを開く">☰</button>
+
+  
+  <div class="overlay" id="overlay"></div>
+
+  <div class="container">
+    <aside id="sidebar">
+      <h1><a href="/">おはなしおきば</a></h1>
+      <div class="side-nav-sticky">
+        <a href="http://localhost:1313/ff14/kotoko/gofuku-k-05/">← BACK</a>
+        <a href="http://localhost:1313/ff14/kotoko/gofuku-k-07/">NEXT →</a>
+      </div>
+
+      
+        <div class="section-group">
+          <h2>FF14</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-46ae835b836b509ad6872524212a5e12" class="toggle-checkbox" >
+              <label for="series-46ae835b836b509ad6872524212a5e12" class="series-toggle">【トロイの話】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main01/" class="">スカラ迷宮 1</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main02/" class="">スカラ迷宮 2</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main03/" class="">スカラ迷宮 3</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main04/" class="">スカラ迷宮 4</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main05/" class="">スカラ迷宮 5</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main06/" class="">スカラ迷宮 6</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main07/" class="">スカラ迷宮 7</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main08/" class="">スカラ迷宮 8</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main09/" class="">スカラ迷宮 after01</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main10/" class="">スカラ迷宮 after02</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main11/" class="">スカラ迷宮 after03</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main12/" class="">スカラ迷宮 after04</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main13/" class="">スカラ迷宮 after05</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main14/" class="">スカラ迷宮 after06</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red01/" class="">ブラトロ はじまり</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red02/" class="">ブラトロ 俺の黄玉</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red03/" class="">ブラトロ ああ見えて</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red04/" class="">ブラトロ 赤鰐という男</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red05/" class="">ブラトロ 番外編GPT</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red06/" class="">ブラトロ 番外編Claude</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-red07/" class="">ブラトロ RED DILE</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/troy/troy-main00/" class="is-draft">base</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-aeeca8301969494c0adf2f2c423c2129" class="toggle-checkbox" checked>
+              <label for="series-aeeca8301969494c0adf2f2c423c2129" class="series-toggle">【琴子お嬢様】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-01/" class="">呉服屋物語 一</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-02/" class="">呉服屋物語 二</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-03/" class="">呉服屋物語 三</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-04/" class="">呉服屋物語 裏</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-05/" class="">呉服屋物語 四</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-06/" class="active">傭兵物語 一</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-07/" class="">傭兵物語 二</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-08/" class="">傭兵物語 三</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/kotoko/gofuku-k-09/" class="">傭兵物語 四</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-4c452e7e8eb0756a2a0e983e2dad583d" class="toggle-checkbox" >
+              <label for="series-4c452e7e8eb0756a2a0e983e2dad583d" class="series-toggle">【ちびこ】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-4/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-5/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-6/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-7/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-8/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC/" class="">ちびこ</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01/" class="">小さな拾いもの</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi01---%E3%82%B3%E3%83%94%E3%83%BC-3/" class="">かぞく</a></li>
+                
+                  <li><a href="http://localhost:1313/ff14/chibiko/chibi02/" class="">家さがし</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT</h2>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-fd1f546341f187a70bb5af75c4bb6af2" class="toggle-checkbox" >
+              <label for="series-fd1f546341f187a70bb5af75c4bb6af2" class="series-toggle">【ORIGIN】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-01/" class="">Prologue</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-02/" class="is-draft">第一話：フェロス</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/sp-main/00-sp-03/" class="">第二話：英雄</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-5de3c22336d28a71e6f69d789ed2b479" class="toggle-checkbox" >
+              <label for="series-5de3c22336d28a71e6f69d789ed2b479" class="series-toggle">【華飾の帳】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr01-kage/" class="">その影に 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr02-kage/" class="">その影に 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr03-kage/" class="">その影に 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr04-kage/" class="">その影に 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr05-inori/" class="">かそけき祈り 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr06-inori/" class="">かそけき祈り 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr07-inori/" class="">かそけき祈り 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr08-inori/" class="">かそけき祈り 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr09-inori/" class="">かそけき祈り 5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr10-inori/" class="">かそけき祈り 6</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr11-inori/" class="">かそけき祈り 7</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr12-hibi/" class="">日々彩々 1</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr13-hibi/" class="">日々彩々 2</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr14-hibi/" class="">日々彩々 3</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/" class="">日々彩々 3.5</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr16-hibi/" class="">日々彩々 4</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr17-hibi/" class="">日々彩々 5・前</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/" class="">日々彩々 5・後</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/" class="is-draft">日々彩々 6</a></li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-6542e7828ae546a46eed441bbde3312b" class="toggle-checkbox" >
+              <label for="series-6542e7828ae546a46eed441bbde3312b" class="series-toggle">【VRファンタジー】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr01/" class="">第一話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr02/" class="">第二話</a></li>
+                
+                  <li><a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr03/" class="">第三話</a></li>
+                
+              </ul>
+            </div>
+          
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>操作実験場</h2>
+          
+          <ul>
+            
+              <li><a href="http://localhost:1313/post/hello/" class="is-draft">自分用：サイト操作・要素まとめ</a></li>
+            
+              <li><a href="http://localhost:1313/post/cheatsheet/" class="is-draft">Markdown・Hugo記法</a></li>
+            
+          </ul>
+        </div>
+      
+    </aside>
+
+    <main>
+      <article>
+        
+  <article>
+    <header style="margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+      <h1 style="font-size: 1.8rem; color: #111; margin: 0;">傭兵物語 一</h1>
+    </header>
+    <div class="novel-body">
+      <p>　　　　　【第零日目】</p>
+<p>　昼下がりのギルドは閑散としている。少しでも旨味のある仕事を取ろうと思う冒険者は皆、朝一、遅くとも午前中には掲示板や窓口に並ぶからだ。冒険者ギルドの依頼は、緊急のものを除き、前日に届いたものを翌日の朝一番で掲示板に貼りだす。昼下がりにのこのこやってくるようなのはやる気がないか、しょせん片手間の腰掛け仕事、さもなければ、指名の依頼が次々舞い込むような大物だけだった。
+　フィルは先を争ってまで旨い仕事にありつこうとは思わない。面倒なのもあって朝一の混雑を避けている。分類すればあまりやる気のない冒険者だろう。とはいえそんなことができるのも、売れ残った仕事の中に旨味を見つけられるからではある。報酬は悪くないがその額面の割に難易度が高いとか、ただ戦えればいいだけではないとか、それほど不味くない依頼は、けっこう残っているものなのだ。
+　その日も昼前まで寝ていて、起きて一服してまた寝て、ティータイム時になってやっと出てきた。昼下がりどころかもうすぐ夕方である。当日片付くような仕事を終えた冒険者が夕飯目当てに殺到するのはもう少し先で、今が一番、ギルドに人がいない時間帯だった。</p>
+<p>　がらんとした掲示板前に立ち、手頃な依頼がないか目を走らせていく。
+　書き方はぼかしてあるがこれは夫婦喧嘩の仲裁だなとか、これはたぶん子供の遊び相手をさせられるだけだとか、残っている依頼のほうが見ているだけでも面白い。
+　昔は依頼人から内容を聞いて、ギルドが清書する形で依頼用紙を作っていたのだが、意図した内容でないとか、言った言わないのトラブルが相次いでひどいものだった。それで結局、提出時に確認して精査、最低限の修正はするものの、そこで確定した文言を転写するだけになっている。そしてだからこそ、依頼人の真意が文面の下に透けて見えるのだ。</p>
+<p>（なかなか読ませる文章だな）
+　息子の仇を取って欲しいと懇願する依頼を眺めるが、嘘だと分かる。あるいは、本人は正当だと本気で思っていても、客観的にはそうでないというパターンである。
+　こういうのを見抜けないと、いいことをしているつもりで利用され、結果的には悪事に加担した、なんてことになるのが冒険者の面白い……怖いところだ。</p>
+<p>　依頼の受付窓口も、あからさまに怪しい依頼は拒否、通報する。だが事実関係の調査はしないし、微妙なときには通してしまう。冒険者が依頼人に会い、関わること自体が調査も兼ねるのだ。
+　だから、偽りの依頼だろうと気付かずに遂行すればそれは自己責任、能力不足である。犯罪は犯罪で、知りませんでしたでは済まない。自発的に犯罪行為を行った場合ほど重い処分ーーー登録抹消、永久除名ーーーにはならずとも、大幅なポイント減算や降格となる。
+　では、途中で犯罪だと気付いたとき、あるいはそう思ったときにはどうするのか。
+　その時点で依頼を放棄して軍やギルドに報告してもいいし、自力でその犯罪のほうを解決してもいい。</p>
+<p>　報告して終えた場合、それが正しい判断だったと証明されたときには、ポイントの増減はないものの達成としてはカウントされるし、ギルドの公益金から半額の報酬ももらえる。
+　そしてもし自力で解決できれば、達成と見なされるのはもちろん、難易度に応じて増減したポイント、満額の報酬（都市の税金から）＋α（軍からの謝礼など）が手に入った。
+　怪しい依頼は避けるのが賢明だが、対処する自信があれば面白くもある。
+　これに首でも突っ込んでみるかと思ったとき、ヅンッ!!　と強めに脇腹を突かれてフィルは身をよじった。</p>
+<p>　腹のあたりからけたけたと面白そうな笑い声が上がる。　
+「おまえなぁ！」
+　見下ろしたところにいる若草色の毛並みのミコッテ娘を睨むが、相手はまるで意に介さずニッと歯を見せて笑った。
+　右顔面が潰れたその娘は元冒険者で、何度か組んだこともある。右目ごと顔の肉をごっそり失う大怪我をして冒険者はやめたが、今はギルドの受付嬢をしており―――これが冒険者が辿る一つの末路だと見た目に分かる―――、気安い口をきく仲だった。
+「お仕事探してるならさぁ、レドレント・ローズさんに連絡してくんないかなー。お願いしたいことあるんだって～」
+　毛足の長い耳が、小さく左右に動いている。強い関心や好奇心を示す反応だ。
+「変な勘繰りするんじゃねえよ」
+　その耳を軽く指先で弾いて、フィルは通信窓口に向かった。</p>
+<p>　通信相手と、通信費は「相手持ち」であることを伝えると、調整の済んだリンクパールを渡される。受け取って耳にかけながら、フロアの隅に用意された通信ブースに行き、あいている椅子に腰かけた。
+　コールが長いが、仕方ない。相手は多忙だ。だがよほどのことでもないかぎり出ないということはない。気長に待つと、
+『ごめんなさい、お待たせして』
+　よそいきの作り声が聞こえ、
+「俺だ」
+　言った途端にそのしなしなした声が張りのある明るいものに変わった。
+『ああん、待ってたのよぉ！　もう！　いい加減個人パール持ってって言ってるでしょ』
+「ところ構わず呼び出されるなんてのは御免だって言ってるだろ。で、なんだ」
+　うふふっ、と耳元で笑われたのに首筋を粟立てながら聞いたのは、東国旅行の間の案内を頼みたい、ということだった。</p>
+<p>　半年ほど前に、ドマから帝国が撤退した。合わせて近海からも帝国船は消え、エオルゼアと東国との間に安定した物流が戻りつつあった。ウルダハにもラザハンやドマ、ひんがしの商品があれこれ入るようになり、来訪者も増えている。もちろんエオルゼアから東国に行く者も出てきた。ローズもそれに乗ることにしたのだろう。
+『フィルちゃん、クガネに行ったことあったわよね』
+「あるにはあるが……」
+　もう10年近く前だ。傭兵としてドマに渡ったことがある。クガネには中継点として滞在した。そのとき半年間の契約でウルダハを留守にしたため、ローズが覚えているのは分かる。だが、フィルは眉を寄せた。
+「観光してたわけじゃないんだぞ。10年もたてば街だって変わってる。案内なぞできるかよ」
+　案内人は、当たり前のことだが、旅行代理店に頼めば詳しい人間を見つけてくれる。ドマへ渡るため、あるいはエオルゼアに戻るために束の間滞在したことがあるだけの傭兵を頼るよりはるかにまともに案内してくれるだろう。だがレドレント・ローズは、詳しい案内人がほしいわけではないと言った。</p>
+<p>『観光地めぐりをしたいわけじゃないの』
+　東国に行きたいのは、リフレッシュ休暇も兼ねているものの、一番の目的は東洋独特の服飾を見、布地を買い、あわよくば和服の仕立てについて学ぶためだった。
+　それらを既に熟知していれば、よりディープなものを求めてマニアックな部分にも踏み込むだろうが、今はほんの入口、王道中の王道、基本の中の基本でいいし、それをこそ求めている。だから現地人しか知らないような穴場へ連れて行ってもらう必要などない。
+　ローズが気にしているのは別のことだ。
+『ほら、私って、夢中になるとつい他のこと全部後回しになるでしょ？　そういうのを気にしないでいてくれる人がいいのよ』
+　つまり、同行者に気を遣いたくないということかとフィルは納得した。
+　15年ばかりも付き合いが続いているだけに、フィルはローズのそういう性格や性分をあらかた知っている。そして、付き合いが切れなかったということは、それを気にせずにいられるということだ。
+　旅行の案内人などという仕事をしたことはないが、相場は護衛と同じでいいか、どうせそれも兼ねるだろうと、フィルは引き受けることにした。</p>
+<p>　そうしたのには、ローズの目的地、ひんがしで唯一他国の人間を受け入れているクガネ港に知人がいるからというのもあった。
+　アダナミというその男はフィルと同じルガディンで、ゼーヴォルフの元侍だ。ドマに派遣される傭兵チームの一員として知り合った。
+　無口で人の輪には入って来ないタイプだったが、気難しいとか人間嫌いとかいうわけでなくただ人見知りなだけで、一度親しくなるとむしろ饒舌にいろんなことを話すようになった。特にフィルとは年が近かったのもあって、同じ晩の見張りを買って出たり、バディを組むことも多かった。
+　アダナミには姉がいた。クガネには彼女が出している茶店があり、アダナミは主君をしくじって浪人してからはそこに居候し、用心棒の真似事をしていた。それではあまりに不甲斐ないので、武骨な自分にもなにかできる仕事をと探して、傭兵になったのだと言う。
+　ある日の哨戒中にフィルはアダナミと、契約期間が終わってクガネに戻ったら姉さんの店に連れて行ってくれ、よし必ず紹介しようと約束した。
+　しかし、大乱鎮圧後に初めて起こった反乱に対する粛清はヒステリックなほど過激で、そのときのチームは入れ代わり立ち代わり、結局、参加した人間の四分の三は死んだ。アダナミは生き残ったが刀を持つ右手を失い、契約満了の前に後方へ送還された。
+　だがフィルがクガネに戻り、聞いていた茶店に行くと、よく無事だったと手放しに喜び、歓迎してくれた。</p>
+<p>　以来、東国に渡ることなく10年がたった。
+　先の解放戦争では、ドマとアラミゴがほぼ同時に大きな戦火に包まれたため、フィルは手近なアラミゴのほうへ向かった。こんなとき、わざわざ消息を尋ねようとドマを選ぶほど親しい友人ではない。だが、たまたまでもドマに行く機会があるなら訪ねたかった。
+　小さな茶店は経営を続けているのかどうかも分からないが、ともあれ、一切の自由時間を許さないようなローズではないし、寄って消息を確認したい相手がいるといえば、それくらいの寄り道は喜んで承諾してくれるだろう。
+　そんなわけでフィルは、確定十日、猶予四日の契約で、レドレント・ローズの護衛兼案内人としてクガネに向かうことになったのだった。</p>
+<hr>
+<p>　　　　　【第一日目】</p>
+<p>　ローズが船酔いで腐ったトードみたいだったのはさておき、行きの航路は安定しており、予定通りの着日時になった。
+　陸に上がってもまだ船の上にいるみたいにふらふらしているローズを宿に押し込んで、初日にいきなりなにもすることがなくなってしまったので、フィルはこれ幸いとアダナミがいるかもしれない茶屋へ向かった。
+　転魂塔広場から東へ行き、小港に出るまでの通りにある店だ。観光客や商売に来る客でなく、仕事の合間に人足や商人が立ち寄るような場所で、軒先に床几は出ているが店内は少し薄暗く、一見の客は入りにくい。そんな様子もそのままに茶屋は潰れずにあり、アダナミの姉はまだそこの店主として働いていた。
+　だがアダナミはいなかった。</p>
+<p>　客商売にしても覚えがよすぎるだろうと思うレベルに、アダナミの姉チトセはフィルのことを覚えていた。むしろフィルのほうが人並みに、彼女の姿を黒髪に青白い肌でやや小柄とくらいしか覚えておらず、どの人だったかと探していると、あちらから声をかけてきた。
+「なあ。お客はん、ひょっとして、フィルはんやおへん？」
+　ふんわりした、ひんがしの中でも西のほうの方言らしい。
+「よう来てくれはったわぁ。そやけど、お仕事やったらのんきに喜んでたらあかんねぇ」
+　そうしてチトセが教えてくれたのは、アダナミは死んだということだった。
+「あの子阿呆やから……。腕ぇ一本なくしてもうたんやし、うちにおとなしゅう養われといたらよかったんに、それが我慢でけん言うてなぁ」
+　ドマの大乱が起こったとき、家を抜け出して義勇兵に参加し、それきり。チトセが四方に尋ねて回ってやっと、小さな戦場で討ち死にしたのだと知れた。魔導兵器の爆撃で荒らされた戦場は立ち入り禁止で、遺骸の一部とて還ることはなく、それでも、生き残った者の口からアダナミは死んだのだとはっきり知れただけマシだった。
+「俺を庇って、盾になってくれたのだ」
+　と人様のために命をかけた最期を知れただけ、チトセは幸運だった。
+「そやけどうちには分かる気がするのんよ。そないかっこええもんやない、あの子死にたかったんやろなぁって」</p>
+<p>　腕をなくし、満足に戦えず、姉に養ってもらわなければ食っていけない。そんな穀潰し、役立たずとして生きているのが苦痛だったのだろう。アダナミは良くも悪くも侍らしい侍だった。本来ならば主君のためにその身命を賭すはずが、己の過ちからお役御免の解き放ちになり、戦う以外に能はないと思い込んで、別の道に生きられなかったに違いない。
+　俺なら、養ってやると言ってくれる女でもいればそうかと喜んで世話になるし―――腕一本なくてもしてやれることはあるし、相手はそれが目当てなのだろうし？―――片手でできる仕事でも探すかなともフィルは思うが、それでもアダナミの気持ちは分かる気がする。
+「墓は?」
+　フィルが問うと、外区の実家に墓地があると教えられた。
+「そうか。それじゃ、墓参りに行くのは無理そうだな」
+　クガネ外区、郊外よりもう一回り外にある部分は外国人でも出入りはできるが、そのためには許可がいる。ふらりと出て行くわけにはいかないし、数時間のうちに行って帰るというのは無理だろう。
+「ええのんよ。訪ねて来てくれはっただけでうちが嬉しいわ。お仕事ゆうても、戦いに行くんやないならほっとしたしなぁ」
+　そう言ってチトセは、せっかく来てくれたのだからと茶菓をたっぷりサービスしてくれた。</p>
+<p>　クガネのことで分からないことがあったら、いつでも来てくれたらいいと言われて見送られ、フィルは宿に戻った。
+　ローズはまだ目が半分死んでいたが、
+「お連れはん、船酔いきつうて寝てはるんやったら、これ飲ましてあげて」
+　チトセからもらった丸薬を飲んでしばらく横になっていると、だいぶ楽になったらしい。
+「あーもう、これ帰りもよね。船があんなに気持ち悪いものだなんて知らなかったわ」
+　それはもう五回くらい聞いたと思いながら、ふと、アダナミが死んだと聞かされても大して驚いても悲しんでもいない自分に気付いた。
+（……そんなもんか）
+　傭兵などしていれば、生きている知り合いより死んだ知り合いのほうが多い。それにいちいち心を動かすような人間に傭兵は務まらない。冒険者と違って、傭兵が戦う相手は基本的に人だ。そして軍と違って、人殺しに国家のお墨付きはない。選んでこんな仕事をするような奴は皆、人を殺しても平気な連中だ。どこかまともじゃない。
+　殺すのは平気でも、隣の奴を殺されるのは平気ではない、というのはまだマシなほうだろう。しかしそれでも、「ああそうか死んだんだな」という程度の感慨しか今はない。目の前で死なれればまだしも、戦争に行って死んだと聞かされるのではこんなものだ。
+　ただ、
+（チトセさんは、そうじゃなかったろうな）
+　そんなことを考えられる間は、まだまだ俺は甘いんだろうし人間なんだろうと、フィルは小さな溜め息をついた。</p>
+
+    </div>
+  </article>
+
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      hamburger.textContent = '✕';
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+  </script>
+
+</body>
+</html>

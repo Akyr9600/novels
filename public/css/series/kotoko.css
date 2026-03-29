@@ -1,0 +1,87 @@
+/* assets/css/series/kotoko.css */
+
+/* ============================================================
+   デザインパレット（変数定義）
+   ============================================================ */
+:root {
+    --bg-base: #2a3a52;
+    --outer-panel: #f0e8e8;
+    --inner-panel: #fdfaf8;
+    --border-color: #d4a8a8;
+    --accent-sakura: #497459;
+    --text-main: #2e2020;
+    --text-dim: #8a6a6a;
+    --title-color: #2e2020;
+}
+
+/* ============================================================
+   1. 本文エリア全体
+   ============================================================ */
+body.theme-kotoko main {
+    background-color: var(--outer-panel) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* ============================================================
+   2. 本文パネル
+   ============================================================ */
+body.theme-kotoko article {
+    background-color: var(--inner-panel) !important;
+    margin: 20px auto !important;
+    padding: 20px 40px 30px 40px !important;
+    width: 95% !important;
+    max-width: 760px !important;
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================================
+   3. ヘッダー（タイトル部分）
+   ============================================================ */
+body.theme-kotoko article header {
+    border-bottom: none !important;
+    margin-bottom: 25px !important;
+    padding-bottom: 5px !important;
+}
+
+/* ============================================================
+   4. タイトル
+   ============================================================ */
+body.theme-kotoko h1 {
+    color: var(--title-color) !important;
+    border-bottom: 2px solid var(--accent-sakura);
+    margin: 0 0 20px 0 !important;
+    padding-bottom: 10px !important;
+}
+
+/* ============================================================
+   5. 本文
+   ============================================================ */
+body.theme-kotoko .novel-body {
+    color: var(--text-main) !important;
+    white-space: pre-wrap;
+}
+body.theme-kotoko .novel-body p {
+    margin: 0 0 0.3em 0;
+}
+
+/* ============================================================
+   6. 区切り線
+   ============================================================ */
+body.theme-kotoko article hr {
+    margin: 3.0em 0;
+    border: none;
+    border-top: 1px solid var(--accent-sakura);
+}
+
+/* ============================================================
+   7. ハンバーガーボタン
+   ============================================================ */
+body.theme-kotoko .hamburger {
+    background: rgba(196, 122, 138, 0.75);
+}

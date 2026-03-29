@@ -60,6 +60,21 @@
     a { text-decoration: none; color: #444; }
     .active { color: #d32f2f !important; font-weight: bold; }
 
+    /* ドラフト表示 */
+    .is-draft { color: #aaa; font-style: italic; }
+
+    /* 準備中表示 */
+    .is-coming-soon {
+      color: #bbb;
+      font-style: italic;
+      cursor: default;
+    }
+    .is-coming-soon::after {
+      content: "　［準備中］";
+      font-size: 0.85em;
+      color: #ccc;
+    }
+
     /* ============================================================
        3. メインエリア
        ============================================================ */
@@ -69,7 +84,6 @@
     }
     article { width: 90%; max-width: 720px; margin: 0 auto; }
     .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
-    .is-draft { color: #aaa; font-style: italic; }
 
     /* ============================================================
        4. 歌詞カード
@@ -155,7 +169,7 @@
       /* メインを全幅に */
       main {
         width: 100%;
-        padding: 60px 0 20px 0; /* 上にハンバーガーボタン分の余白 */
+        padding: 60px 0 20px 0;
         display: block;
       }
 
@@ -218,14 +232,38 @@
               <label for="series-{{ .File.UniqueID }}" class="series-toggle">【{{ .Title }}】 <span class="arrow"></span></label>
               <ul class="series-content">
                 {{ range .Pages.ByWeight }}
-                  <li>{{ if .Draft }}<a href="{{ .Permalink }}" class="is-draft">{{ .Title }}</a>{{ else }}<a href="{{ .Permalink }}" class="{{ if eq $.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>{{ end }}</li>
+                  <li>
+                    {{ if .Draft }}
+                      <a href="{{ .Permalink }}" class="is-draft">{{ .Title }}</a>
+                    {{ else if .Params.coming_soon }}
+                      {{ if hugo.IsServer }}
+                        <a href="{{ .Permalink }}" class="is-coming-soon">{{ .Title }}</a>
+                      {{ else }}
+                        <span class="is-coming-soon">{{ .Title }}</span>
+                      {{ end }}
+                    {{ else }}
+                      <a href="{{ .Permalink }}" class="{{ if eq $.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>
+                    {{ end }}
+                  </li>
                 {{ end }}
               </ul>
             </div>
           {{ end }}
           <ul>
             {{ range .RegularPages.ByWeight }}
-              <li>{{ if .Draft }}<a href="{{ .Permalink }}" class="is-draft">{{ .Title }}</a>{{ else }}<a href="{{ .Permalink }}" class="{{ if eq $.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>{{ end }}</li>
+              <li>
+                {{ if .Draft }}
+                  <a href="{{ .Permalink }}" class="is-draft">{{ .Title }}</a>
+                {{ else if .Params.coming_soon }}
+                  {{ if hugo.IsServer }}
+                    <a href="{{ .Permalink }}" class="is-coming-soon">{{ .Title }}</a>
+                  {{ else }}
+                    <span class="is-coming-soon">{{ .Title }}</span>
+                  {{ end }}
+                {{ else }}
+                  <a href="{{ .Permalink }}" class="{{ if eq $.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>
+                {{ end }}
+              </li>
             {{ end }}
           </ul>
         </div>
