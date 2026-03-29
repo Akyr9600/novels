@@ -10,11 +10,15 @@
   </url><url>
     <loc>http://localhost:1313/mass-effect/sp-main/00-sp-01/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi01/</loc>
+  </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main01/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr01-kage/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/kotoko/gofuku-k-01/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-fantasy/02-vr01/</loc>
   </url><url>
@@ -23,6 +27,12 @@
     <loc>http://localhost:1313/ff14/troy/troy-main02/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr02-kage/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/kotoko/gofuku-k-02/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi02/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/kotoko/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/sp-main/00-sp-02/</loc>
   </url><url>
@@ -36,35 +46,63 @@
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr03-kage/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/kotoko/gofuku-k-03/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi03/</loc>
+  </url><url>
     <loc>http://localhost:1313/post/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-fantasy/02-vr03/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/sp-main/00-sp-03/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi04/</loc>
+  </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main04/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr04-kage/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/kotoko/gofuku-k-04/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi05/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr05-inori/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main05/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/kotoko/gofuku-k-05/</loc>
+  </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr06-inori/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main06/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/kotoko/gofuku-k-06/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi06/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr07-inori/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main07/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/kotoko/gofuku-k-07/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi07/</loc>
+  </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr08-inori/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main08/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/kotoko/gofuku-k-08/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi08/</loc>
+  </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr09-inori/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main09/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/kotoko/gofuku-k-09/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr10-inori/</loc>
   </url><url>
@@ -96,19 +134,37 @@
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi20/</loc>
+  </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red01/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red02/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi21/</loc>
+  </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red03/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi22/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red04/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi23/</loc>
+  </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red05/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi24/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red06/</loc>
   </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi25/</loc>
+  </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red07/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi30/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi60/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ff14/chibiko/chibi61/</loc>
   </url><url>
     <loc>http://localhost:1313/</loc>
     <lastmod>2026-03-29T00:00:00+00:00</lastmod>
