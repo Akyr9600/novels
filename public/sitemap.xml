@@ -4,6 +4,8 @@
   <url>
     <loc>http://localhost:1313/post/hello/</loc>
   </url><url>
+    <loc>http://localhost:1313/me-ex/ex-me1/ex-me1-01/</loc>
+  </url><url>
     <loc>http://localhost:1313/ff14/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/sp-main/</loc>
@@ -21,6 +23,8 @@
     <loc>http://localhost:1313/ff14/kotoko/gofuku-k-01/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-fantasy/02-vr01/</loc>
+  </url><url>
+    <loc>http://localhost:1313/me-ex/ex-me1/ex-me1-02/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/</loc>
   </url><url>
@@ -40,6 +44,10 @@
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/</loc>
   </url><url>
+    <loc>http://localhost:1313/me-ex/ex-me1/ex-me1-03/</loc>
+  </url><url>
+    <loc>http://localhost:1313/me-ex/</loc>
+  </url><url>
     <loc>http://localhost:1313/mass-effect/vr-fantasy/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main03/</loc>
@@ -52,11 +60,11 @@
   </url><url>
     <loc>http://localhost:1313/ff14/chibiko/chibi03/</loc>
   </url><url>
-    <loc>http://localhost:1313/post/</loc>
-  </url><url>
     <loc>http://localhost:1313/mass-effect/vr-fantasy/02-vr03/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/sp-main/00-sp-03/</loc>
+  </url><url>
+    <loc>http://localhost:1313/me-ex/ex-me1/ex-me1-04/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/chibiko/chibi04/</loc>
   </url><url>
@@ -65,6 +73,8 @@
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr04-kage/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/kotoko/gofuku-k-04/</loc>
+  </url><url>
+    <loc>http://localhost:1313/post/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/chibiko/chibi05/</loc>
   </url><url>
