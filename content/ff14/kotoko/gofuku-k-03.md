@@ -1,6 +1,7 @@
 ﻿---
 title: "呉服屋物語 三"
-weight: 30
+group: "琴子お嬢様"
+weight: 430
 draft: false
 ---
 　　　　　【百言は一動にしかず】

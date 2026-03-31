@@ -1,6 +1,7 @@
 ﻿---
 title: "呉服屋物語 四"
-weight: 50
+group: "琴子お嬢様"
+weight: 450
 draft: false
 ---
 　　　　　【ハンドメイド恋心】

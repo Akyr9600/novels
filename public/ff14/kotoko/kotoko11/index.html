@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老人と犬、そして鰐 01 - おはなしおきば</title>
+  
+  <style>
+     
+    body { 
+      margin: 0; padding: 0; 
+      font-family: "BlinkMacSystemFont", "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      background: #fff; color: #333; 
+    }
+    .container { 
+      display: flex; min-height: 100vh; max-width: 1200px; 
+      margin: 0 auto; background: #fafafa; 
+    }
+
+     
+    aside { 
+      width: 220px; border-right: 1px solid #e0e0e0; 
+      padding: 0 15px 20px 15px;
+      background: #fafafa; position: sticky; top: 0; height: 100vh; overflow-y: auto; 
+      flex-shrink: 0;
+    }
+    aside h1 { margin: 15px 0 10px 0; line-height: 1.2; }
+    aside h1 a { font-size: 1.1rem; color: #000; text-decoration: none; font-weight: bold; }
+
+    .side-nav-sticky {
+      position: sticky; top: 0; z-index: 10;
+      background: #fafafa; padding: 10px 0;
+      border-bottom: 1px solid #eee; margin-bottom: 15px;
+      display: flex; justify-content: space-between; gap: 5px;
+    }
+    .side-nav-sticky a {
+      flex: 1; text-align: center; font-size: 0.7rem; font-weight: bold;
+      color: #666; text-decoration: none; padding: 6px 0;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+
+    h2 { font-size: 1.1rem; border-left: 4px solid #333; padding-left: 10px; margin: 20px 0 8px 0; }
+    .series-toggle { cursor: pointer; display: block; font-size: 0.95rem; color: #888; margin: 10px 0 4px 5px; position: relative; padding-right: 20px; }
+    .arrow {
+      display: inline-block; width: 0; height: 0; margin-left: 5px; vertical-align: middle;
+      border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #888;
+      transition: transform 0.3s;
+    }
+    .toggle-checkbox { display: none; }
+    .toggle-checkbox:checked + .series-toggle .arrow { transform: rotate(180deg); }
+    .series-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .toggle-checkbox:checked + .series-toggle + .series-content { max-height: 2000px; }
+
+    ul { list-style: none; padding-left: 15px; margin: 0; }
+    li { margin-bottom: 8px; font-size: 0.80rem; }
+    a { text-decoration: none; color: #444; }
+    .active { color: #d32f2f !important; font-weight: bold; }
+
+     
+    .is-draft { color: #aaa; font-style: italic; }
+
+     
+    .is-coming-soon {
+      color: #bbb;
+      font-style: italic;
+      cursor: default;
+    }
+    .is-coming-soon::after {
+      content: "　［準備中］";
+      font-size: 0.85em;
+      color: #ccc;
+    }
+
+     
+    .group-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      color: #999;
+      margin: 10px 0 4px 0;
+      white-space: nowrap;
+    }
+    .group-label::before,
+    .group-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+
+     
+    .page-list {
+      padding-left: 8px;
+    }
+
+     
+    main { 
+      flex: 1; padding: 50px 0; background: #fff; 
+      display: flex; justify-content: center;
+    }
+    article { width: 90%; max-width: 720px; margin: 0 auto; }
+    article h1, article h2, article h3,
+    article h4, article h5, article h6 { margin-top: 0; margin-bottom: 0; }
+    .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
+
+     
+    .lyric-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 20px 30px;
+      margin: 1.5em auto;
+      max-width: 500px;
+      text-align: center;
+      font-style: italic;
+    }
+
+     
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 12px; left: 12px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      width: 40px; height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+     
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 900;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+     
+    @media screen and (max-width: 768px) {
+
+      .hamburger { display: flex; }
+
+      aside {
+        position: fixed;
+        top: 0; left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 950;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+      }
+      aside.open { transform: translateX(0); }
+
+      .container { display: block; }
+
+      main {
+        width: 100%;
+        padding: 60px 0 20px 0;
+        display: block;
+      }
+
+      article {
+        width: 94%;
+        max-width: none;
+        margin: 0 auto;
+        padding: 20px 15px;
+      }
+
+      h1 { font-size: 1.4rem !important; }
+      .novel-body { font-size: 1.05rem !important; line-height: 1.9 !important; }
+      img { max-width: 100%; height: auto; }
+    }
+  </style>
+
+  
+  
+    
+      
+    
+  
+
+  
+    
+    
+      <link rel="stylesheet" href="http://localhost:1313/css/series/kotoko.css">
+    
+  
+</head>
+
+<body class="theme-kotoko">
+
+  
+  <button class="hamburger" id="hamburger" aria-label="メニューを開く">☰</button>
+
+  
+  <div class="overlay" id="overlay"></div>
+
+  <div class="container">
+    <aside id="sidebar">
+      <h1><a href="/">おはなしおきば</a></h1>
+      <div class="side-nav-sticky">
+        <a href="http://localhost:1313/ff14/kotoko/kotoko10/">← BACK</a>
+        <a href="http://localhost:1313/ff14/kotoko/kotoko12/">NEXT →</a>
+      </div>
+
+      
+        <div class="section-group">
+          <h2>FF14</h2>
+
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-46ae835b836b509ad6872524212a5e12" class="toggle-checkbox" >
+              <label for="series-46ae835b836b509ad6872524212a5e12" class="series-toggle">【トロイの話】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                    <li class="group-label">白トロ</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main01/" class="">スカラ迷宮 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main02/" class="">スカラ迷宮 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main03/" class="">スカラ迷宮 3</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main04/" class="">スカラ迷宮 4</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main05/" class="">スカラ迷宮 5</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main06/" class="">スカラ迷宮 6</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main07/" class="">スカラ迷宮 7</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main08/" class="">スカラ迷宮 8</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main09/" class="">スカラ迷宮 after01</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main10/" class="">スカラ迷宮 after02</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main11/" class="">スカラ迷宮 after03</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main12/" class="">スカラ迷宮 after04</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main13/" class="">スカラ迷宮 after05</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main14/" class="">スカラ迷宮 after06</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red01/" class="">ブラトロ はじまり</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red02/" class="">ブラトロ 俺の黄玉</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red03/" class="">ブラトロ ああ見えて</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red04/" class="">ブラトロ 赤鰐という男</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red05/" class="">ブラトロ 番外編GPT</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red06/" class="">ブラトロ 番外編Claude</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red07/" class="">ブラトロ RED DILE</a>
+                    
+                  </li>
+                
+                  
+                  
+                    <li class="group-label">黒トロ</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-black00/" class="">Prototype</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-black01/" class="">01</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-black02/" class="">02</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-black03/" class="">03</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-aeeca8301969494c0adf2f2c423c2129" class="toggle-checkbox" checked>
+              <label for="series-aeeca8301969494c0adf2f2c423c2129" class="series-toggle">【コトコの物語】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                    <li class="group-label">こっこちゃん</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/ff14/kotoko/kotoko01/" class="is-coming-soon">はじまりの日</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko02/" class="">ウルダハの冒険者 01</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko03/" class="">ウルダハの冒険者 02</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko04/" class="">ウルダハの冒険者 03</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko05/" class="">ルルナの物語</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko06/" class="">ルルナ・ルナと冒険者たち 01</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko07/" class="">ルルナ・ルナと冒険者たち 02</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko08/" class="">ルルナ・ルナと冒険者たち 03</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko09/" class="">ルルナ・ルナと冒険者たち 04</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko10/" class="">One for All, All for One</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko11/" class="active">老人と犬、そして鰐 01</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko12/" class="">老人と犬、そして鰐 02</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/ff14/kotoko/kotoko13/" class="is-coming-soon">老人と犬、そして鰐 03</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/ff14/kotoko/kotoko14/" class="is-coming-soon">老人と犬、そして鰐 04</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko15/" class="">エレーヌの物語 01</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko16/" class="">エレーヌの物語 02</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/kotoko17/" class="">カルたちとの出会い 01</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/ff14/kotoko/kotoko18/" class="is-coming-soon">カルたちとの出会い 02</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                    <li class="group-label">琴子お嬢様</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-01/" class="">呉服屋物語 一</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-02/" class="">呉服屋物語 二</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-03/" class="">呉服屋物語 三</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-04/" class="">呉服屋物語 裏</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-05/" class="">呉服屋物語 四</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-06/" class="">傭兵物語 一</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-07/" class="">傭兵物語 二</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-08/" class="">傭兵物語 三</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-09/" class="">傭兵物語 四</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-4c452e7e8eb0756a2a0e983e2dad583d" class="toggle-checkbox" >
+              <label for="series-4c452e7e8eb0756a2a0e983e2dad583d" class="series-toggle">【ちびこ】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                    <li class="group-label">フィルとちびこ</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi01/" class="">かぞく(プロト版)</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi02/" class="">小さな拾いもの</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi03/" class="">家さがし</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi04/" class="">おうちゲットだぜ</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi05/" class="">おやこ</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi06/" class="">異</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi07/" class="">真</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi08/" class="">裏側の黒トロ</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi20/" class="">小さなえいゆう</a>
+                    
+                  </li>
+                
+                  
+                  
+                    <li class="group-label">リュシアン</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi21/" class="">とある晩餐会の裏側で</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi22/" class="">千伐の竜騎士</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi23/" class="">不伐の竜騎士</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi24/" class="">北稜の守護神</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi25/" class="">北稜の勇者たち</a>
+                    
+                  </li>
+                
+                  
+                  
+                    <li class="group-label">まんまるいし</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi30/" class="">まんまるいしの物語</a>
+                    
+                  </li>
+                
+                  
+                  
+                    <li class="group-label">調理師ちびこ</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi60/" class="">それから、これから</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi61/" class="">あたしのお父さん</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT</h2>
+
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-fd1f546341f187a70bb5af75c4bb6af2" class="toggle-checkbox" >
+              <label for="series-fd1f546341f187a70bb5af75c4bb6af2" class="series-toggle">【ORIGIN】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/sp-main/00-sp-01/" class="">Prologue</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/sp-main/00-sp-02/" class="is-coming-soon">第一話：フェロス</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/sp-main/00-sp-03/" class="">第二話：英雄</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-5de3c22336d28a71e6f69d789ed2b479" class="toggle-checkbox" >
+              <label for="series-5de3c22336d28a71e6f69d789ed2b479" class="series-toggle">【華飾の帳】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr01-kage/" class="">その影に 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr02-kage/" class="">その影に 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr03-kage/" class="">その影に 3</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr04-kage/" class="">その影に 4</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr05-inori/" class="">かそけき祈り 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr06-inori/" class="">かそけき祈り 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr07-inori/" class="">かそけき祈り 3</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr08-inori/" class="">かそけき祈り 4</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr09-inori/" class="">かそけき祈り 5</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr10-inori/" class="">かそけき祈り 6</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr11-inori/" class="">かそけき祈り 7</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr12-hibi/" class="">日々彩々 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr13-hibi/" class="">日々彩々 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr14-hibi/" class="">日々彩々 3</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/" class="">日々彩々 3.5</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr16-hibi/" class="">日々彩々 4</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr17-hibi/" class="">日々彩々 5・前</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/" class="">日々彩々 5・後</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/" class="is-coming-soon">日々彩々 6</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr20-with/" class="is-coming-soon">With You 1</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr21-with/" class="">With You 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr22-with/" class="">With You 3.0</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr23-with/" class="">With You 3.3</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr24-with/" class="">With You 3.7</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr25-with/" class="is-coming-soon">With You 4</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr26-with/" class="is-coming-soon">With You 5</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr27-with/" class="">Two of us 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr28-with/" class="">Two of us 2.2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr29-with/" class="">Two of us 3.0</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr30-with/" class="">Two of us 3.1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr31-with/" class="">Two of us 3.5</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr32-with/" class="">Two of us 3.7</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr33-with/" class="">Two of us 4</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr34-with/" class="">銀蛇と軍神 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr35-with/" class="">銀蛇と軍神 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr36-with/" class="is-coming-soon">銀蛇と軍神 3</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr37-with/" class="is-coming-soon">銀蛇と軍神 4</a>
+                      
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-6542e7828ae546a46eed441bbde3312b" class="toggle-checkbox" >
+              <label for="series-6542e7828ae546a46eed441bbde3312b" class="series-toggle">【VRイレギュラー】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                    <li class="group-label">ファンタジー転生</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr01/" class="">第一話</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr02/" class="">第二話</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr03/" class="">第三話</a>
+                    
+                  </li>
+                
+                  
+                  
+                    <li class="group-label">転生ホームコメディ</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc01/" class="">01 起きたらヴァレス</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc02/" class="">01 裏</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc03/" class="">02 Top Priority</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc04/" class="">03 みーと鳴くリディ</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc05/" class="">04 パパの日・ママの日</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc06/" class="">04 夫と妻の時間</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc07/" class="is-coming-soon">05 ラス・オクトン</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc08/" class="">06 幕間</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc09/" class="">07 クッキータイム</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc10/" class="">08 ホームパーティ</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc11/" class="">09 ヴァレス・トライオス</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT解説</h2>
+
+          
+
+          <ul>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-01/" class="is-draft">①エデンプライム～シタデル</a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-02/" class="is-draft">①３つのメイン任務</a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-03/" class="is-draft">③激動のヴァーマイア</a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-04/" class="is-draft">④真相と決戦</a>
+                
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>操作実験場</h2>
+
+          
+
+          <ul>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/post/hello/" class="is-draft">サイト操作・要素まとめ</a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/post/cheatsheet/" class="is-draft">Markdown・Hugo記法</a>
+                
+              </li>
+            
+          </ul>
+        </div>
+      
+    </aside>
+
+    <main>
+      <article>
+        
+  <article>
+    <header style="margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+      <h1 style="font-size: 1.8rem; color: #111; margin: 0;">老人と犬、そして鰐 01</h1>
+    </header>
+    <div class="novel-body">
+      <p>　その日そこにいたのは、いくつもの偶然が重なって生まれたたまたまだった。
+　まず、朝一起きるのに失敗した。前日つい夜更かしをしてしまったせいだ。
+　朝一で起きたかったのは少し割のいい仕事がほしかったからで、それは二つ前、三つ前の依頼で立て続けに失敗して、収入より支出が多くなってしまっていたからだ。
+　仲間を誘わずソロで出ようとしていたのは、その失敗に仲間が関わっているから。コトコから見れば、気にすることなんてない、そんなミスくらい誰だってするよというものなのだが、責任感の強いジョアンはひどく落ち込んでしまった。ジョアンを無理に誘ってもつらいだろうし、かと言って彼を除いて三人で行く、別の誰かを誘うというのも、気分が沈んでいるときには刺さってしまうだろう。
+　そんなわけでコトコはその日、10時を少し回った遅い朝、あるいは昼前に、クイックサンドで一人、ぎりぎりモーニングを食べていた。</p>
+<p>　いかにも人を探している様子の男を見かけたのは、目玉焼きの端っことスープが一口残ったくらいのタイミングだった。
+　濃いめの緑色の肌をした小柄なルガディン族で（と言ってもミッドランダーのコトコから見れば巨漢だ）、皺の目立つ顔をしている。若い頃は逞しく頑丈だったに違いない体もしぼんだような印象だし、杖をついた足元も少し覚束なかった。
+　ルガディンの男は、年をとると簡単に膝を壊す。巨体に相応しい重量を支えてきた代償だ。このままうろ
+うろと人探しをするのはいかにも大変そうに見えた。
+　ごはんを食べたら仕事を探してと思っていたが、今のコトコは多少ピンチだろうと暮らしに怯えなくていいだけの経済的余裕がある。それは、よそから来たらしい老人を助けてあげる余裕があるということでもあった。コトコは急いで残りの目玉焼きとスープを片付け椅子を立った。</p>
+<p>「あの……誰か人をお探しですか？」
+　尋ねると、老人は顎の太いいかつい顔をほっとした様子に笑み崩した。
+「いやあ、すまねえな。お嬢さん。ウルダハはちっとも分からねえからよ。ここまで来るのもやっとだったんだ。助けてもらえるとありがてえ」
+　言葉遣いは荒っぽくとも、笑った声は穏やかで威圧感はない。
+　そうして言われたのは、
+「フィルとナガレってぇ冒険者を知らねえかな。会いに来たってわけじゃあねえんだが、せっかくこっちに来たなら会えねえもんかと思ってなぁ」
+　だった。</p>
+<p>　ぴこ一んとコトコのアンテナが直立する。ナガレのことはよく知らないが、フィルのことなら常にチェックしてある。
+　最近は本業で遠出したり長期間不在にすることもないようで、だとしたら午前中は&quot;会社&quot;か、その近くのカフェ、それともトルマリン通りの図書館にいる可能性が高い。そしどこへ出かけるにしても、連絡がつきやすいようにと会社の人には行き先を告げているはずだ。
+　つまり行くべきは、
+「いるかどうか分かりませんけど、そこにいなくても行き先分かる場所、ご案内します！」
+　コトコはそう言うとオニキス通りの先、やや郊外にある建物へ向かった。
+
+　幸いフィルはカフェにいた。
+　会社へ向かう狭い通りにある古めかしい喫茶店で、大きなガラス窓の向こうに見知った横顔がある。少しでも余計に歩かせず、すぐに見つかって良かったと思いながら、コトコは老人を案内してカフェに入った。
+　ドアにつけられた真鍮のベルが、客が来たと伝えるためカランカランとなるのも古臭い。だがその音のおかげで、ふと顔を上げたフィルは即座に新しい客、コトコが連れてきた自分への客に気付いた。
+　途端にぱっと嬉しそうな笑顔になって立ち上がる。
+「バルクさん！　いったいどうしたんです、ウルダハに来るなんて」
+「はっはー！　ちょいとした野暮用でなぁ」
+　老人は右の拳でドンドンと自分の胸を叩き、にっと笑う。そしてフィルに近づいていってその拳を出すと、フィルも右拳を作ってそれにゴンと合わせた。
+　二人とも久しぶりに会えたのがいかにも嬉しそうである。
+　コトコにとっては、通りすがりの顔を見られるだけでもその日はいい日、ましてやそれが笑顔なら最高の日で、
+「案内してきてくれたのか。ありがとうな」
+　そんな言葉と自分に向けられる笑顔は格別の報酬だ。スキップしかねない上機嫌で、にこにことギルドへ戻っていった。</p>
+<p>　その十日ほど後、クイックサンドでランチを一緒にできるという超ラッキーがあったので、これくらいなら聞いてもいいかなと、あのときの人はどういう知り合いなのか、尋ねることにした。フィルの知り合いはたぶん膨大だろうが、今までに見かけてきた誰と会うより嬉しそうだったのが気になったのだ。
+「あの人はバルクウェルシンさんといってな。リムサの冒険者ギルド立ち上げにも関わった、俺たちの大先輩だよ」
+　冒険者ギルドは、リムサ・ロミンサで設立された。当時の備兵、冒険者……といっても自称でしかないなんでも屋。そういった人たちが、職人や商人のギルドのようなものが自分たちにもあるべきだ、ほしい、と立ち上げたのだ。今コトコたちが「冒険者だ」と言っても人からそれほど嫌な顔をされず、ほとんど無一文からでも冒険者になればなんとか暮らしていけるようになったのは、彼等のおかげだと言っていい。</p>
+<p>　バルクウェルシンはフィルが20歳そこそこの若造だったとき既に40前後くらいだったそうだから、つまり今は60半ばか70に近いことになる。膝を壊して引退したのがもう10年近く前で、それ以来隠居状態になってしまったが、ギルド設立前後はリムサのバルクといえば間違いなく顔役だった。
+　まだ海賊が大手を振って存在し、ウルダハ行きの商船からでも略奪していた時代に、彼は備兵として雇われ、その海賊とやり合う側にいた。護衛には冒険者(の前身)が同じように雇われることもあり、顔見知りで、それで設立メンバーの一人として誘われて、備兵から冒険者に鞍替えしたのだ。
+「俺もリムサに行ったときにはさんざん世話になってな。同じルガディンだからっていうのもあるが、こんな男になりたいと憧れたもんだよ」</p>
+<p>　バルクは小兵で、大柄な同族の男に囲まれるといかにもチビだった。だが馬鹿にする者などいなかった。なにせ彼は戦うことを専門にする傭兵として、いくつもの修羅場をくぐって生き抜いてきた男だ。歴戦の経験からにじみ出る自信や威圧感、壮年とはいえ漲る生気や豪快さは、弱そうなどと思うことを少しも許さなかった。
+　一般的なルガディン族の男は、その体格もあっていかにも巨大な戦槌のようだが、筋肉だけでなく脂肪もたっぷりと蓄えた肉体のせいで、どこか柔らかな印象もある。だがバルクはがっちりと引き締まった体といかつい風貌、斧一本を頼りに戦い抜いてきた経験のためか、小さくとも容赦のない弾丸のような印象だった。</p>
+<p>「バルクさんの前じゃ俺なんか、ただガタイがデカいだけのほんの小僧だった」
+　だがバルクという男は、一見の迫力に反して面倒見がよく兄貴肌で、多くの若手冒険者に慕われていた。それは地元リムサ・ロミンサの冒険者だけのことではない。護衛や遠征で他国から来た者にとっても同じだ。慣れない他国での仕事では戸惑うこともある。そういうときリムサ・ロミンサでは、地元冒険者たちが手助けを申し出てくることが多かった。
+　と聞いてコトコは、単純に「いいですね」とは思えない。たしかにあの街では、困っていると「どうした」と言ってくれる人は多い。だが、助けを断るとむっとした顔をされたり、助けてもらってお礼もちゃんと言ったのに、その後も仲間……格下の舎弟みたいに「話を聞いて当然、誘われたら付き合って当然」のように扱われたりして、面倒なことも多かったのだ。
+　それは昔からそうだったらしい。
+「助けてくれるのは嬉しいが、少しばかり、こう言っちゃ悪いがお節介だってこともあるんだがな」
+　フィルも苦笑いする。</p>
+<p>　バルクという男は、そこもありきたりの&quot;先輩風&quot;とは違っていた。彼はフィルたちが自分でやりたいと言えば笑って送り出してくれた。それでいて、助けを求められれば任せろと飛んできて、因着せがましいことなど何一つ言わない。ただ無事を喜んでくれる。
+　困ってる後輩や仲間を無下にすることは決してなく、いつも親身に、真剣に向き合っていた。
+「一度ナガレの奴と大喧嘩してな。余計な意地張って一人で仕事受けて、……とんでもない失敗して、なけなしの貯金はたくような違約金を払ったことがある。Ｄランクになって間もない頃だったな」
+　ランクが上がれば報酬も上がるが、罰則も厳しくなる。駆け出しの頃同然に食う心配をしなければならなくなったフィルが、あえてリムサ・ロミンサ行きの仕事を受けたのはバルクに話を聞いてもらいたかったからだ。
+　普通なら説教の一つもしたくなるところだろう。だがバルクは、そうかそうかと話を聞くだけ聞いて、こっちにいる間は俺が奢ってやるから、リキつけて元気出して、仕事の二つ三つ片付けて金作って、それでナガレに謝りに行けと、ただ励まし力になってくれた。
+「たぶん、自分が言わなくてもこいつはもう十分後悔して反省もしてるって、信じてくれたからだろうな」
+　分かってないなら分からせてやったほうがいい。だが本人がもう嫌になるほど分かってるなら、追い討ちなんかかけてどうする。
+　そんなふうに、本当に相手が必要としていることはなにか、相手のためになることはなにかを考えてくれるのだ。借りを返せなどとセコいことは言わない。
+　そしてもちろん、強かった。</p>
+<p>　オフィサーなどというシステム・人員がなかった昔、帰還できない冒険者を捜索し連れて帰るのはベテラン勢の仕事だった。
+　フィルも何度か救護されたことがある。
+　ウルダハでは、対価を求められた。ギルドの仕組みが曖昧で公正さに欠け、納得のいかない、説得力のないものだったから、
+「馬鹿の尻拭いするのに命をかけてこれっぽっちかってのも、分からんでもなかったな」
+　ギルドから支払われる形ばかりの危険手当てでは満足ができず、助けた相手に謝礼を要求するのである。格下だろうと関係ない。仕事には相応の対価を。それ以上のことではないが、以下にも決してならない。金銭にシビアなウルダハならではの悪習だった。
+　だがリムサ・ロミンサではバルクとその仲間が駆けつけることが多く、彼等は身銭を切って助けに来たとしても、礼を寄越せと言うことは決してなかった。
+　リーダー格のバルクがそれを嫌ったからだ。
+　自分より弱い奴を助けるのは当たり前。そいつを助けてしんどいなら、それは自分に強さが足りないから。助けてやったぞと恩着せがましいのはみっともない。助けてやったはいいがひーひー言ってるのも情けない。どうせなら俺らは、助けてやって心底平気で笑っていられるくらい強くあろう。それが一番かっこいいじゃねえか。
+　バルクの周りには、そんな考え方に共感したり、あるいは敬意を抱く者たちが集っていた。
+　バルクさんが来てくれたなら俺たちは助かる。そう安心できる強さに、豪快で太っ腹、思いやりのある人柄。
+「とにかく最っ高にかっこよくてなあ。こんなデカい男になりたいって憧れたもんだ。俺は同じルガディンだし、ナガレは同じ斧術士だから、二人して『バルクさんみたいになるぜ！』ってな」</p>
+<p>　懐かしそうに話すフィルに、コトコもつい類が緩んでしまう。
+　今でこそベテラン冒険者としてそう思われる側の彼等にも、自分たちと同じように、誰かをキラキラと見上げていた頃があったのだと思うと、親近感が増してますます嬉しい。
+　フィルとナガレの若い頃についてはルナクル商会のルルナから聞いたこともあるから、一層思い描きやすかった。自分たちが酒場でわいわい先輩冒険者の活躍で盛り上がったり悔しがったりするように、彼等も「やっぱバルクさんはすげえよな！」などと言って興奮していたことがあるのだ。失敗して落ち込んだり、喧嘩してモヤモヤしたり、憧れの先輩に会えて嬉しくてたまらなかったり……。
+（若い頃のおじさん……）
+　ｳﾍﾍﾍﾍと妄想しているのは精一杯顔に出さないようにして、コトコにはご褒美タイムだった。</p>
+<p>　そんなある日のことがあったからだろうか。
+　ホワイト・ピジョンの頼みでリムサ・ロミンサについて行くことになった。そんな話をいったいどこから聴きこんだのか、フィルのほうからコトコを訪ねて来て、
+「リムサに行くんだってな。ついでですまんが」
+　とバルクウェルシンへの届け物を頼まれた。もちろん、役に立てる機会は逃さないコトコである。ハイ喜んで一！　と二つ返事で引き受けたのだった。</p>
+<hr>
+<p>　コトコが参加している固定パーティのヒーラー、幻術士のホワイト・ピジョン。
+　リムサ・ロミンサの海賊一家のもとに生まれ、陸に上がって山賊の仲間になり、二十歳前の時点で投獄経験が三回。そんな荒くれ人生ながら何故かヒーラーであり、言動の荒っぽさは否めなくても、内面はむしろ繊細で怖がりという彼女についても、いろいろと物語はある。
+　彼女がなにをしたくてリムサ・ロミンサの実家に戻ったのか、何故それに同行者をほしがったのかについても、それなりに波乱万丈、紆余曲折があるのだが、それは今回、さておいて。
+　リムサ・ロミンさにいる間中ピジョンの傍につきっきりでいる必要があるかと言えばそうではなく、到着するとピジョンはまず実家に向かい、
+「悪ィな。たぶん、明後日くらいまでは戻れねえしよ。その間適当に時間潰しててくれよ」
+　と、コトコは自由時間になった。</p>
+<p>　フィルに書いてもらった住所と簡単な地図を見ながら、バルクウェルシンの住まいを探す。
+　繁華な町中からはずれると、さすがは元海賊の町、リムサ・ロミンサの治安は決して良くはない。だがそこはそれ、
+「なにかあったらバルクさんの名前を出すか、もしそれが通じなかったら……まあ、あくまで二つ目の手として、&ldquo;赤鰐&quot;の友達が知り合いにいるって言えば、そっちは100％有効なはずだ」
+　と教わっている。&ldquo;赤鰐&quot;がどういう人物かは知らないが、フィルの友人には違いないようだ。ただし、リムサ・ロミンサの後ろ暗い世界に、現在進行形で支配力があるとなると、あまり表向きの仕事はしていないのだろう。
+　だが幸い、バルクウェルシンの名がまだまだ有効だった。
+　近所にまでは辿り着いても、こまかな場所までは分からない。それで、そのへんの石段に座って洗い物をしていたルガディン族の婦人にバルクウェルシンさんの家は何処かと聞くと、面倒くさそうな剣呑な様子が一変した。
+「あんた、あの人の知り合いかい」
+　そう言われたので、バルクさんの友達の冒険者の後輩だということは正直に答えた。だいぶ縁遠い知り合いだが、それでも彼女は最初とは打って変わった穏やかな様子で、
+「ふぅん。ま、ついてきな。こっちだよ」
+　と洗濯をやめてわざわざ案内してくれた。</p>
+<p>　バルクの家は石段の続く狭い坂道の脇、そこにいくつも連なった小さな白い石の家の一つだった。
+　コトコは案内のお礼をとついポシェットに手をかける。道案内してくれた婦人は、それを見ると少しばかり不愉快そうに眉をひそめ、
+「たかが道案内で礼金もらわなきゃいけないほど貧乏してないよ」
+　と大股に去っていった。
+　ウルダハの癖だ。かえって失礼なことをしてしまったかもと、コトコは申し訳なく思う。見えなくなった背中に小さく頭を下げてから、気持ちを切り替えて水色のドアをノックした。
+「おいよ。ちぃっと待ってくんな」
+　とくぐもった返事があってから少し待つ。やがてガチャリとノブが回って、ドアから緑色のいかつい顔が覗いた。
+　視線が一瞬はコトコの頭上を素通りし、すぐ下に向く。そこにいる訪問者に気付くと、
+「おお、あんときのお嬢さんか」
+　くしゃっと笑顔になる。
+「あんときゃあ世話ンなったなぁ。さ、入んな……ってのはまずいか。こんな爺でも、男は男だしな」
+　はっはっ、と豪快に笑って、バルクウェルシンは飯でも食おうとコトコを連れて街に出た。</p>
+<p>　住まいのあたりを歩いていて思ったが、石段の続く狭い道は、バルクにとって暮らしやすい環境ではなさそうだ。膝が悪いのに外出させてしまって良かったのだろうかと思わずにいられない。
+「あの……膝、大丈夫ですか」
+　我慢できずに尋ねると、
+「天気が悪いとうちに籠もってたくもなるが、普段はどうってこたねえ。むしろ、今のうちに歩きたいだけ歩いておかねえとな。あと何年かしたら、引っ越しも真面目に考えなきゃならねえさ」
+　からからと笑って、それよりなにが食べたい、とコトコに聞いてきた。
+　ドマにいた頃なら、下手な遠慮をして「なんでも」と言っていただろう。あるいは相手への気遣いがバレバレになる、「この近くのお店でいい」か。だが今は素直に、
+「せっかくリムサ・ロミンサに来たので、美味しいお魚がいいです」
+　と答える。ちゃんと自分の希望を伝えたうえで、後は相手にお任せだ。距離も、店の価格帯も。……価格帯。
+「あっ、あの、でもこの間ちょっと依頼に失敗して、お金にそんなに余裕はないので……」
+　それだけは慌てて付け加えた。
+　するとバルクはまた声を上げて笑い、
+「よせよせ。こんな若い娘さんに飯も奢れねえんじゃ、年食った甲斐もねえ。ましてやあいつが目ぇかけてる冒険者なら、俺にとっちゃ孫弟子みてぇなもんじゃねえかよ」
+　それが上っ面の言葉に聞こえず、ほのぼのしんみりと嬉しく思えるのは、前もってフィルの話を聞いているからだろうか。なんにせよバルクウェルシンというこの老人であれば、「あのとき奢ってやったよな」などとは口が裂けても言わないだろうという安心感があった。</p>
+<p>　こじゃれたレストランは少し高そうだったが、バルク自身がもてなしに選んだ店だ。しかも彼は、コトコに嫌いなものがないか、食べたい魚の種類があるかだけ聞くと、メニューを見せずにオーダーしてしまう。よく来る店らしく店員も慣れた様子で、味付けの好みやデザートのことだけ聞くと、にこやかに厨房へと去った。
+　価格なんか気にせず美味しく楽しんでくれ、と言う気持ちに、コトコはありがたく甘えることにする。ウルダハにも海に面した場所はあるが、当然漁獲量はリムサ・ロミンサの何十分の一で、価格も相応だ。新鮮な魚介は高くてなかなか食べられない。新鮮な魚をこんな立派な店で食べるのなんて久しぶり……というよりも初めてかもしれないと、コトコはバルクに思うことをそのまま伝えた。
+　バルクは嬉しそうに楽しそうにそれを聞いてくれる。
+「リムサで一流の店って言やぁ誰でもビスマルクを挙げるだろうがよ、魚料理に関しちゃここは少しも劣らねえぜ。しかもあっちより二割は安い」
+「本当ですか。あの……お値段今日は聞きませんけど、私も自分で通えるお店ですか？」
+「お嬢さんは今？」
+「Ｄランクです。まだまだなりたてですけど」
+「そうか。だったら、そうよなぁ。もう少しすりゃあ、月一の自分ご褒美ってやつにできるんじゃねえかな」
+　ということはけっこうお高いのだが、それはがんばれば届く範囲だ。</p>
+<p>（うん。やっぱり……そっか。おじさんに似てるんだ。っていうか、おじさんが似てるのかな）
+　雰囲気は違う。外見はまるっきり違う。だが似ている。だから会うのがたった二度目でも、安心して緊張を解ける。
+　若い小娘だと馬鹿にすることもなく、自分の年齢や経験を見せつけるでもない。知ってることはさらりと知っていて、知らないことはあっさり知らない。自分を小さくも見せないし、大きくも見せない。孫弟子、と言ったように、かわいい身内を見守り、その話を聞くような優しい褐色の目をしている。
+　それが心地好くてついついおしゃべりしていて、コトコはやっと我に返った。そもそも自分は何故バルクウェルシンを訪ねたのか。彼も何故来たなどと言わず食事に誘うものだから、その流れで当たり前のように忘れてしまっていた。
+「すみませんっ。バルクさんを訪ねた理由、すっかり言い忘れてました。これ、フィルさんからのお届け物です」
+　コトコはぺこりと頭を下げて、バッグの中から綺麗に包装された箱を取り出しテーブルに乗せる。バルクも
+「そう言やぁ、なんで来たんだったか聞いてなかったっけな」
+　あっはっはっとまた愉快そうに笑って目を細めた。</p>
+<p>　バルクはさっそく封を切り、細長い箱から一本の小ぶりな(対ルガディン男性)ナイフを取り出した。
+「ほおう」
+　店内の明かりにかざし、矯めつ眇めつする。
+「相変わらず気の利く奴だ」
+　そして満足げに頷く。
+　そんなナイフがなんの役に立つんだろう。武器ではないし、キッチンで使うようでもない。コトコの疑問はどうやら顔に出たらしい。バルクは自分の手をテーブルに広げ、
+「見な。俺たちの手はこのとおりデけぇ。指がお嬢さんの手首くらいあるだろ。これじゃ、こまかい作業なんざとてもできねえんだよ。だからこういうのが役に立つ。特に年をとると、目も弱るし、指先の微妙な加減もきかなくってな」
+　瓶の蓋を開けるとき、本のページをめくるとき、落とした小さいものを拾うとき。
+「若ぇ頃は、ほれ、手に潤いってぇヤツがあるだろ。それでなんとかなるんだが、年とると、このとおりかっさかさだ」
+　長年武器を握っていた手は分厚くごついが、たしかに白っぽく乾いていた。</p>
+<p>　バルクがウルダハに来たときにしたいろんな話の中には、年をとったことの苦労話もあった。もちろんバルクもナイフを持っているが、だいぶ傷みもしたし、
+「頑丈なだけが取り柄みてえなもんだ」
+　と苦笑しながら並べた新旧２本は、見た目の良さ、刃の薄さは雲泥の差だ。しかもフィルが新しく贈ったものは、折りたたむことで柄の中に刃がおさまり、持ち歩くにも便利にできている。しかも刃を出すときには、指先でつまんで出すなどという本末転倒なことはなく、ボタンを押し込めばいいらしい。そのボタンも、上からまっすぐに押したりしたのでは動かず、前に滑り出すように押すことで掛け金がはずれる仕組みのようである。もちろんルガディンの男の指の大きさに合わせて押しやすいように作られていた。
+「このへんの細工は、さすがウルダハだな。あの野郎、腕のいい彫金師を雇ったに違いねえ。ほれ、こいつは俺が好きな海島でよ」
+　柄の木材に彫り込んであるのは、嘴の大きな少し変わった鳥の姿。それを見ても、これがオーダーメイドであるのは確かだった。</p>
+<p>　バルクは上機嫌だった。そしてその上機嫌のもとになったからだろう。
+「あいつぁガキの頃から、他とはちっと違ってた」
+　フィルの話になった。
+　コトコは前のめりの全身ダンボ耳になる。老人にとっては、昔話を真剣に、面白そうに聞いてくれる若者が嬉しいのかもしれない。(しかもカワイコチャンだ)　コトコの下心はさておき、20数年前の「出会い」の話を始めた。</p>
+<p>　当時のリムサ・ロミンサはまさに海賊の街だった。
+　メルウィブ提督によって海賊行為が違法とされたのは近年のことである。20年さかのぼるだけで、この街は無法者が独自の掟で共存する荒くれのたまり場だった。
+　そんな中で冒険者ギルド設立が進んだのは、第一には大きな戦争がなくなり仕事にあぶれた傭兵のためだった。食うに困れば簡単にその武力を略奪に使う者もいる。そうさせないためにも、なんらかの受け皿は必要だった。
+　そして第二に、弱者を守るためだ。ウルダハの「騙されるほうが悪い」、グリダニアの「和を乱すから悪い」と同じく、リムサ・ロミンサには「弱い奴が悪い」がある。弱者は強奪されても泣き寝入りするしかなかった。そんな弱者を守ろうとしても、守る側にも暮らしがあって、なにもかもを無料奉仕ではできないのだ。
+「それにおやっさんは、食い詰めただけの善人が、そっから悪人に落ちていくのをなんとかしたいって言っててな」
+　誰でもなれて、なれば信用が得られ、暮らしていける、そして誰かを助ける力になれる、そういう冒険者のギルドを作りたかったのだ。</p>
+<p>　設立の理念に共感したバルクは「最初の登録冒険者」の一人となって、ギルドのため、冒険者という仲間、自分より弱い立場の者たちのために尽力した。
+　そんな最中でのことだ。
+「あいつらはまだぴよびぴよのヒナチョコで、護衛の依頼でウルダハからリムサに来たんだったな」
+　今でこそ他国へ行く依頼もけっこうあるし、他国から派遣を要請されることもあるが、当時はまだまだ珍しかった。護衛や配達人として冒険者を信用する商人や旅人が少なかったし、国間でのギルドの連携も不行き届きが多く、トラブルになることも珍しくなかった。
+　そんな中で他国から来た冒険者というのは、不思議な熱狂をもって歓迎された。
+　慣れない町中で迷子になっていた二人を案内してきたのが、同じく設立メンバーの一人だったミコッテの弓術士、ル・シンティ。彼女の鶴の一声で、せっかくよそから来た冒険者なんだから、うちで一つ稼いでいってもらおうと決まった。</p>
+<p>　いい話だ。一見は。いい仕事を優先的に選ばせることで他国の冒険者を歓待しようというのだから。
+　だが本心からそう思って美味い仕事を譲ってやる気になった者がどれくらいいたかは分からない。誰も逆らわなかっただけだ。設立メンバーであり、リムサ・ロミンサで最強争いをするとき名を挙げられる腕前のル・シンティに。
+　普段は押し合いへし合い、足を踏みつけときには殴り合いにまで発展して占拠する掲示板の前をあけ、さあ選べと言う。想像するとコトコには、どうも居心地が悪く思える。そんな中でフィルが選んだのは、
+「たしかそのときでもう半月はほったらかされてたような、どう考えたってやりづれぇ仕事だった」</p>
+<p>　内陸の山村で、夜のうち畑が荒らされ作物が食われる。食われるだけでなく、時にはただ破壊され荒らされているだけのこともある。山のコボルド族が下りててきた、あるいは近隣の獣の仕業なら、食い物を奪うことはあってもただ畑を荒らすだけということは考えられない。罠をかけたりもしたが効果はないから、ある程度の知能がある可能性もある。
+　そんな正体不明の相手を討伐してくれと言うのだ。
+　Ｅランクに出ていたが、相手がなにかも分からないのにどうにかしろと言われても、と皆思う。手におえないような妖異だったらどうするのか。Ｄランクの冒険者であれば対処できるかもしれないが、それにしてもどれくらい危険か分からないのにこの報酬は安すぎる。
+　だから誰もやりたがらず、このまま期限が来て捨てられるはずだった依頼だった。</p>
+<p>「そういう気の使い方する奴ぁ、歓迎されねえ街だな、ここは」
+　やると言ったものはありがたがって受け取る、それが礼儀、といったところがある。ギルドにいた連中も、ほっとするより腹を立てた。人の気遣いを無駄にしやがって、それがこなせる自信があるのか、ガキがかっこつけてんじゃねえ。そんな空気がうっすらと漂った。
+　その空気にナガレは気付いているようではなかった。そもそも彼は、楽で稼ぎのいい仕事を選ぼうとしていたのだ。
+「それがあの跳ねっ返りめ」
+　と、バルクは当時を思い出した様子でにいっと大きな口の両端を上げた。</p>
+<p>　驚いたことに、バルクから見ると当時のフィルとナガレで、気が強く強情で、周りと衝突するのはフィルのほうだったのだ。それを「跳ねっ返り」だと彼は思っていた。
+　コトコには意外でしかない。ルルナの話を聞いていても、フィルは若い頃から穏やかで落ち着いていて、思慮深く、温和な印象しかなかった。
+　バルクにそう言うと、彼は面白そうに頷き笑った。
+「普段温厚な奴ほど怒ると怖ぇ。大抵のことはなんでもいいと言う奴ほど、譲れないことについちゃ絶対に譲らねぇ。あいつはその典型だ」
+　後になってフィルから直接聞いたと言って、当時のことをバルクは振り返ってコトコに教えてくれた。
+「あいつぁ、割のいい仕事を取られることに本心から納得してる奴なんてほとんどいねぇ、そう思ったんだ。そんな上っ面のことを親切ごかしでやられて、なんで俺らが面倒な思いしなきゃならねえんだってな。で、人助けをするのが冒険者だって言いながら、報酬が安いってだけで困ってたって知らん顔。結局みんな、自分助けをしてるだけじゃねえかって、腹が立ったんだと。ナガレはその点、良く言や素直、悪く言やぁ……馬鹿だからなぁ、あいつは」</p>
+<p>　そんな相棒にフィルが言ったのは、
+『この依頼、相手が分からないってのがまずいんだろ。だったら俺らが調べてきたら後の人はやりやすくなるし、それに、どんな相手か調べるのだって面白そうじゃないか』
+　ということだった。
+　失敗しても自分たちならこの街で失うメンツもない、平気で恥をかける。討伐できなかったらできなかったでいい。ただ、もし相手がどんなやつなのか分かれば、それならやろうって人が出るはずだ。そうすれば、よそ者の俺たちにいい仕事をやろうという彼等の好意に、少しなりとも恩返しができたことになる。
+「ほんと頭のいいガキだったぜ、あいつは。そう言われて、半分海賊育ちのノウタリンどもはすっかり感心しちまいやがった。それに、俺たちからしても目鱗だった」
+　話を先取りすれば、そんなフィルの話をもとにして、「正体の分からない相手なら、調査と討伐は分けるべきじゃないか」とバルクがギルドに掛け合った。また、遭遇した敵がＥランクの冒険者ではどう足掻いても勝ち目のない相手だったとき、それで撤退しても失敗と見做されて違約金が取られるのでは、誰も行きたがらないのも当然、そういった状況ではペナルティが出ないようにしてはどうだという話にもつながっていった。
+　ギルドの仕組みは、そんなふうにして少しずつ整えられていったのだ。</p>
+<p>「ただなぁ。それがあいつを、リムサからすっかり縁遠くしちまった」
+　わくわくふんふんする話だったが、バルクは急にトーンを落として長い鼻息、溜め息をつく。
+「縁遠く……？」
+「ああ。俺ぁ感心した。敵地の真ん中でも媚びるのは嫌で我を通す、とんだ跳ねっ返りだが、間違ったこと言ってるわけじゃねえし、なにより頭がいいうえに骨もある。もうちょい敵を作らねえことも教えてやらねえじゃ危なっかしいが、こりゃあ育て甲斐があるぞってな。だが、俺とは逆にあいつを生意気だって、心底嫌う奴が出ちまった」
+　唸るような声を零し、そこでバルクははっとすると、
+「いや、すまねぇ。爺の悪い癖だぜ。つい思い出話しちまう。ましてやそれが愚痴混じりじゃあな」
+　元のいかついながら愛嬌のある笑顔になって、大きな手でぽんと自分の後ろ頭を叩いた。</p>
+<p>　コトコの本音は、「えっ、ちょっと、今いいところ、ていうかこれからもっといいところもあるんでしょ!?　なのにお話やめないで!!」以外のなにかではない。
+　本気で食いついてドン引きされるのは嫌だ、くらいの理性はせいぜい働いて、ぶんぶんと首を横に振った。
+「そのお話、もっと聞きたいです。私……私、あの、フィルさんにはいっつもすっごくお世話になってて……」
+　好きでたまらないので、そんな乙女心の当然として、好きな人のことはなんだって知りたい、というのは胸の中にぎゅっと折りたたみ、
+「それに、バルクさんたちが苦労してくれたから今の冒険者があるんだって聞いてて……それに、私たちからしたら、フィルさんたちも苦労してくれたからで……」
+　今の話もそうだ。若かったフィルは、親切ごかしが気に食わなくて噛み付いただけだったのかもしれない。だがそこから、「調査と討伐は分けたほうがいい」「冒険者自身に責任のない内容で罰が適用されるのはどうか」と、ギルドの仕組みが洗練されていったのだ。
+「あの、うまく言えませんけど、でもすごく興味があって、だからもっといろいろ聞きたいです！」
+　流暢な自己主張には国家レベルで程遠い。だが気持ちはしっかり伝わったようだ。バルクは嬉しそうに目を細めて頷いた。</p>
+<p>　コトコの自由時間は最低でもまだ一日、長いともう一日ある。ピジョンの話では、準備万端整えて臨まないといけない、というようなことでなく、つまりは「一人だと不安だからついてきてほしい」くらいのことのようだ。つまり、この後夜まででもたっぷりと時間はあった。
+「よし。だったら、ここに長っ尻しちゃすまねぇ。もうちっと気の置けねぇとこに行こう」
+　バルクは、汚いが行きつけの店だと言って、郊外の小さな店へとコトコを連れて行った。
+　魚の生臭い匂いと、炙った香ばしい匂いが混じったような場所だ。舗装のされていない土がむき出しの道が続く、その左右に思いつき次第で建て増しされたような、バラックと変わりないような建物が並ぶ。裕福でないのは一目見れば分かったが、胡散臭さや後ろ暗さとは無縁の明るい気配があった。貧しいが、健康的な漁村、といった雰囲気である。
+　案内された店はその片隅にあった。他の建物同様に小さく古く、たしかに汚いが、不潔なのではない。長い年月でしみついて落としきれない魚の匂いや脂、食べこぼしなどが染みつき浸透してしまったような飲み屋だ。
+　看板も出ていなかったが、中に入るとそこは確かに飲み屋のようで、カウンターの中には背の曲がったミコッテの婦人がいた。大きな目の端、口の脇に皺が寄り、
+「なんだい。まだ営業してないよ」
+　と言い放つ声は刺々しく、あまり愛想はないように見えたが、
+「客だ客。俺じゃねえ。このお嬢さんだ」
+　そう言われてコトコを見る金色の猫目は、途端にほっと和んで優しくなった。</p>
+<p>「そうかい。フィル坊のねえ。こんなとこで良きゃあゆっくりしていきな。さ、なんにする？　言ってくれりゃ、大概のモンは作るよ。酒はまあ、あるだけしか出せないがね」
+　お言葉に甘えて甘い卵焼きとレモン入りのエールを頼む。
+　婦人は何度か頷きながら厨房に消えて行った。
+「ここでならなんでも話せる。ここのババアも元は冒険者でな。若い頃は&quot;一百のセン&quot;なんて呼ばれたもんだ」
+「ババアとはなんだい、クソジジイ」
+　厨房からそんな声だけが飛んでくるが、バルクが言ったとおり、気の置けない本当の友人だからだろう。
+「アンタは飲みたいなら勝手にやんな。嬢ちゃんのは今作ってっからね」
+　続けて聞こえた言葉に、バルクは勝手にカウンターの内側に手を伸ばし、グラスをとって出す。&ldquo;うちの台所&quot;と変わらないくらい気安い店のようだ。
+　そこでコトコは、当時の思い出話、そして今も昔も変わらないリムサの悪癖について聞いた。</p>
+<p>　リムサ・ロミンサの少し乾いた土、その果樹園で作られたレモンはとびきり酸っぱいが甘みもあって美味しい。ぬるいエールもそれはそれで飲みやすく、卵焼きはレストランで出すには下品なのかもしれないが、コトコにはしっかり甘くて素朴でたまらなかった。
+　どうせ客なんか来ないよ、と三人でテーブルを囲んで、センーーーガム・エル・センが勝手に持ってきたいくつかのつまみを口に運びながら話に花が咲く。
+　バルクは簡単に、さっきまでフィルとナガレが初めてリムサに来た、あのときのことを話してたんだとセンに伝えた。
+「あんときはよぉ、覚えてるか？　ってえか、おめえそんときいたっけか？」
+「いたよ。なに忘れてんだい。あたしゃ別に、どこの国の冒険者だろうが同じだろとしか思ってなかったけどね。なにが珍しいんだか寄ってたかって群がって、邪魔で仕方なかった」
+　センは毒舌だ。だがそれをコトコに向けることはなく、矛先はもっぱらバルクだ。だが聞いていていやらしい感じがしないのは、心の底にバルクへの信頼があることも同時に感じられるからだろう。
+　自分で入れた、ほとんど真っ黒に近いような酒を飲みながらセンが少し上向きの鼻を鳴らす。
+「それであれだろ。好きな仕事選べって押し付けてさ」
+「おう、それそれ。そんときの話だ」</p>
+<p>　フィルの本心は、上っ面の親切ならいらない、だった。
+　それをそのままぶつける代わりに、利口な彼は「調べてくれば後の人の役に立つ、それが好意ヘの恩返しになる」という理屈を武器にした。
+　バルクはその媚びない態度が気に入った。跳ねっ返りだが、頭もいいし度胸もある、と。
+　センはそれを見ていて、フィルにどうのというより、親切面をした連中がまんまと肩透かしを食らったのが面白いと思った。
+　大半の冒険者、有象無象は、「それが恩返しになる」という言葉に素直に喜んだ。いい仕事を譲らなくて済んだし、そうやって顔も立ててもらえたからだ。
+　だが一部の人間が、そんなフィルに強い反感を持った。
+　それが、ル・シンティとその仲間だった。</p>
+<p>「ル・シンティさんって……」
+　話のだいぶ最初で聞いた名前だ。たしか、彼女も設立メンバーの一人で、
+「あ、そうだ。いい依頼を選ばせてやろうって言い出した人でしたよね」
+　迷子になっていた二人を案内してきて、（実のところ迷惑ではあったものの）親切な申し出をしてくれた面倒見のいい人。だがそれは、すぐにくるりと裏返る。
+　ル・シンティは、せっかく自分が言い出した名案を、どんな理屈だろうと無視されたのが気に入らなかったのだ。
+　『せっかくこの私が好きな仕事を選べと言ってやってるのに、いらないっていうのはどういうことだ』。それがル・シンティだった。
+　しかも彼女は設立メンバーの一人で、リムサ・ロミンサの冒険者の中では屈指の実力者、更にはあちこちで若い連中の面倒を見、&ldquo;姉御&quot;と敬われていた。その彼女がフィルを嫌った。シンティにとってフィルは「礼儀知らずの偉そうなクソガキ」になり、その意見は彼女のシンパ、彼女に逆らえない連中にも伝播し、強制された。
+「そんな……！」
+　そのせいでフィルはリムサ・ロミンサに来ると、シンティとその傘下にいる連中からは相手にされなくなったのだ。</p>
+<p>　とはいえ、
+「あのクソアマ」
+　とセンが吐き捨てるように、そんなル・シンティが嫌いで、決して迎合しない者たちもいた。
+　しかし、シンティと同格で、正面から向かい合える者は少なかった。初代ギルドマスター、早くに亡くなってしまったが元海賊だった男が一人、そしてバルクウェルシンだ。
+　ギルドの面倒を見るのが第一のギルマスと、皆より一回り年上で、経験や実績はあっても現役の力は衰えつつあった男には、あえてシンティと張り合う余力などなかった。必然的にバルクが、シンティに一方的に嫌われた者たちの庇護者になっていき、気がつけば&quot;シンティ派&quot;に対して&quot;バルク派&quot;というのができていた。</p>
+<p>　シンティが切り捨てる。それをバルクが拾い上げる。この形式は、彼等がフィルと出会ったそのときからできていた。
+　フィルとナガレが、正体不明の相手を可能なら討伐、無理でも調査するために出かけていって五日。距離からして、行き来だけなら半日程度なのだから、もう戻ってきてもいいはずなのに帰還する様子がない。
+　バルクたちは心配し、様子を見に行こう、必要なら助けてやろう、俺は行くがおまえも来るかと話し合っていた。そこに通りかかったル・シンティは、
+「ほっとけよ。オレらが世話してやろうってのに、いらねえとか気取ったガキの不始末だろ。てめえで戻れねえなら、あんな礼儀知らずなガキ、死にゃあいい」
+　そう言い捨てた。もちろんバルクは彼女の言うことなど無視して助けに向かったのである。</p>
+<p>　『礼儀知らず』。シンティの挙げる罪状はいつもそれだ。ただしそれはシンティが勝手に判断する「礼儀」にかなっているかどうかだ。それはあまりにも一方的で、そのうえ押し付けられた「感謝」と「礼儀」は永遠について回る。
+「俺でもよ、助けてやったのに礼の一つも言わねえとなると、腹ぁ立てるぜ？　けどありがとう助かったと言ってもらえりゃそれだけでいい。その後で、そうだな、たとえば飯に誘ったとき断られても、じゃあまたなってくらいだ。だがシンティの奴は、それを断るのが『礼儀知らず』になりやがる。一度助けられたが最後、あいつにいつまでもぺこぺこしてなきゃならねえんだよ」
+「そ、それ……！」
+　言われてコトコも落雷なみにバシンと思い当たった。</p>
+<p>「私はドマの出身で、こっちに来たとき、最初はここに、リムサ・ロミンサにいたんです」
+　二人の視線に促されて、コトコは聞く一方だった身から、今度は話す側に回った。
+　ドマから渡ってきた理由は、今は関係ない。この街に辿り着いて、冒険者になればいいと聞いてきたとおりに登録し、言葉もおぼつかない中で、不安と戦いながらなんとか馴染もう、慣れよう、暮らしていこうとしていた。
+　幸いコトコは、&ldquo;厄介な親切&quot;に絡まれることはなかった。言葉も片言、文化習俗も違いすぎるコトコに、リムサの冒険者は自然と付き合いづらさを感じ、距離を置いたのだ。そのうちにグリダニア出身で同じくリムサ・ロミンサで冒険者をしていたエレーヌという友達に出会い、一人でがんばらなくても良くなった。
+　ル・シンティが体現する一方的な親切、押し付けられる礼儀に苦しめられていたのは、そのエレーヌである。
+　誰と名前は出さないが、エレーヌはコトコと会う以前から、実力も人望もある先輩冒険者に何度か助けてもらった。助けてもらえるのは嬉しかったし楽でありがたかったが、やがて、誘いを断れない、断るとイヤな顔をされる、後になって嫌味を言われる、といったことに気付いた。
+　恩知らずだと言いたいなら言えばいい、と無視するようにしたが、しつこく言い寄られ、それでもエレーヌが突っぱねると、「あいつに仕事を回すな」ということになった。「礼儀を知らない」と。
+　その男の取り巻きをしている冒険者にも睨まれ、エレーヌがなにかひどく面倒な目に遭っているのはやがてコトコにも分かった。それで、もうここのギルドにいるのは嫌だ、とウルダハに引っ越すことにしたのである。</p>
+<p>　話を聞いてバルクとセンはつくづく頷き、溜め息をつく。
+「分かるよ。名前出さなくたって、あいつだろうなって見当はつくさ。しかもあいつはシンティ派だ。あたしらがなにか言ったって聞きゃしない」
+「コトコちゃんの友達が遭ったってぇろくでもない目。それがそのまま、今のリムサ・ギルドの、どうしようもねえところだ。シンティもなぁ。悪い奴ってぇわけじゃねえんだが」
+「どこがさ。あいつが元凶だろ。十分悪いよ。最悪だ。そのせいでこのコだってリムサを出て行っちまったんだからね。十分以上に立派な罪悪だよ」
+　昔に比べて国の間の冒険者の行き来が増えたせいで、昔ほどの絶対王政ではなくなったが、それでも一部、ル・シンティを女王のようにトップに立てて、その庇護下にあり、シンティ印の礼儀を自分たちのルールにして振る舞う連中がいる。
+　ル・シンティもさすがに年なので引退しているが、その傘下には、実力もそこそこあるうえに身分家柄が強いのも集っていた。そのせいで、中堅の冒険者では意見も言えないし対立もできない。
+「このジジイが現役張ってたときはマシだったんだけどねぇ」
+　言ってセンはバルクを見、そこでようやく少しだけ寂しそうな顔をした。</p>
+<p>　昔からずっと、シンティの横暴によって弾かれた者を、バルクが可愛がってきた。彼はその態度で、「シンティがどう言ってようと、俺にとっちゃこいつらは可愛い後輩だ」と言い続けてきた。
+「あんた、フィル坊たちをあからさまに可愛がってたもんねぇ」
+「それくらいしかできねぇと思ったからな。……だが、今にして思や、甘かった。シンティと真正面から噛みあうのが嫌で、逃げてたんだよ、俺は」
+　言えば良かった、とバルクは後悔していた。言うだけでなく、シンティのやり方は間違っている、おかしい、おまえは異常だと、たとえ悪役になってでもいい、彼女を冒険者ギルドから追放するという嫌なやり方でもいい、とにかく止めるべきだった、と。
+　だがバルクには、そこまで悪辣なことはできなかった。
+「結局俺も我が身可愛さで、自分にできること……我が身可愛さの中でできることしか、しなかったんだなぁ」
+「でもそんな……！　なにもそこまでして、人のために……」
+「そうさ。このコの言うとおりだよ。なんであんたが悲劇のヒーローんならなきゃいけないのさ。しかもあんなクソアマのために。我が身可愛さで十分」
+　センは自信満々に言って、黒い酒の残りをぐっと飲み干す。そして金色の目に優しさと不遜さをたっぷりたたえて言った。
+「あんたが一から十まで守ってやらなくったってさ、フィル坊はあっちでしっかりやってるじゃないか。あの子みたいにちゃんと自分で立てる子なら、あんたの助けなんて片手で十分なんだよ。なにからなにまでしてやらなくたってさ」
+　まったくそうだと、コトコは大きく頷いた。</p>
+<p>　それにしても、センにとってフィルは「フィル坊」で「あの子」なのだ。彼女がバルクと同じくらいの歳なら、40歳くらいのときに20歳くらいのフィルを見ているわけで、子供扱いも無理はない。だがコトコには新鮮だった。
+　そんな二人から見れば、自分は孫の代である。まだよちよちの幼児冒険者だろう。孫に甘いのはどこの老人でもだいたい同じらしく、バルクだけでなくセンもあれこれサービスしてくれる。
+「金のことなんて気にすんじゃないよ。請求するならこのジジイにするしね」
+　などと言いながら、しぼりたてのジュース、オーダーした素朴な料理、なんでもよしよしと作って出してくれる。</p>
+<p>　一方バルクに対する物言いは辛辣で、クソジジイ、この馬鹿、筋肉ダルマ、自惚れ屋と言いたい放題である。
+「昔っから言ってるだろ。あたしはあんたのそういうとこが嫌いなんだよ」
+　などとも言う。それはコトコが聞いていてさえ本当のことだと思えるのに、嫌いながらセンはバルクとこうして話しているし、バルクは嫌われていても平気で居座っている。「そこが」嫌い。だがきっと、他は好き、あるいは認めているのだ。そして、嫌いな部分を見ないことにしたり、嫌いでないふりをしたりもせず、一部の嫌いのところがすべてになることもない。
+　それによく見ていると、口では辛辣なセンが、バルクにこまかいことをさせないのに気付いた。枝豆は全部鞘から出して、その皿をバルクの前に置く。瓶の栓は抜くし、手回りに倒れそうなものを置いたりもしない。</p>
+<p>　バルクの話によると、ガム・エル・センはかつてのリムサ・ロミンサで、ル・シンティと並んでどっちが女冒険者のトップかを争ったほどの実力者だった。百に一つも的をはずさない。そこから&quot;一百のセン&quot;と呼ばれ、一目置かれていた。
+　だが性格はル・シンティとは真逆だった。シンティが大勢の取り巻きを連れていたのに対して、センは
+「猫に犬はどうかと思うが、一匹狼ってやつでな」
+　基本的には一人で行動し、必要なときだけ仲間を募った。そして仕事が終われば解散。大きな仕事を達成した後でも、打ち上げをやろうなどという発想はなく、さっさと解散して立ち去るのだ。
+　そんな孤高のセンだが、一人でしか生きられないタイプではなかったのだろうと思う。そんな淡白な態度でも、彼女に誘われれば組もうと思う者がいたのだから、なにかを感じて慕っていたに違いない。そして、他人をまるきり無視した者に、こまやかな気遣いなどできないはずだ。
+　不思議な人だとコトコは思う。そんな一匹狼の弓術士が、どうして今バルクとこんなに親しい友達なのだろう。もしかして……？　もちろん、それをあけすけに聞くのはさすがにはばかられたので、コトコは二人の冒険譚をせがんだのだった。</p>
+
+    </div>
+  </article>
+
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      hamburger.textContent = '✕';
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+  </script>
+
+</body>
+</html>

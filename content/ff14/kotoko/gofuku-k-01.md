@@ -1,6 +1,7 @@
 ﻿---
 title: "呉服屋物語 一"
-weight: 10
+group: "琴子お嬢様"
+weight: 410
 draft: false
 ---
 　　　　　【西の海から】

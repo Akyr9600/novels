@@ -1,5 +1,6 @@
 ﻿---
-title: "琴子お嬢様"
+title: "コトコの物語"
+default_group: "こっこちゃん"
 custom_css: "kotoko"
 Weight: 20
 ---

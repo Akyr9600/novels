@@ -1,6 +1,7 @@
 ﻿---
 title: "呉服屋物語 二"
-weight: 20
+group: "琴子お嬢様"
+weight: 420
 draft: false
 ---
 　　　　　【寝ても覚めても】

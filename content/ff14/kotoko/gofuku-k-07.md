@@ -1,6 +1,7 @@
 ﻿---
 title: "傭兵物語 二"
-weight: 70
+group: "琴子お嬢様"
+weight: 470
 draft: false
 ---
 　　　　　【第二日目】

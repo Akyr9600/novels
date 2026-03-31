@@ -1,6 +1,5 @@
 ﻿---
 title: "MASS EFFECT解説"
 Weight: 30
-custom_css: "kasyoku"
-draft: true
+custom_css: guide
 ---

@@ -1,3 +1,6 @@
 baseURL = 'https://novels-ei2.pages.dev/'
 languageCode = 'ja-jp'
 title = 'おはなしおきば'
+
+[markup.goldmark.renderer]
+  unsafe = true

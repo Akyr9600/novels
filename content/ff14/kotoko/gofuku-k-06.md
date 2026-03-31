@@ -1,6 +1,7 @@
 ﻿---
 title: "傭兵物語 一"
-weight: 60
+group: "琴子お嬢様"
+weight: 460
 draft: false
 ---
 　　　　　【第零日目】

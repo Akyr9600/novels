@@ -1,6 +1,7 @@
 ﻿---
 title: "傭兵物語 四"
-weight: 90
+group: "琴子お嬢様"
+weight: 490
 draft: false
 ---
 　　　　　【第六日目】

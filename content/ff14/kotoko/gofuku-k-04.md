@@ -1,6 +1,7 @@
 ﻿---
 title: "呉服屋物語 裏"
-weight: 40
+group: "琴子お嬢様"
+weight: 440
 draft: false
 ---
 　　　　　【クガネの町に潜む闇】
