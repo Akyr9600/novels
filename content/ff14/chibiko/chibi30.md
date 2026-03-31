@@ -1,5 +1,6 @@
 ﻿---
 title: "まんまるいしの物語"
+group: "まんまるいし"
 weight: 300
 draft: false
 ---

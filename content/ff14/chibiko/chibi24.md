@@ -1,5 +1,6 @@
 ﻿---
 title: "北稜の守護神"
+group: "リュシアン"
 weight: 240
 custom_css: "chibiko-tough"
 draft: false

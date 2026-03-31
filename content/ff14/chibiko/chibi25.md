@@ -1,5 +1,6 @@
 ﻿---
 title: "北稜の勇者たち"
+group: "リュシアン"
 weight: 250
 custom_css: "chibiko-tough"
 draft: false

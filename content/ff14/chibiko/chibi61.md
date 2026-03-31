@@ -1,5 +1,6 @@
 ﻿---
-title: "調理師ちびこっこ 02"
+title: "あたしのお父さん"
+group: "調理師ちびこ"
 weight: 610
 draft: false
 ---

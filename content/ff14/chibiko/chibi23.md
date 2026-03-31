@@ -1,5 +1,6 @@
 ﻿---
 title: "不伐の竜騎士"
+group: "リュシアン"
 weight: 230
 draft: false
 ---

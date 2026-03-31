@@ -1,5 +1,6 @@
 ﻿---
 title: "千伐の竜騎士"
+group: "リュシアン"
 weight: 220
 draft: false
 ---

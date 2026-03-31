@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>With You 3.7 - おはなしおきば</title>
+  
+  <style>
+     
+    body { 
+      margin: 0; padding: 0; 
+      font-family: "BlinkMacSystemFont", "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      background: #fff; color: #333; 
+    }
+    .container { 
+      display: flex; min-height: 100vh; max-width: 1200px; 
+      margin: 0 auto; background: #fafafa; 
+    }
+
+     
+    aside { 
+      width: 220px; border-right: 1px solid #e0e0e0; 
+      padding: 0 15px 20px 15px;
+      background: #fafafa; position: sticky; top: 0; height: 100vh; overflow-y: auto; 
+      flex-shrink: 0;
+    }
+    aside h1 { margin: 15px 0 10px 0; line-height: 1.2; }
+    aside h1 a { font-size: 1.1rem; color: #000; text-decoration: none; font-weight: bold; }
+
+    .side-nav-sticky {
+      position: sticky; top: 0; z-index: 10;
+      background: #fafafa; padding: 10px 0;
+      border-bottom: 1px solid #eee; margin-bottom: 15px;
+      display: flex; justify-content: space-between; gap: 5px;
+    }
+    .side-nav-sticky a {
+      flex: 1; text-align: center; font-size: 0.7rem; font-weight: bold;
+      color: #666; text-decoration: none; padding: 6px 0;
+      border: 1px solid #ddd; border-radius: 4px; background: #fff;
+    }
+
+    h2 { font-size: 1.1rem; border-left: 4px solid #333; padding-left: 10px; margin: 20px 0 8px 0; }
+    .series-toggle { cursor: pointer; display: block; font-size: 0.95rem; color: #888; margin: 10px 0 4px 5px; position: relative; padding-right: 20px; }
+    .arrow {
+      display: inline-block; width: 0; height: 0; margin-left: 5px; vertical-align: middle;
+      border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #888;
+      transition: transform 0.3s;
+    }
+    .toggle-checkbox { display: none; }
+    .toggle-checkbox:checked + .series-toggle .arrow { transform: rotate(180deg); }
+    .series-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .toggle-checkbox:checked + .series-toggle + .series-content { max-height: 2000px; }
+
+    ul { list-style: none; padding-left: 15px; margin: 0; }
+    li { margin-bottom: 8px; font-size: 0.80rem; }
+    a { text-decoration: none; color: #444; }
+    .active { color: #d32f2f !important; font-weight: bold; }
+
+     
+    .is-draft { color: #aaa; font-style: italic; }
+
+     
+    .is-coming-soon {
+      color: #bbb;
+      font-style: italic;
+      cursor: default;
+    }
+    .is-coming-soon::after {
+      content: "　［準備中］";
+      font-size: 0.85em;
+      color: #ccc;
+    }
+
+     
+    .group-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      color: #999;
+      margin: 10px 0 4px 0;
+      white-space: nowrap;
+    }
+    .group-label::before,
+    .group-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+
+     
+    .page-list {
+      padding-left: 8px;
+    }
+
+     
+    main { 
+      flex: 1; padding: 50px 0; background: #fff; 
+      display: flex; justify-content: center;
+    }
+    article { width: 90%; max-width: 720px; margin: 0 auto; }
+    .novel-body { line-height: 1.8; letter-spacing: 0.03em; font-size: 1.0rem; color: #222; }
+
+     
+    .lyric-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 20px 30px;
+      margin: 1.5em auto;
+      max-width: 500px;
+      text-align: center;
+      font-style: italic;
+    }
+
+     
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 12px; left: 12px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      width: 40px; height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+     
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 900;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+     
+    @media screen and (max-width: 768px) {
+
+      .hamburger { display: flex; }
+
+      aside {
+        position: fixed;
+        top: 0; left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 950;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+      }
+      aside.open { transform: translateX(0); }
+
+      .container { display: block; }
+
+      main {
+        width: 100%;
+        padding: 60px 0 20px 0;
+        display: block;
+      }
+
+      article {
+        width: 94%;
+        max-width: none;
+        margin: 0 auto;
+        padding: 20px 15px;
+      }
+
+      h1 { font-size: 1.4rem !important; }
+      .novel-body { font-size: 1.05rem !important; line-height: 1.9 !important; }
+      img { max-width: 100%; height: auto; }
+    }
+  </style>
+
+  
+  
+    
+      
+    
+  
+
+  
+    
+    
+      <link rel="stylesheet" href="http://localhost:1313/css/series/kasyoku.css">
+    
+  
+</head>
+
+<body class="theme-kasyoku">
+
+  
+  <button class="hamburger" id="hamburger" aria-label="メニューを開く">☰</button>
+
+  
+  <div class="overlay" id="overlay"></div>
+
+  <div class="container">
+    <aside id="sidebar">
+      <h1><a href="/">おはなしおきば</a></h1>
+      <div class="side-nav-sticky">
+        <a href="http://localhost:1313/mass-effect/vr-main/01-vr23-with/">← BACK</a>
+        <a href="http://localhost:1313/mass-effect/vr-main/01-vr25-with/">NEXT →</a>
+      </div>
+
+      
+        <div class="section-group">
+          <h2>FF14</h2>
+
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-46ae835b836b509ad6872524212a5e12" class="toggle-checkbox" >
+              <label for="series-46ae835b836b509ad6872524212a5e12" class="series-toggle">【トロイの話】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                    <li class="group-label">白トロ</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main01/" class="">スカラ迷宮 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main02/" class="">スカラ迷宮 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main03/" class="">スカラ迷宮 3</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main04/" class="">スカラ迷宮 4</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main05/" class="">スカラ迷宮 5</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main06/" class="">スカラ迷宮 6</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main07/" class="">スカラ迷宮 7</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main08/" class="">スカラ迷宮 8</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main09/" class="">スカラ迷宮 after01</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main10/" class="">スカラ迷宮 after02</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main11/" class="">スカラ迷宮 after03</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main12/" class="">スカラ迷宮 after04</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main13/" class="">スカラ迷宮 after05</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main14/" class="">スカラ迷宮 after06</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red01/" class="">ブラトロ はじまり</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red02/" class="">ブラトロ 俺の黄玉</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red03/" class="">ブラトロ ああ見えて</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red04/" class="">ブラトロ 赤鰐という男</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red05/" class="">ブラトロ 番外編GPT</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red06/" class="">ブラトロ 番外編Claude</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-red07/" class="">ブラトロ RED DILE</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/troy/troy-main00/" class="is-draft">base</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-aeeca8301969494c0adf2f2c423c2129" class="toggle-checkbox" >
+              <label for="series-aeeca8301969494c0adf2f2c423c2129" class="series-toggle">【琴子お嬢様】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-01/" class="">呉服屋物語 一</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-02/" class="">呉服屋物語 二</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-03/" class="">呉服屋物語 三</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-04/" class="">呉服屋物語 裏</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-05/" class="">呉服屋物語 四</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-06/" class="">傭兵物語 一</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-07/" class="">傭兵物語 二</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-08/" class="">傭兵物語 三</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/kotoko/gofuku-k-09/" class="">傭兵物語 四</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-4c452e7e8eb0756a2a0e983e2dad583d" class="toggle-checkbox" >
+              <label for="series-4c452e7e8eb0756a2a0e983e2dad583d" class="series-toggle">【ちびこ】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                    <li class="group-label">フィルとちびこ</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi01/" class="">かぞく(プロト版)</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi02/" class="">小さな拾いもの</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi03/" class="">家さがし</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi04/" class="">おうちゲットだぜ</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi05/" class="">おやこ</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi06/" class="">異</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi07/" class="">真</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi08/" class="">裏側の黒トロ</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi20/" class="">小さなえいゆう</a>
+                    
+                  </li>
+                
+                  
+                  
+                    <li class="group-label">リュシアン</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi21/" class="">とある晩餐会の裏側で</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi22/" class="">千伐の竜騎士</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi23/" class="">不伐の竜騎士</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi24/" class="">北稜の守護神</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi25/" class="">北稜の勇者たち</a>
+                    
+                  </li>
+                
+                  
+                  
+                    <li class="group-label">まんまるいし</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi30/" class="">まんまるいしの物語</a>
+                    
+                  </li>
+                
+                  
+                  
+                    <li class="group-label">調理師ちびこ</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi60/" class="">それから、これから</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/ff14/chibiko/chibi61/" class="">あたしのお父さん</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT</h2>
+
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-fd1f546341f187a70bb5af75c4bb6af2" class="toggle-checkbox" >
+              <label for="series-fd1f546341f187a70bb5af75c4bb6af2" class="series-toggle">【ORIGIN】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/sp-main/00-sp-01/" class="">Prologue</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/sp-main/00-sp-02/" class="is-coming-soon">第一話：フェロス</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/sp-main/00-sp-03/" class="">第二話：英雄</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-5de3c22336d28a71e6f69d789ed2b479" class="toggle-checkbox" checked>
+              <label for="series-5de3c22336d28a71e6f69d789ed2b479" class="series-toggle">【華飾の帳】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr01-kage/" class="">その影に 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr02-kage/" class="">その影に 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr03-kage/" class="">その影に 3</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr04-kage/" class="">その影に 4</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr05-inori/" class="">かそけき祈り 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr06-inori/" class="">かそけき祈り 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr07-inori/" class="">かそけき祈り 3</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr08-inori/" class="">かそけき祈り 4</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr09-inori/" class="">かそけき祈り 5</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr10-inori/" class="">かそけき祈り 6</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr11-inori/" class="">かそけき祈り 7</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr12-hibi/" class="">日々彩々 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr13-hibi/" class="">日々彩々 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr14-hibi/" class="">日々彩々 3</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/" class="">日々彩々 3.5</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr16-hibi/" class="">日々彩々 4</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr17-hibi/" class="">日々彩々 5・前</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/" class="">日々彩々 5・後</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/" class="is-coming-soon">日々彩々 6</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr20-with/" class="is-coming-soon">With You 1</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr21-with/" class="">With You 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr22-with/" class="">With You 3.0</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr23-with/" class="">With You 3.3</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr24-with/" class="active">With You 3.7</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr25-with/" class="is-coming-soon">With You 4</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr26-with/" class="is-coming-soon">With You 5</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr27-with/" class="">Two of us 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr28-with/" class="">Two of us 2.2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr29-with/" class="">Two of us 3.0</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr30-with/" class="">Two of us 3.1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr31-with/" class="">Two of us 3.5</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr32-with/" class="">Two of us 3.7</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr33-with/" class="">Two of us 4</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr34-with/" class="">銀蛇と軍神 1</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-main/01-vr35-with/" class="">銀蛇と軍神 2</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-main/01-vr36-with/" class="is-coming-soon">銀蛇と軍神 3</a>
+                      
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+            <div class="accordion-item">
+              <input type="checkbox" id="series-6542e7828ae546a46eed441bbde3312b" class="toggle-checkbox" >
+              <label for="series-6542e7828ae546a46eed441bbde3312b" class="series-toggle">【VRイレギュラー】 <span class="arrow"></span></label>
+              <ul class="series-content">
+                
+                
+                
+                  
+                  
+                    <li class="group-label">ファンタジー転生</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr01/" class="">第一話</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr02/" class="">第二話</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/02-vr03/" class="">第三話</a>
+                    
+                  </li>
+                
+                  
+                  
+                    <li class="group-label">転生ホームコメディ</li>
+                    
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc01/" class="">01 起きたらヴァレス</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc02/" class="">01 裏</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc03/" class="">02 Top Priority</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc04/" class="">03 みーと鳴くリディ</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc05/" class="">04 パパの日・ママの日</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc06/" class="">04 夫と妻の時間</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      
+                        <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc07/" class="is-coming-soon">05 ラス・オクトン</a>
+                      
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc08/" class="">06 幕間</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc09/" class="">07 クッキータイム</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc10/" class="">08 ホームパーティ</a>
+                    
+                  </li>
+                
+                  
+                  
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/03-vrhc11/" class="">09 ヴァレス・トライオス</a>
+                    
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          <ul>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>MASS EFFECT解説</h2>
+
+          
+
+          <ul>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-01/" class="is-draft">①エデンプライム～</a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-02/" class="is-draft">①３つのメイン任務</a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-03/" class="is-draft">③激動のヴァーマイア</a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-04/" class="is-draft">④真相と決戦</a>
+                
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="section-group">
+          <h2>操作実験場</h2>
+
+          
+
+          <ul>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/post/hello/" class="is-draft">サイト操作・要素まとめ</a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="http://localhost:1313/post/cheatsheet/" class="is-draft">Markdown・Hugo記法</a>
+                
+              </li>
+            
+          </ul>
+        </div>
+      
+    </aside>
+
+    <main>
+      <article>
+        
+  <article>
+    <header style="margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+      <h1 style="font-size: 1.8rem; color: #111; margin: 0;">With You 3.7</h1>
+    </header>
+    <div class="novel-body">
+      <p>　　　　　【君思故我在 D】</p>
+<p>　ドレン・ヴァドは、元STGエージェントである。
+　平均種族であれば18歳くらいにあたる８歳のとき、訓練校で校長に呼び出され、スカウトマンに引き合わせられた。職務の性質上、家族に相談することも許されず、ドレン一人で決めなければならなかった。迷うことはなかったように思う。
+　そしてそのときに、ドレンという&quot;名&quot;以外の過去を捨てた。
+　ヴァドというのは、姓名を揃えて名前らしくするための、仮の姓だ。自分で決めてもいいし、思いつかなければこちらで勝手に決めると言われ、決めてもらったはずだ。
+　なんにせよ、それ以来彼はドレン・ヴァドとして生きてきた。</p>
+<p>　軍を離れたのは19歳のとき、つまり４年前だ。リーパー大戦の最中に負傷し、戦線を退かなければならなくなった。それを機に除隊を決めた。サラリアンの20歳というのは老境にさしかかる頃合いで、頭脳的にも身体的にも衰えが始まる。老化は個人差が大きく、30歳で現役という者も少なくはないものの、ドレンはそれを過信であり、危ういと考えていた。
+　昔からそうだった。「できるかもしれない」や「大丈夫だろう」で大きな仕事や判断はしないし、できない性分なのだ。やらねばならないとなれば危険な賭けにだろうと出るが、選択肢があるかぎり、ドレンは堅実な道を選ぶのだ。</p>
+<p>　しかし、老後や余生というにはまだ早かった。そこまで衰えたわけではなく、だから、第二の人生というものを考えた。
+　まず、10年間離れていた家族に連絡をとった。父母は亡くなっていたが妹は健勝で、しかし、親しみのある関係ではなくなっていた。
+『そんなことだろうとは思ったけど』
+　と彼女は言った。「仕事が決まった。帰れなくなる」。その言葉で誰もが察していたのだ。だが、止めなかったということは、決して、歓迎したということではないし、納得したわけでもなかったようだ。
+　実家に戻るつもりは最初からなかったが、妹の声音を聞いて、頼ることもしないほうがいいと判断した。</p>
+<p>　一人で生きていくとしても、蓄えはあった。危険な分だけ給料はいいのだ。そして、それを派手に使うようなドレンではなかったため、銀河がこのまま存続してくれるなら、残り10年程度の時間を不自由なく暮らすことはできた。
+　どこで、何をしてにするか。それを探すため、リーパーが撤退するとすぐに、ドレンは銀河の旅に出た。
+　STGエージェントとして任務で飛び回っていたときとは違う、気楽な旅だ。
+　その中で気付いたのは、過ごすならサラリアン社会の外がいい、ということだった。
+　そういえば昔からそうだなと気がついた。待機するのが苦にならない。同じ作業をずっとしていても疲れない。他種族と話していて、早くしてくれと思うことはない。むしろ同族たちのせわしなさに、少し落ちついてくれと思うことのほうが多かった。ドレンは自分が、あまりサラリアンらしくないということを自覚したのだ。
+　そして、旅路の行き先の一つとして、アウスティア星系を訪れた。</p>
+<p>　そのあたりはトゥーリアンとヴォルスの支配域が重なる星域だが、アウスティアはほぼトゥーリアンの住み家となっている。しかも他の星域、星系からは離れた位置にあり、辺境の一歩手前のような場所だ。
+　星域の中心地であるセリオ系と行き来する定期便は、アウスティア系は惑星アレタヤ、セリオ系では惑星ヴァーシアのメインポートからしか出ておらず、１日に２本のみの、しかも小型船である。
+　主惑星アレタヤ最大の都市、ステイト・ツーですら、「大きいが田舎の都市」といった風情だった。
+　しかし暮らしやすそうだった。都会ほど騒がしくはなく混み合ってもおらず、だからといってさびれているわけではなく充分賑やかで、必要なものは揃っている。ただ、生態系が右旋性に偏っているため、サラリアンが定住するには向かない。
+　他に人が住むのは惑星ホイと、その衛星ランカ。しかしどちらも鉱業とその従事者の居住に特化した星で、余所者や観光客が行くようなところではない。</p>
+<p>　だが、コロニー・ユーリシアは驚嘆すべき場所だった。
+　清潔で機能的ではありつつも、高低差や緩急のある美しい街並み。豊富な樹木に居心地の良い公園。美術館や演劇ホール、映画館といった娯楽・芸能の施設もある。
+　中でひときわ印象に残ったのは、リーパーに関する内容も含む総合技術研究所だ。まず単純に大きかった。かつては野外音楽堂があったところを潰して作ったらしい。建設されたのは大戦の後なのでかなり新しい施設だが、外から分かる敷地内や窓の向こうに、何人もの職員や出入りの業者が見えた。
+　感心して眺めていると、出勤途中らしきヒューマンから声をかけられた。立ち去れと言われるのかと思えば、
+「興味あるなら、うち、見学できるっスよ」
+　で驚いた。一般人が入れない場所も多いが、開放されている区画もあるというのだ。</p>
+<p>　引退したとはいえ元STG、エンジニアの端くれとして、俄然、興味が湧いた。
+　一言で言えば、すごかった。回収されたリーパーの&quot;肉体&quot;や、リーパーに改造されたゲスの駆体といったものが研究されているだけではない。解明された技術や理論は、既に現代銀河の生活に利用できるものとして、実用が進められているという。
+　しかも活気がある。研究者たちが足早なのは、なにかに追い立てられているからではなく、早く進みたいからのように見えた。
+　ドレンはふと、もし自分の能力が基準を満たしているなら、こういう中で働くのもいいと思った。
+　が、見ているものは一般の見学が許された表層なのだ。これより専門的な内容となると、自分には到底理解できないだろう。興味はあるが、得意分野というわけではない。</p>
+<p>　研究施設を見学したことでドレンは、自分が活かせるものは、やはり軍事の経験と知識、技能だと気付かされた。
+　電子機器を扱うことは得意でも、それを作るための研究開発やプログラミングはやはり畑違いなのだ。
+　戦闘は昔から得意ではないし、老境に差し掛かった体には信用が置けない。だから、警備員という選択はあったとしても、銃を持ち足を使って見回るのではなく、モニターを隙なくチェックしているようなもののほうがいい。
+　それからふと、タクシードライバーというのもありだと思った。幸い記憶力はまだ衰えておらず、地図を覚えるのは苦ではない。それに、運転は好きだし、得意でもある。昔のようにハイウェイを逆走しつつ逃走するなどという荒っぽいことはなくとも、道と信号の切り替わりパターンを把握することで、客が求めるとおりに、つまり速度重視か料金重視かに従って、もちろん安全に目的地まで届けられると思う。</p>
+<p>　そんなことを考えていたせいだ。
+　露店で買ったスナックに右旋性食品が混じっていることに気付かず、うっかり飲み込んでしまった。
+　口の中に入れたときにひどい苦みがあったはずなのに、吐き出さず飲んでしまったのだ。なんたる失態かと呆れつつ、大量の水を飲みながら吐けそうな場所を探した。
+　その後で、たしか病院があったと、頭に叩き込んであるコロニー案内を思い出し、訪れた。
+　就職先は、そこで見つけた。</p>
+<p>　病院ではない。
+　一人のトゥーリアンだ。
+　職業柄、他種族だろうとある程度正確に見分けられるし、覚えた顔は忘れない。
+　長身で体格が良く、ダークブラウンの外殻は鋭角的だが厚みがある。ファミリーペイントはない。そしてトゥーリアンにしては珍しく、あのときと変わらず今も、金属片、つまりピアスのような飾りをつけている。
+　名前は聞いていないが、かつて命を助けられた恩人だった。
+　彼はどうにも沈んだ顔つきで、人を避けて歩いてはいてもほとんど目には入っていない様子だった。
+　丈高く広い背中を見送っていると、
+「どうしました？　アヴローンさんになにかご用事ですか？」
+　と看護師に聞かれた。それで彼が、銀河に名だたる大富豪の一人、ヴェクタス・アヴローンだと知ったのだ。</p>
+<p>　彼が病院にいる理由は、はっきりとは聞けなかった。当然だ。医師や看護師には守秘義務がある。ただ、彼自身の問題ではないことは聞かされた。
+　ならば見舞いかなにかなのだろう。あの様子では深刻なのだと思われる。であれば、今は声をかけるまいと決めた。だが名前が分かり、立ち寄る場所が一つでも分かったなら、再び見つけることなどドレンには至極簡単なことだ。
+　ーーーいや。簡単ではない。見つけずにいるほうが無理な相手だった。
+　コロニー・ユーリシアそのものが、ここにあるありとあらゆるものが、ヴェクタス・アヴローン個人の出資で作られているのだ。
+　もっと言えば、アウスティア星系そのものがヴェクタス・アヴローンの庭だった。</p>
+<p>　コロニーのように明確に所有しているわけではなくとも、アレタヤのインフラや産業、ホイ・ランカの鉱業は、ヴェクタス・アヴローンによって再開発され活性化された。田舎の星系であるにも関わらず複数設置されている通信ブイも彼の資本によって増設されたもので、おかげでアウスティア内の通信で接続を待たされることはまったくない。
+　そして、コロニーのすぐ近くにあるA-IX-4235という星をまるごと一つ、ヴェクタスは所有しているという。そもそもその私有星への移動・運輸の中継点として作ったのが、コロニー・ユーリシアだったのである。</p>
+<p>　そんな彼が、その私有星で働く人員を求めていると知った。
+　その星は別荘で、それまでは年に一度か二度訪れるかどうかだったため、必要なのは管理人だけだった。だが今はそこで長時間過ごしている。それに伴って必要な人員が変化したのだ。
+　ドレンが応募したのは、ともかくあのときの礼だけでも伝えられればと思ったからだった。本人が出てこないとしても、面接を担当する人物にわけを話し、伝えてもらえばいい。それさえできたら、もうしばらくをこのコロニーで過ごし、他の星へ行こうと思っていた。なにせ自分はサラリアンであり、20歳をすぎている。雇ってもらっても、そう長くは働けないのである。</p>
+<p>　が、採用された。
+　ヴェクタス・アヴローン本人が現れて話をした。彼もまた一度会っただけのドレンのことを覚えていた。そして、惑星に設置されている簡易的な防衛設備のチェックやモニター係と、シャトルおよびスペースシップのパイロットとして、ドレンは丁度良かったのだ。
+　秘密を守るのは当たり前であるし、余計な口を出さないのも当然だ。仕事は正確に確実にこなすべきで、電子機器の取り扱いはお手の物。運転技術については言うまでもない。
+　以来ドレンは、ヴェクタスの&quot;星&quot;に住み家を得て、そこで過ごしている。</p>
+<p>　ヴェクタス・アヴローンは不思議な男だ。
+　まったくトゥーリアンらしくない。過去や伝統を軽んじはしないが重視せず、現在の利益と未来の発展に目を向けている。
+　商人として極めて現実的で実利を重んじる一方で、遊び心や無駄を楽しむ。
+　かつて自分を助けたことからして「普通に生きていたら、スパイなんてものには会えない。君がもしそうなら、面白いじゃないか」というだけだった。管理できる範囲で、ではあるだろうが、確実性を脇に置いてスリルを楽しむ。
+　そして今は、ーーードレンがつい呆れるほど、過保護で心配性で極甘の男になっていた。</p>
+<p>　ヴェクタスが今最も心を砕き、優先し、大事にしているのは、かつて”軍神”と呼ばれた英雄の身である。
+　リデアン・トライオスという軍人、英雄の存在については、ドレンは以前から知っていた。危機管理のために暗躍するSTGであれば当然である。にわかには信じられないようなことをやってのける人物となったら、真偽を確かめないわけがない。
+　そしてリーパー大戦の最中、同僚がその戦いぶりを目にしてもいる。
+「化け物だ」
+　と彼は言った。修辞的な伝達は事実を阻害すると分かっているエージェントが、そう言ったのだ。つまり、それが事実だということだ。
+　だが、驚異的な強さから”軍神”とまで呼ばれたそのトゥーリアンは、リーパー大戦の末期に死亡したと思われていた。クルーシブルを守るため自身の乗る戦闘艦を盾にし、残骸から遺体の回収は、されたのか、されなかったのか。そこで途絶えた消息は、それきり消えたままだった。
+　だが実際には、ヴェクタス・アヴローンが遺体をーーーほぼ死んでいると言ってよかったその体を手に入れ、蘇生させたのだった。</p>
+<p>　それを知らされたとき、最初は武器、あるいは護衛として使うためかと思った。
+　だが&quot;星&quot;とユーリシアの病院間をヴェクタスを乗せて運ぶとき、彼はほぼ無言だった。必要なことしか言わなかった。回復を願い憂うがゆえに、上っ面の笑いなどなくしてしまった男にしか見えなかった。
+　だからこそ、”かつて軍神と呼ばれた男”の回復に伴って、快活さが戻っていった。
+　その果てがーーーこれだ。</p>
+<p>　そわそわと端末を気にする。なにか言われなくても、行動に移されなくても分かる。
+「これは、彼のための訓練ですか。それとも貴方のですかな？」
+　ドレンが溜め息混じりにそう言うと、ヴェクタスは触れかけていた端末から手を遠ざけた。
+「うん、まあ、そうだな」
+　なにが「うんまあそう」なのか。</p>
+<p>　心配するのは分かる。
+　かの&quot;軍神&quot;は、他人が押し付けた数多の期待や義務を取りのけてみれば、ひどく傷つき弱った男だった。右半身を失っており、視力もなく、日常生活にも様々な制限がある。体のことだけではない。詳しいことはあえて聞かずにいるが、心もまた弱っていることは、雇われて間もない頃にそのどこか虚ろな様子を垣間見ただけでも分かった。
+　ドレンはそのとき、ここにいるのは無敵の軍神などではなく、傷つき疲れ果てた一人の兵士なのだと認識を改めた。</p>
+<p>　そしてそれを心配するヴェクタスもまた、一人の過保護な男だ。
+　ただし、銀河を左右するほど莫大な富と力を持つ男だった。
+　だからドレンは思う。今回のことで心底、そして本気で思っている。リーパーの技術解明が進んだら、この人は絶対にアウスティアのマスリレイを改造する、と。
+　もしあのリレイが行き先の固定から解放され、銀河中のどのリレイ座標へでもダイレクト、かつ安全に行けるようになれば、二日の移動が数時間に縮まるのだ。
+　そのためであれば、何億何兆のクレジットがかかろうと気にするまい。
+　なにせ、ドレンがざっと計算したかぎりにおいては、年商ではなく年収が兆単位の男である。</p>
+<p>(む？　その前に&quot;彼女&quot;の改造か、あるいは、新造になるか)
+　&ldquo;ティラシヤ&quot;の性能を上げる、より高性能な船を造ることであれば、マスリレイの改造よりははるかに簡単だろう。
+　そしておそらく、新造ではなく改造になるはずだ。資産家ゆえにヴェクタスはいくらでも物を買えるし、気に入らなければ簡単に処分もするが、気に入ったものは長く愛用する傾向もある。細部までこだわって造ったティラシヤを、彼は気に入っている。
+「いってらっしゃいませ」
+　とヴェクタスを送り出した後、ドレンはすっかり親しくなった&quot;技研&quot;に連絡した。間違いなく今から十日以内に、ティラシヤの改造案を求められるぞ、と。
+『マジか……。あれ、大戦中に一回エンジン取っ替えてんだけど、その時点でもうけっこうそこそこ限界だった記憶』
+「&ldquo;けっこうそこそこ&quot;であれば、まだ可能だということだな。ともあれ、熱まわりだと思う。そのつもりで考えておくといい」
+『はあ……。あざっす、ドレンさん。オーナーの無茶振りはいつものことだけど、いきなり言われると心臓に悪いんだよね』
+　まあがんばれと励ましながら、ドレンは通信を切った。</p>
+<p>　そして次の仕事にとりかかる。いや、契約内容にはないのだから、自主的なサービス業務だ。
+　なにせ敵の多い雇用主である。専属のSPは常についているが、それでも彼等の死角から狙われないとは限らない。身近に迫る危険からであれば彼等が守るだろうが、そもそも敵を近づけない守り方というのもあると、ドレンは考えている。そしてそういう守り方であれば、荒事が苦手だろうと務まるのだ。
+　暇な時間を観光にでも費やすそぶりでエレベーターに乗る。そしてドレンは、繁華な街の中で路地裏の影へと姿を隠した。</p>
+
+    </div>
+  </article>
+
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      hamburger.textContent = '✕';
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+  </script>
+
+</body>
+</html>

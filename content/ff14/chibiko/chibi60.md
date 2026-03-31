@@ -1,5 +1,6 @@
 ﻿---
-title: "調理師ちびこっこ 01"
+title: "それから、これから"
+group: "調理師ちびこ"
 weight: 600
 draft: false
 ---

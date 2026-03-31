@@ -75,6 +75,29 @@
       color: #ccc;
     }
 
+    /* グループ見出し */
+    .group-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      color: #999;
+      margin: 10px 0 4px 0;
+      white-space: nowrap;
+    }
+    .group-label::before,
+    .group-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* タイトルリストのインデント */
+    .page-list {
+      padding-left: 8px;
+    }
+
     /* ============================================================
        3. メインエリア
        ============================================================ */
@@ -140,12 +163,8 @@
        ============================================================ */
     @media screen and (max-width: 768px) {
 
-      /* ハンバーガーボタンを表示 */
-      .hamburger {
-        display: flex;
-      }
+      .hamburger { display: flex; }
 
-      /* サイドバーをドロワーに変換 */
       aside {
         position: fixed;
         top: 0; left: 0;
@@ -157,23 +176,16 @@
         overflow-y: auto;
         box-shadow: 2px 0 12px rgba(0,0,0,0.3);
       }
-      aside.open {
-        transform: translateX(0);
-      }
+      aside.open { transform: translateX(0); }
 
-      /* コンテナを縦積みに */
-      .container {
-        display: block;
-      }
+      .container { display: block; }
 
-      /* メインを全幅に */
       main {
         width: 100%;
         padding: 60px 0 20px 0;
         display: block;
       }
 
-      /* 本文パネル */
       article {
         width: 94%;
         max-width: none;
@@ -181,11 +193,8 @@
         padding: 20px 15px;
       }
 
-      /* 文字サイズ */
       h1 { font-size: 1.4rem !important; }
       .novel-body { font-size: 1.05rem !important; line-height: 1.9 !important; }
-
-      /* 画像のはみ出し防止 */
       img { max-width: 100%; height: auto; }
     }
   </style>
@@ -226,13 +235,21 @@
       {{ range .Site.Sections }}
         <div class="section-group">
           <h2>{{ .Title }}</h2>
+
           {{ range .Sections }}
             <div class="accordion-item">
               <input type="checkbox" id="series-{{ .File.UniqueID }}" class="toggle-checkbox" {{ if .IsAncestor $ }}checked{{ end }}>
               <label for="series-{{ .File.UniqueID }}" class="series-toggle">【{{ .Title }}】 <span class="arrow"></span></label>
               <ul class="series-content">
+                {{ $default_group := .Params.default_group }}
+                {{ $current_group := "" }}
                 {{ range .Pages.ByWeight }}
-                  <li>
+                  {{ $group := .Params.group | default $default_group }}
+                  {{ if and $group (ne $group $current_group) }}
+                    <li class="group-label">{{ $group }}</li>
+                    {{ $current_group = $group }}
+                  {{ end }}
+                  <li class="page-list">
                     {{ if .Draft }}
                       <a href="{{ .Permalink }}" class="is-draft">{{ .Title }}</a>
                     {{ else if .Params.coming_soon }}
@@ -249,6 +266,7 @@
               </ul>
             </div>
           {{ end }}
+
           <ul>
             {{ range .RegularPages.ByWeight }}
               <li>
