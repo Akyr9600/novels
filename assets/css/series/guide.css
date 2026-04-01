@@ -96,6 +96,11 @@ body.theme-guide .aside-block p {
     color: var(--text-dim);
     margin: 0 0 0.6em 0;
 }
+body.theme-guide .aside-spacer {
+    display: block;
+    height: 0;
+    clear: both;
+}
 
 /* ============================================================
    8. ハンバーガーボタン

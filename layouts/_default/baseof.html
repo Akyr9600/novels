@@ -302,6 +302,9 @@
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
 
+    // ============================================================
+    // ハンバーガーメニュー（スマホ用）
+    // ============================================================
     function openMenu() {
       sidebar.classList.add('open');
       overlay.classList.add('active');
@@ -319,6 +322,25 @@
     });
 
     overlay.addEventListener('click', closeMenu);
+
+    // ============================================================
+    // サイドバー：スクロール位置の保存と復元
+    // ============================================================
+    const SCROLL_KEY = 'sidebar_scroll';
+
+    // 復元：ページ読み込み時
+    const savedScroll = sessionStorage.getItem(SCROLL_KEY);
+    if (savedScroll !== null) {
+      sidebar.scrollTop = parseInt(savedScroll, 10);
+    }
+
+    // 保存：サイドバー内のリンクをクリックしたとき
+    sidebar.addEventListener('click', e => {
+      const link = e.target.closest('a');
+      if (link && link.href) {
+        sessionStorage.setItem(SCROLL_KEY, sidebar.scrollTop);
+      }
+    });
   </script>
 
 </body>

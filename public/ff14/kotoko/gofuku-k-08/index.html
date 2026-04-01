@@ -1352,6 +1352,12 @@
             
               <li>
                 
+                  <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-05/" class="">　世界を知ろう！</a>
+                
+              </li>
+            
+              <li>
+                
                   <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-02/" class="is-draft">①３つのメイン任務</a>
                 
               </li>
@@ -1608,6 +1614,9 @@
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
 
+    
+    
+    
     function openMenu() {
       sidebar.classList.add('open');
       overlay.classList.add('active');
@@ -1625,6 +1634,25 @@
     });
 
     overlay.addEventListener('click', closeMenu);
+
+    
+    
+    
+    const SCROLL_KEY = 'sidebar_scroll';
+
+    
+    const savedScroll = sessionStorage.getItem(SCROLL_KEY);
+    if (savedScroll !== null) {
+      sidebar.scrollTop = parseInt(savedScroll, 10);
+    }
+
+    
+    sidebar.addEventListener('click', e => {
+      const link = e.target.closest('a');
+      if (link && link.href) {
+        sessionStorage.setItem(SCROLL_KEY, sidebar.scrollTop);
+      }
+    });
   </script>
 
 </body>
