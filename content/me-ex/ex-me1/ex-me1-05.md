@@ -1,5 +1,5 @@
 ﻿---
-title: "・世界を知ろう！"
+title: "■世界を知ろう！"
 Weight: 15
 draft: false
 ---
