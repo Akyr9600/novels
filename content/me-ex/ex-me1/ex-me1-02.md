@@ -1,5 +1,5 @@
 ﻿---
-title: "①３つのメイン任務"
+title: "②３つのメイン任務"
 Weight: 20
 draft: true
 ---
