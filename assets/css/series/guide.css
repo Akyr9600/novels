@@ -108,3 +108,32 @@ body.theme-guide .aside-spacer {
 body.theme-guide .hamburger {
     background: rgba(85, 85, 85, 0.6);
 }
+
+/* ============================================================
+   9. ネタバレ折りたたみ
+   ============================================================ */
+body.theme-guide details.spoiler-block {
+    margin: 1.5em 0;
+}
+body.theme-guide summary.spoiler-toggle {
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 0.95rem;
+    list-style: none;
+    padding: 6px 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+body.theme-guide summary.spoiler-toggle::marker,
+body.theme-guide summary.spoiler-toggle::-webkit-details-marker {
+    display: none;
+}
+body.theme-guide details.spoiler-block[open] summary.spoiler-toggle::before {
+    content: "▼ ";
+}
+body.theme-guide details.spoiler-block:not([open]) summary.spoiler-toggle::before {
+    content: "▶ ";
+}
+body.theme-guide .spoiler-content {
+    padding: 1em 0;
+}
