@@ -84,3 +84,17 @@ body.theme-varres_cute article hr {
 body.theme-varres_cute .hamburger {
     background: rgba(232, 93, 138, 0.8);
 }
+
+/* ============================================================
+   8. ギャラリー
+   ============================================================ */
+body.theme-varres_cute .gallery-item {
+    background: var(--inner-panel);
+    border-color: var(--border-color);
+}
+body.theme-varres_cute .gallery-title {
+    color: var(--text-main);
+}
+body.theme-varres_cute .gallery-desc {
+    color: var(--text-dim);
+}

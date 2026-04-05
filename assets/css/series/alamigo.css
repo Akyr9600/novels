@@ -90,3 +90,17 @@ body.theme-alamigo .series-toggle {
 body.theme-alamigo .hamburger {
     background: rgba(176, 141, 87, 0.7);
 }
+
+/* ============================================================
+   9. ギャラリー
+   ============================================================ */
+body.theme-alamigo .gallery-item {
+    background: var(--inner-panel);
+    border-color: var(--accent-gold);
+}
+body.theme-alamigo .gallery-title {
+    color: var(--text-main);
+}
+body.theme-alamigo .gallery-desc {
+    color: var(--text-dim);
+}

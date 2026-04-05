@@ -1,0 +1,13 @@
+{{ $src := .Get "src" }}
+{{ $title := .Get "title" }}
+{{ $id := printf "dialog-%s" (md5 $src) }}
+<div class="gallery-item">
+  <img class="gallery-thumb" src="{{ $src }}" alt="{{ $title }}" onclick="document.getElementById('{{ $id }}').showModal()">
+  <div class="gallery-caption">
+    <div class="gallery-title">{{ $title }}</div>
+    <div class="gallery-desc">{{ .Inner | markdownify }}</div>
+  </div>
+</div>
+<dialog class="gallery-dialog" id="{{ $id }}" onclick="this.close()">
+  <img src="{{ $src }}" alt="{{ $title }}">
+</dialog>

@@ -115,6 +115,63 @@
       font-style: italic;
     }
 
+ 
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px 0;
+  align-items: start;
+}
+.gallery-item {
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  height: 450px;         
+}
+.gallery-thumb {
+  width: 100%;
+  height: 200px;         
+  object-fit: cover;     
+  object-position: top;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.gallery-caption {
+  padding: 8px 10px;
+  white-space: normal;
+  overflow-y: auto;      
+  max-height: 200px;     
+}
+.gallery-title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.gallery-desc {
+  font-size: 0.8rem;
+  color: #666;
+}
+.gallery-dialog {
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 95vw;
+  max-height: 95vh;
+}
+.gallery-dialog img {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+  display: block;
+}
+.gallery-dialog::backdrop {
+  background: rgba(0,0,0,0.85);
+}
+
+
      
     .hamburger {
       display: none;
@@ -1252,6 +1309,14 @@
                 
                   
                   
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/me_fantasy_gallery/" class="">イラスト置き場</a>
+                    
+                  </li>
+                
+                  
+                  
                     <li class="group-label">転生ホームコメディ</li>
                     
                   
@@ -1400,6 +1465,14 @@
               <li>
                 
                   <a href="http://localhost:1313/me-ex/ex-me1/ex-me1-04/" class="is-draft">④真相と決戦</a>
+                
+              </li>
+            
+              <li>
+                
+                  
+                    <a href="http://localhost:1313/me-ex/ex-me1/me_gallery/" class="is-coming-soon">イラスト置き場</a>
+                  
                 
               </li>
             

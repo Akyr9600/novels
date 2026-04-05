@@ -70,3 +70,17 @@ body.theme-kasyoku .is-draft {
 body.theme-kasyoku .hamburger {
     background: rgba(0, 212, 255, 0.3);
 }
+
+/* ============================================================
+   8. ギャラリー
+   ============================================================ */
+body.theme-kasyoku .gallery-item {
+  background: rgba(255,255,255,0.05);
+  border-color: var(--accent-red);
+}
+body.theme-kasyoku .gallery-title {
+  color: var(--accent-cyan);
+}
+body.theme-kasyoku .gallery-desc {
+  color: var(--text-dim);
+}

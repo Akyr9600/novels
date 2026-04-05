@@ -85,3 +85,17 @@ body.theme-kotoko article hr {
 body.theme-kotoko .hamburger {
     background: rgba(196, 122, 138, 0.75);
 }
+
+/* ============================================================
+   8. ギャラリー
+   ============================================================ */
+body.theme-kotoko .gallery-item {
+    background: var(--inner-panel);
+    border-color: var(--border-color);
+}
+body.theme-kotoko .gallery-title {
+    color: var(--title-color);
+}
+body.theme-kotoko .gallery-desc {
+    color: var(--text-dim);
+}

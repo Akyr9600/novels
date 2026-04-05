@@ -85,3 +85,17 @@ body.theme-vr-fantasy article hr {
 body.theme-vr-fantasy .hamburger {
     background: rgba(74, 124, 89, 0.7);
 }
+
+/* ============================================================
+   8. ギャラリー
+   ============================================================ */
+body.theme-vr-fantasy .gallery-item {
+    background: var(--inner-panel);
+    border-color: var(--border-color);
+}
+body.theme-vr-fantasy .gallery-title {
+    color: var(--text-main);
+}
+body.theme-vr-fantasy .gallery-desc {
+    color: var(--text-dim);
+}

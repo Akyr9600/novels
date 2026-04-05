@@ -115,6 +115,63 @@
       font-style: italic;
     }
 
+ 
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px 0;
+  align-items: start;
+}
+.gallery-item {
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  height: 450px;         
+}
+.gallery-thumb {
+  width: 100%;
+  height: 200px;         
+  object-fit: cover;     
+  object-position: top;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.gallery-caption {
+  padding: 8px 10px;
+  white-space: normal;
+  overflow-y: auto;      
+  max-height: 200px;     
+}
+.gallery-title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.gallery-desc {
+  font-size: 0.8rem;
+  color: #666;
+}
+.gallery-dialog {
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 95vw;
+  max-height: 95vh;
+}
+.gallery-dialog img {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+  display: block;
+}
+.gallery-dialog::backdrop {
+  background: rgba(0,0,0,0.85);
+}
+
+
      
     .hamburger {
       display: none;
@@ -1252,6 +1309,14 @@
                 
                   
                   
+                  <li class="page-list">
+                    
+                      <a href="http://localhost:1313/mass-effect/vr-fantasy/me_fantasy_gallery/" class="">イラスト置き場</a>
+                    
+                  </li>
+                
+                  
+                  
                     <li class="group-label">転生ホームコメディ</li>
                     
                   
@@ -1403,6 +1468,14 @@
                 
               </li>
             
+              <li>
+                
+                  
+                    <a href="http://localhost:1313/me-ex/ex-me1/me_gallery/" class="is-coming-soon">イラスト置き場</a>
+                  
+                
+              </li>
+            
           </ul>
         </div>
       
@@ -1438,7 +1511,7 @@
       <h1 style="font-size: 1.8rem; color: #111; margin: 0;">②３つのメイン任務</h1>
     </header>
     <div class="novel-body">
-      <h2 id="hahahugoshortcode156s0hbhb"><span style="color: #800000">セラム／フェロス／ノヴェリア</span></h2>
+      <h2 id="hahahugoshortcode366s0hbhb"><span style="color: #800000">セラム／フェロス／ノヴェリア</span></h2>
 <p>サレンの目的を追うための三つの調査
 　</p>
 <h3 id="導入ここから何をするのか">導入：ここから何をするのか</h3>
@@ -1471,7 +1544,7 @@
 このポイントを押さえていないと、後の展開で「え？　なんで??」となるので気をつけよう。
 </div><div class="aside-spacer"></div>
 <hr>
-<h2 id="hahahugoshortcode156s4hbhb"><span style="color: #800000">セラム：アサリという協力者の重要性</span></h2>
+<h2 id="hahahugoshortcode366s4hbhb"><span style="color: #800000">セラム：アサリという協力者の重要性</span></h2>
 <p>　</p>
 <h3 id="セラムでやること">セラムでやること</h3>
 <p>アサリの考古学者リアラ・ティッソーニの捜索。
@@ -1502,7 +1575,7 @@ MASS EFEECTを周回プレイしたくなるのは、こういう要素のため
   </div>
 </details>
 <hr>
-<h2 id="hahahugoshortcode156s6hbhb"><span style="color: #800000">フェロス：ビジョンの意味を知る</span></h2>
+<h2 id="hahahugoshortcode366s6hbhb"><span style="color: #800000">フェロス：ビジョンの意味を知る</span></h2>
 <p>　</p>
 <h3 id="フェロスでやること">フェロスでやること</h3>
 <p>ここは、ゲスの襲撃に遭っているらしいと知って、であれば背後にサレンがいるのでは？　と向かうことになる。
@@ -1559,7 +1632,7 @@ MASS EFEECTを周回プレイしたくなるのは、こういう要素のため
   </div>
 </details>
 <hr>
-<h2 id="hahahugoshortcode156s8hbhb"><span style="color: #800000">ノヴェリア：目的地が見えてくる</span></h2>
+<h2 id="hahahugoshortcode366s8hbhb"><span style="color: #800000">ノヴェリア：目的地が見えてくる</span></h2>
 <p>　</p>
 <h3 id="ノヴェリアでやること">ノヴェリアでやること</h3>
 <p>メイトリアーク・ベネジアが、「サレンの秘書」として訪れたという星ノヴェリアは、評議会の法の外にある。法律的にグレーな研究をするような企業が集っており、ここでは<b><span style="color: #008080">評議会＝スペクターの権威が通じない</span></b>。
@@ -1605,7 +1678,7 @@ MASS EFEECTを周回プレイしたくなるのは、こういう要素のため
   </div>
 </details>
 <hr>
-<h2 id="hahahugoshortcode156s11hbhb"><span style="color: #800000">まとめ：ここまでで分かったこと</span></h2>
+<h2 id="hahahugoshortcode366s11hbhb"><span style="color: #800000">まとめ：ここまでで分かったこと</span></h2>
 <details class="spoiler-block">
   <summary class="spoiler-toggle">ネタバレを見る</summary>
   <div class="spoiler-content">

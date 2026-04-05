@@ -85,3 +85,17 @@ body.theme-chibiko-tough article hr {
 body.theme-chibiko-tough .hamburger {
     background: rgba(192, 106, 42, 0.75);
 }
+
+/* ============================================================
+   8. ギャラリー
+   ============================================================ */
+body.theme-chibiko-tough .gallery-item {
+    background: var(--inner-panel);
+    border-color: var(--accent);
+}
+body.theme-chibiko-tough .gallery-title {
+    color: var(--text-main);
+}
+body.theme-chibiko-tough .gallery-desc {
+    color: var(--text-dim);
+}

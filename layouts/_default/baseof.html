@@ -123,6 +123,65 @@
       font-style: italic;
     }
 
+/* ============================================================
+   ギャラリー
+   ============================================================ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px 0;
+  align-items: start;
+}
+.gallery-item {
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  height: 450px;        /* カード全体の高さを固定 */
+}
+.gallery-thumb {
+  width: 100%;
+  height: 200px;        /* 固定高さ */
+  object-fit: cover;    /* はみ出た部分をトリミング */
+  object-position: top;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.gallery-caption {
+  padding: 8px 10px;
+  white-space: normal;
+  overflow-y: auto;     /* はみ出たら縦スクロール */
+  max-height: 200px;    /* キャプション部分の最大高さ */
+}
+.gallery-title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.gallery-desc {
+  font-size: 0.8rem;
+  color: #666;
+}
+.gallery-dialog {
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 95vw;
+  max-height: 95vh;
+}
+.gallery-dialog img {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+  display: block;
+}
+.gallery-dialog::backdrop {
+  background: rgba(0,0,0,0.85);
+}
+
+
     /* ============================================================
        5. ハンバーガーボタン（PCでは非表示）
        ============================================================ */

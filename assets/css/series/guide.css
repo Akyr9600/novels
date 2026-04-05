@@ -137,3 +137,17 @@ body.theme-guide details.spoiler-block:not([open]) summary.spoiler-toggle::befor
 body.theme-guide .spoiler-content {
     padding: 1em 0;
 }
+
+/* ============================================================
+   10. ギャラリー
+   ============================================================ */
+body.theme-guide .gallery-item {
+    background: var(--inner-panel);
+    border-color: var(--border-color);
+}
+body.theme-guide .gallery-title {
+    color: var(--text-main);
+}
+body.theme-guide .gallery-desc {
+    color: var(--text-dim);
+}
