@@ -5,7 +5,7 @@ custom_css: guide
 weight: 99
 draft: false
 ---
-言うまでもないけれど、AIさんたちの作品。
+言うまでもないけれど、AIさんたちの作品。画像クリックで全体表示。
 <div class="gallery-grid">
 {{< gallery_item src="/images/vr-fantasy/character_vectas01.png" title="ヴェクタス" >}}
 元は59歳のトゥーリアン。<br>
