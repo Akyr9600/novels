@@ -128,7 +128,7 @@
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main10/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc02/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc01_1/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr11-inori/</loc>
   </url><url>
@@ -136,7 +136,7 @@
   </url><url>
     <loc>http://localhost:1313/ff14/kotoko/kotoko11/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc03/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc02/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main12/</loc>
   </url><url>
@@ -144,7 +144,7 @@
   </url><url>
     <loc>http://localhost:1313/ff14/kotoko/kotoko12/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc04/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc03/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main13/</loc>
   </url><url>
@@ -152,7 +152,7 @@
   </url><url>
     <loc>http://localhost:1313/ff14/kotoko/kotoko13/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc05/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc04/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-main14/</loc>
   </url><url>
@@ -160,39 +160,39 @@
   </url><url>
     <loc>http://localhost:1313/ff14/kotoko/kotoko14/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc06/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc04_1/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/kotoko/kotoko15/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr15-hibi/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc07/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc05/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/kotoko/kotoko16/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr16-hibi/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc071/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc05_1/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc072/</loc>
-  </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc08/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc06/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/kotoko/kotoko17/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr17-hibi/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc09/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc07/</loc>
   </url><url>
     <loc>http://localhost:1313/ff14/kotoko/kotoko18/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr18-hibi/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc10/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc08/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr19-hibi/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc11/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc08-1/</loc>
+  </url><url>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc09/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr20-with/</loc>
   </url><url>
@@ -200,7 +200,7 @@
   </url><url>
     <loc>http://localhost:1313/ff14/chibiko/chibi20/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc12/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc10/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr21-with/</loc>
   </url><url>
@@ -208,7 +208,9 @@
   </url><url>
     <loc>http://localhost:1313/ff14/troy/troy-red02/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc13/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc11/</loc>
+  </url><url>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc12/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr22-with/</loc>
   </url><url>
@@ -216,7 +218,7 @@
   </url><url>
     <loc>http://localhost:1313/ff14/chibiko/chibi22/</loc>
   </url><url>
-    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc14/</loc>
+    <loc>http://localhost:1313/mass-effect/vr-fantasy/03-vrhc13/</loc>
   </url><url>
     <loc>http://localhost:1313/mass-effect/vr-main/01-vr23-with/</loc>
   </url><url>
